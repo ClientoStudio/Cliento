@@ -1617,6 +1617,103 @@
         min-width: 42px;
       }
     }
+
+    /* HAMBURGER BUTTON */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 40px;
+      height: 40px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .hamburger:hover {
+      border-color: var(--accent);
+    }
+
+    .hamburger.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* MOBILE MENU */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 65px;
+      left: 0;
+      right: 0;
+      z-index: 99;
+      background: rgba(13, 14, 20, 0.98);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+      flex-direction: column;
+      padding: 16px 6%;
+      gap: 4px;
+      transform: translateY(-10px);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .mobile-menu.open {
+      display: flex;
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .mobile-link {
+      color: var(--muted);
+      font-size: 1rem;
+      font-weight: 500;
+      text-decoration: none;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.2s;
+    }
+
+    .mobile-link:last-child {
+      border-bottom: none;
+    }
+
+    .mobile-link:hover {
+      color: var(--text);
+    }
+
+    .mobile-cta {
+      color: var(--accent2) !important;
+      font-weight: 700;
+      margin-top: 8px;
+      padding-bottom: 6px;
+    }
+
+    @media(max-width:860px) {
+      .hamburger {
+        display: flex;
+      }
+    }
   </style>
 </head>
 
@@ -1630,8 +1727,20 @@
       <a class="nav-link" href="#servizi">Servizi</a>
       <a class="nav-link" href="#pacchetti">Pacchetti</a>
       <a class="nav-cta" href="#contatti">Contattaci →</a>
+      <button class="hamburger" id="hamburger" aria-label="Apri menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#lavori" class="mobile-link" onclick="closeMobileMenu()">Portfolio</a>
+    <a href="#partner" class="mobile-link" onclick="closeMobileMenu()">Partnership</a>
+    <a href="#servizi" class="mobile-link" onclick="closeMobileMenu()">Servizi</a>
+    <a href="#pacchetti" class="mobile-link" onclick="closeMobileMenu()">Pacchetti</a>
+    <a href="#contatti" class="mobile-link mobile-cta" onclick="closeMobileMenu()">Contattaci →</a>
+  </div>
 
   <!-- HERO -->
   <section id="hero">
@@ -2234,6 +2343,35 @@
       try {localStorage.setItem('cookie_ok', '1');} catch (err) { }
       document.getElementById('cookieBanner').classList.remove('show');
     }
+
+    /* HAMBURGER MENU */
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.contains('open');
+      if (isOpen) {
+        closeMobileMenu();
+      } else {
+        mobileMenu.classList.add('open');
+        hamburger.classList.add('open');
+        hamburger.setAttribute('aria-expanded', 'true');
+      }
+    });
+
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    }
+
+    // Chiudi il menu cliccando fuori
+    document.addEventListener('click', (e) => {
+      if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+        closeMobileMenu();
+      }
+    });
+
   </script>
 
 </body>

@@ -4,27 +4,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cliento — Digital Growth Partner</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Outfit:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet">
+  <title>CLIENTO. — Web, Google & Stampa | Fossano e Cuneo</title>
+  <meta name="description" content="Noi del team di Cliento progettiamo siti web, visibilità su Google e materiali stampati per le attività locali di Fossano e Cuneo." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --ink: #0d0e14;
-      --ink2: #161824;
-      --card: #1b1e2a;
-      --border: rgba(255, 255, 255, 0.09);
-      --text: #f3f4f8;
-      --muted: #9a9dac;
-      --accent: #2563eb;
-      --accent2: #7bb4ff;
-      --white: #ffffff;
-      --grad: linear-gradient(135deg, #2563eb, #60a5fa);
+      --bg: #050811;
+      --surface: rgba(15, 22, 41, 0.65);
+      --surface-solid: #0e1528;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-bright: rgba(0, 212, 255, 0.4);
+      --text: #ffffff;
+      --muted: #94a3b8;
+      --cyan: #00d4ff;
+      --yellow: #facc15;
+      --wa: #25D366;
     }
 
-    *,
-    *::before,
-    *::after {
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -35,1178 +34,984 @@
     }
 
     body {
-      background: var(--ink);
+      background-color: var(--bg);
       color: var(--text);
-      font-family: 'Outfit', sans-serif;
-      font-size: 17px;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
       line-height: 1.65;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
-    ::-webkit-scrollbar {
-      width: 3px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: var(--accent);
-      border-radius: 2px;
-    }
-
-    /* NAV */
-    nav {
+    /* AURORA ANIMATA + GRIGLIA PROSPETTICA */
+    .bg-canvas {
       position: fixed;
-      top: 0;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 25%, #000 20%, transparent 85%);
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(110px);
+      opacity: 0.45;
+      animation: floatOrb 16s ease-in-out infinite alternate;
+    }
+
+    .orb-1 {
+      width: 520px;
+      height: 520px;
+      background: radial-gradient(circle, rgba(0, 212, 255, 0.35), transparent 70%);
+      top: -140px;
+      left: 10%;
+    }
+
+    .orb-2 {
+      width: 440px;
+      height: 440px;
+      background: radial-gradient(circle, rgba(250, 204, 21, 0.18), transparent 70%);
+      top: 120px;
+      right: 5%;
+      animation-delay: -6s;
+    }
+
+    @keyframes floatOrb {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(40px, 30px) scale(1.12); }
+    }
+
+    /* NAVBAR FLOATING PILL */
+    header {
+      position: fixed;
+      top: 20px;
       left: 0;
       right: 0;
       z-index: 100;
       display: flex;
+      justify-content: center;
+      padding: 0 5%;
+    }
+
+    nav {
+      width: 100%;
+      max-width: 1140px;
+      display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 18px 6%;
-      background: rgba(13, 14, 20, 0.92);
-      backdrop-filter: blur(24px);
-      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      background: rgba(11, 16, 30, 0.72);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 99px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     }
 
     .logo {
-      font-family: 'Playfair Display', serif;
-      font-weight: 900;
-      font-size: 1.4rem;
-      color: var(--white);
+      font-weight: 800;
+      font-size: 1.35rem;
+      letter-spacing: -0.04em;
+      color: #fff;
       text-decoration: none;
-      letter-spacing: -0.01em;
     }
 
     .logo span {
-      color: var(--accent2);
+      color: var(--yellow);
     }
 
-    .nav-right {
+    .nav-links {
       display: flex;
       align-items: center;
-      gap: 24px;
+      gap: 32px;
     }
 
-    .nav-link {
+    .nav-links a {
       color: var(--muted);
-      font-size: 0.88rem;
-      font-weight: 500;
       text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
       transition: color 0.2s;
     }
 
-    .nav-link:hover {
-      color: var(--text);
+    .nav-links a:hover {
+      color: #fff;
     }
 
     .nav-cta {
-      background: var(--accent);
-      color: var(--white);
-      font-weight: 700;
-      font-size: 0.85rem;
+      background: var(--yellow);
+      color: #050811 !important;
       padding: 10px 22px;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 10px 30px rgba(37, 99, 235, 0.22);
+      border-radius: 99px;
+      font-weight: 800 !important;
+      font-size: 0.86rem !important;
+      transition: transform 0.2s, box-shadow 0.2s !important;
     }
 
     .nav-cta:hover {
-      background: #1d4ed8;
-      transform: translateY(-1px);
-      box-shadow: 0 14px 34px rgba(37, 99, 235, 0.32);
+      transform: scale(1.04);
+      box-shadow: 0 0 24px rgba(250, 204, 21, 0.4);
     }
 
-    /* HERO */
+    /* HERO SPLIT CON TILT 3D */
     #hero {
-      min-height: 100vh;
+      position: relative;
+      z-index: 1;
+      min-height: 95vh;
       display: flex;
       align-items: center;
-      padding: 130px 6% 90px;
-      position: relative;
-      overflow: hidden;
+      padding: 150px 6% 90px;
     }
 
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 55% 50% at 75% 45%, rgba(37, 99, 235, 0.10) 0%, transparent 65%), radial-gradient(ellipse 30% 40% at 10% 70%, rgba(96, 165, 250, 0.06) 0%, transparent 50%);
+    .hero-container {
+      max-width: 1180px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 56px;
+      align-items: center;
     }
 
-    .hero-grid {
-      position: absolute;
-      inset: 0;
-      background-image: linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-      background-size: 80px 80px;
-      mask-image: radial-gradient(ellipse 70% 70% at 60% 40%, black 0%, transparent 70%);
-    }
-
-    .hero-inner {
-      position: relative;
-      max-width: 720px;
-    }
-
-    .badge {
+    .location-pill {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(37, 99, 235, 0.1);
-      border: 1px solid rgba(37, 99, 235, 0.25);
-      color: var(--accent2);
-      padding: 6px 14px;
-      border-radius: 4px;
-      font-size: 0.74rem;
+      padding: 7px 16px;
+      border-radius: 99px;
+      background: rgba(0, 212, 255, 0.08);
+      border: 1px solid rgba(0, 212, 255, 0.25);
+      color: var(--cyan);
+      font-size: 0.8rem;
       font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 28px;
+      margin-bottom: 26px;
     }
 
-    .badge-dot {
-      width: 6px;
-      height: 6px;
-      background: var(--accent);
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
-      animation: blink 1.8s infinite;
+      background: var(--yellow);
+      box-shadow: 0 0 10px var(--yellow);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
     }
 
     h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.8rem, 6vw, 4.6rem);
-      font-weight: 900;
-      line-height: 1.05;
-      letter-spacing: -0.03em;
+      font-size: clamp(2.8rem, 5.4vw, 4.6rem);
+      font-weight: 800;
+      line-height: 1.06;
+      letter-spacing: -0.04em;
       margin-bottom: 24px;
-      color: var(--white);
     }
 
-    .accent-text {
-      color: var(--accent2);
+    .dynamic-word {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--cyan), var(--yellow));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: opacity 0.35s ease, transform 0.35s ease;
     }
 
-    .hero-sub {
-      font-size: 1.1rem;
+    .dynamic-word.fade-out {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    .hero-desc {
+      font-size: 1.12rem;
       color: var(--muted);
       max-width: 530px;
-      margin-bottom: 44px;
-      line-height: 1.75;
-      font-weight: 400;
+      margin-bottom: 38px;
+      line-height: 1.7;
     }
 
-    .ctas {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      align-items: center;
-    }
-
-    .btn-main {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--accent);
-      color: var(--white);
-      font-weight: 700;
-      font-size: 1rem;
-      padding: 16px 32px;
-      border-radius: 8px;
-      text-decoration: none;
-      box-shadow: 0 0 48px rgba(37, 99, 235, 0.22);
-      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
-    }
-
-    .btn-main:hover {
-      transform: translateY(-2px);
-      background: #1d4ed8;
-      box-shadow: 0 12px 48px rgba(37, 99, 235, 0.35);
-    }
-
-    .btn-ghost {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: transparent;
-      color: var(--text);
+    .hero-desc strong {
+      color: #fff;
       font-weight: 600;
-      font-size: 1rem;
-      padding: 15px 28px;
-      border-radius: 8px;
-      text-decoration: none;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      transition: border-color 0.2s, color 0.2s;
     }
 
-    .btn-ghost:hover {
-      border-color: rgba(37, 99, 235, 0.4);
-      color: var(--accent2);
-    }
-
-    .hero-stats {
+    .hero-btns {
       display: flex;
-      gap: 44px;
-      margin-top: 60px;
+      gap: 16px;
       flex-wrap: wrap;
     }
 
-    .stat-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.1rem;
-      font-weight: 900;
-      color: var(--white);
-      line-height: 1;
-      margin-bottom: 4px;
+    .btn-primary {
+      background: var(--yellow);
+      color: #050811;
+      font-weight: 800;
+      font-size: 0.98rem;
+      padding: 16px 32px;
+      border-radius: 99px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 12px 32px rgba(250, 204, 21, 0.25);
+      transition: transform 0.25s, box-shadow 0.25s;
     }
 
-    .stat-num span {
-      color: var(--accent2);
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 40px rgba(250, 204, 21, 0.4);
     }
 
-    .stat-label {
-      font-size: 0.78rem;
-      color: var(--muted);
-      font-weight: 500;
+    .btn-glass {
+      background: rgba(255, 255, 255, 0.04);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.98rem;
+      padding: 16px 30px;
+      border-radius: 99px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .btn-glass:hover {
+      border-color: var(--cyan);
+      background: rgba(0, 212, 255, 0.08);
+    }
+
+    /* HERO 3D FLOATING SHOWCASE */
+    .hero-visual {
+      perspective: 1000px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .tilt-stack {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      height: 410px;
+      transform-style: preserve-3d;
+      transition: transform 0.15s ease-out;
+    }
+
+    .float-card {
+      position: absolute;
+      border-radius: 22px;
+      padding: 26px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55);
+    }
+
+    .fc-top {
+      width: 330px;
+      top: 10px;
+      left: 0;
+      background: linear-gradient(145deg, rgba(20, 30, 56, 0.9), rgba(10, 15, 30, 0.95));
+      border: 1px solid rgba(0, 212, 255, 0.35);
+      transform: translateZ(30px);
+    }
+
+    .fc-bottom {
+      width: 310px;
+      bottom: 15px;
+      right: 0;
+      background: linear-gradient(145deg, rgba(28, 34, 52, 0.92), rgba(14, 18, 32, 0.96));
+      border: 1px solid rgba(250, 204, 21, 0.35);
+      transform: translateZ(55px);
+    }
+
+    .fc-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .fc-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.08em;
+      padding: 4px 10px;
+      border-radius: 99px;
     }
 
-    .stat-sep {
-      width: 1px;
-      background: var(--border);
-      align-self: stretch;
+    .search-pill {
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 12px;
     }
 
-    /* GENERAL */
+    /* MARQUEE CLIENTI */
+    .marquee-wrap {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: rgba(10, 15, 28, 0.6);
+      padding: 28px 0;
+      overflow: hidden;
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      gap: 64px;
+      animation: scrollMarquee 24s linear infinite;
+    }
+
+    .marquee-wrap:hover .marquee-track {
+      animation-play-state: paused;
+    }
+
+    .brand-pill {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.55);
+      letter-spacing: -0.02em;
+      transition: color 0.3s;
+    }
+
+    .brand-pill:hover {
+      color: #fff;
+    }
+
+    .brand-star {
+      color: var(--cyan);
+      font-size: 0.9rem;
+    }
+
+    @keyframes scrollMarquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* SEZIONI GENERALI */
     section {
-      padding: 100px 6%;
+      position: relative;
+      z-index: 1;
+      padding: 120px 6%;
     }
 
-    .inner {
-      max-width: 1100px;
+    .container {
+      max-width: 1180px;
       margin: 0 auto;
     }
 
-    .sec-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--accent2);
-      font-size: 0.73rem;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      margin-bottom: 16px;
+    .sec-head {
+      max-width: 640px;
+      margin-bottom: 64px;
     }
 
-    .sec-label::before {
-      content: '';
-      width: 22px;
-      height: 2px;
-      background: var(--accent);
+    .kicker {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--cyan);
+      margin-bottom: 12px;
     }
 
     h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 3.8vw, 3rem);
-      font-weight: 900;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      margin-bottom: 16px;
-      color: var(--white);
+      font-size: clamp(2.2rem, 4vw, 3.3rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
     }
 
     .sec-sub {
       color: var(--muted);
-      font-size: 1rem;
-      max-width: 520px;
-      margin-bottom: 56px;
-      line-height: 1.8;
-    }
-
-    /* PORTFOLIO */
-    #lavori {
-      background: var(--ink2);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 28px;
-    }
-
-    .portfolio-card {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01)), var(--card);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      overflow: hidden;
-      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
-    }
-
-    .portfolio-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(96, 165, 250, 0.32);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
-    }
-
-    .portfolio-card.full {
-      grid-column: 1 / -1;
-    }
-
-    .portfolio-img-wrap {
-      position: relative;
-      background: radial-gradient(circle at 80% 85%, rgba(37, 99, 235, 0.10), transparent 24%), linear-gradient(180deg, #11131b 0%, #0d0f16 100%);
-      padding: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 250px;
-      overflow: hidden;
-    }
-
-    .portfolio-img-wrap img {
-      max-width: 100%;
-      max-height: 200px;
-      object-fit: contain;
-      border-radius: 6px;
-    }
-
-    .port-badge {
-      position: absolute;
-      top: 16px;
-      left: 16px;
-      background: rgba(37, 99, 235, 0.14);
-      border: 1px solid rgba(96, 165, 250, 0.30);
-      color: var(--accent2);
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 7px 14px;
-      border-radius: 8px;
-      backdrop-filter: blur(8px);
-      z-index: 3;
-    }
-
-    .portfolio-body {
-      padding: 28px 28px 30px;
-    }
-
-    .portfolio-body h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.22rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-      color: var(--white);
-      line-height: 1.25;
-    }
-
-    .portfolio-body p {
-      color: var(--muted);
-      font-size: 0.95rem;
-      line-height: 1.8;
-    }
-
-    .before-after {
-      display: flex;
-      align-items: stretch;
-      gap: 0;
-      width: 100%;
-      max-width: 760px;
-      border-radius: 16px;
-      overflow: hidden;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(96, 165, 250, 0.10);
-    }
-
-    .ba-side {
-      flex: 1;
-      background: #0f1118;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 28px 24px;
-      gap: 16px;
-      min-height: 230px;
-    }
-
-    .ba-side+.ba-side {
-      border-left: 1px solid rgba(96, 165, 250, 0.16);
-    }
-
-    .ba-label {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      padding: 7px 14px;
-      border-radius: 8px;
-    }
-
-    .ba-label.before {
-      background: rgba(123, 122, 133, 0.16);
-      color: #b8b7c2;
-    }
-
-    .ba-label.after {
-      background: rgba(37, 99, 235, 0.16);
-      color: var(--accent2);
-    }
-
-    .ba-side img {
-      max-width: 100%;
-      max-height: 155px;
-      object-fit: contain;
-      display: block;
-    }
-
-    .fidelity-wrap,
-    .catalogo-wrap {
-      padding: 40px 25px 25px;
-      min-height: 300px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .fidelity-wrap img,
-    .catalogo-img {
-      width: 90%;
-      max-width: 330px;
-      height: 220px;
-      margin-top: 13px;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* PARTNER */
-    #partner {
-      background: var(--ink);
-      border-top: 1px solid var(--border);
-    }
-
-    #partner .inner {
-      max-width: 1200px;
-    }
-
-    .partner-wrap {
-      display: grid;
-      grid-template-columns: 420px 1fr;
-      gap: 34px;
-      align-items: stretch;
-    }
-
-    .partner-logo-box {
-      height: 100%;
-      min-height: 100%;
-      position: sticky;
-      top: 110px;
-      padding: 38px 34px;
-      border-radius: 18px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01)), var(--card);
-      border: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 18px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.22);
-    }
-
-    .partner-logo-box img {
-      max-width: 240px;
-      max-height: 90px;
-      object-fit: contain;
-      filter: brightness(1.08);
-    }
-
-    .partner-label-top {
-      font-size: .72rem;
-      font-weight: 700;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--accent2);
-      text-align: center;
-    }
-
-    .partner-desc {
-      color: var(--muted);
-      font-size: .92rem;
-      line-height: 1.8;
-      text-align: center;
-      max-width: 320px;
-    }
-
-    .collab-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-      align-content: start;
-    }
-
-    .collab-card {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01)), var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 24px;
-      display: flex;
-      gap: 18px;
-      align-items: flex-start;
-      transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease;
-    }
-
-    .collab-card:hover {
-      transform: translateX(6px);
-      border-color: rgba(96, 165, 250, .34);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, .18);
-    }
-
-    .collab-icon {
-      width: 48px;
-      height: 48px;
-      min-width: 48px;
-      border-radius: 12px;
-      background: rgba(37, 99, 235, .10);
-      border: 1px solid rgba(37, 99, 235, .22);
-      display: flex;
-      align-items: center;
-      justify-content: center;
       font-size: 1.08rem;
     }
 
-    .collab-card h4 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 4px;
-    }
-
-    .collab-card p {
-      color: var(--muted);
-      font-size: .87rem;
-      line-height: 1.7;
-    }
-
-    @media(min-width:1024px) {
-      .collab-grid {
-        grid-auto-rows: 1fr;
-      }
-    }
-
-    /* PROBLEMA */
-    #problema {
-      background: var(--ink2);
-      border-top: 1px solid var(--border);
-    }
-
-    #problema .inner {
+    /* BENTO GRID SERVIZI */
+    .bento-services {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 70px;
-      align-items: center;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 24px;
     }
 
-    .pain-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .pain-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-left: 3px solid rgba(37, 99, 235, 0.35);
-      border-radius: 0 10px 10px 0;
-      padding: 18px 20px;
-      transition: border-left-color 0.2s;
-    }
-
-    .pain-item:hover {
-      border-left-color: var(--accent);
-    }
-
-    .pain-icon {
-      font-size: 1.2rem;
-      min-width: 26px;
-      text-align: center;
-    }
-
-    .pain-text strong {
-      display: block;
-      font-weight: 600;
-      margin-bottom: 3px;
-      font-size: 0.97rem;
-      color: var(--white);
-    }
-
-    .pain-text span {
-      color: var(--muted);
-      font-size: 0.87rem;
-    }
-
-    .data-boxes {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .data-box {
-      background: var(--card);
+    .b-card {
+      background: var(--surface);
+      backdrop-filter: blur(16px);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 30px 28px;
-    }
-
-    .big-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 4rem;
-      font-weight: 900;
-      line-height: 1;
-      color: var(--accent2);
-      margin-bottom: 10px;
-    }
-
-    .data-box p {
-      color: var(--muted);
-      font-size: 0.95rem;
-      line-height: 1.75;
-    }
-
-    .data-box p strong {
-      color: var(--text);
-    }
-
-    /* SERVIZI */
-    #servizi {
-      background: var(--ink);
-      border-top: 1px solid var(--border);
-    }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .s-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 28px 22px;
+      border-radius: 26px;
+      padding: 38px 34px;
       position: relative;
       overflow: hidden;
-      transition: transform 0.3s, border-color 0.3s;
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s, background 0.3s;
     }
 
-    .s-card::before {
-      content: '';
+    .b-card::after {
+      content: "";
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: var(--grad);
+      inset: 0;
+      background: radial-gradient(380px circle at var(--mx, 50%) var(--my, 50%), rgba(0, 212, 255, 0.14), transparent 65%);
       opacity: 0;
       transition: opacity 0.3s;
+      pointer-events: none;
     }
 
-    .s-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(37, 99, 235, 0.2);
+    .b-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--border-bright);
+      background: rgba(20, 30, 56, 0.85);
     }
 
-    .s-card:hover::before {
+    .b-card:hover::after {
       opacity: 1;
     }
 
-    .s-icon {
-      font-size: 1.5rem;
-      margin-bottom: 14px;
-    }
+    .span-6 { grid-column: span 6; }
+    .span-4 { grid-column: span 4; }
 
-    .s-card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-      color: var(--white);
-    }
-
-    .s-card p {
-      color: var(--muted);
-      font-size: 0.88rem;
-      line-height: 1.7;
-    }
-
-    /* PACCHETTI */
-    #pacchetti {
-      background: var(--ink2);
-      border-top: 1px solid var(--border);
-    }
-
-    .pkg-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 22px;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .pkg {
-      background: var(--card);
-      border: 1px solid var(--border);
+    .svg-icon {
+      width: 54px;
+      height: 54px;
       border-radius: 16px;
-      padding: 32px 26px;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      transition: transform 0.3s;
-    }
-
-    .pkg:hover {
-      transform: translateY(-4px);
-    }
-
-    .pkg.growth {
-      border-color: rgba(37, 99, 235, 0.35);
-      background: linear-gradient(155deg, rgba(37, 99, 235, 0.07), rgba(18, 18, 25, 1) 60%);
-    }
-
-    .pkg.expansion {
-      grid-column: 1 / -1;
-      background: linear-gradient(135deg, rgba(37, 99, 235, 0.06), rgba(96, 165, 250, 0.04), var(--card));
-      border-color: rgba(96, 165, 250, 0.22);
-      flex-direction: row;
-      gap: 48px;
-      align-items: flex-start;
-    }
-
-    .pkg.expansion .expansion-left {
-      flex: 1;
-    }
-
-    .pkg.expansion .expansion-right {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .pkg-exp-label {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent2);
-      margin-bottom: 8px;
-    }
-
-    .hot-badge {
-      position: absolute;
-      top: -13px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--accent);
-      color: var(--white);
-      font-size: 0.68rem;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 5px 16px;
-      border-radius: 4px;
-      white-space: nowrap;
-    }
-
-    .pkg-lv {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent2);
-      margin-bottom: 6px;
-    }
-
-    .pkg h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
-      font-weight: 900;
-      margin-bottom: 6px;
-      color: var(--white);
-    }
-
-    .pkg-desc {
-      color: var(--muted);
-      font-size: 0.87rem;
-      margin-bottom: 24px;
-      line-height: 1.65;
-    }
-
-    .pkg-feats {
-      list-style: none;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 11px;
-      margin-bottom: 28px;
-    }
-
-    .pkg-feats li {
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      font-size: 0.9rem;
-    }
-
-    .pkg-feats li::before {
-      content: '✓';
-      color: var(--accent2);
-      font-weight: 800;
-      min-width: 14px;
-      font-size: 0.8rem;
-      margin-top: 3px;
-    }
-
-    .pkg-btn {
-      display: block;
-      text-align: center;
-      padding: 13px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 0.92rem;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-
-    .pkg-btn-ghost {
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: var(--text);
-    }
-
-    .pkg-btn-ghost:hover {
-      border-color: var(--accent);
-      color: var(--accent2);
-    }
-
-    .pkg-btn-main {
-      background: var(--accent);
-      color: var(--white);
-    }
-
-    .pkg-btn-main:hover {
-      background: #1d4ed8;
-      box-shadow: 0 8px 32px rgba(37, 99, 235, 0.3);
-    }
-
-    .pkg.expansion h3 {
-      font-size: 1.6rem;
-    }
-
-    /* STEPS */
-    #steps {
-      background: var(--ink);
-      border-top: 1px solid var(--border);
-    }
-
-    #steps .inner {
-      max-width: 780px;
-      margin: 0 auto;
-    }
-
-    .step-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    .step {
-      display: flex;
-      gap: 28px;
-      align-items: flex-start;
-      padding: 32px 0;
-    }
-
-    .step+.step {
-      border-top: 1px solid var(--border);
-    }
-
-    .step-n {
-      min-width: 48px;
-      height: 48px;
-      background: rgba(37, 99, 235, 0.12);
-      border: 1px solid rgba(37, 99, 235, 0.3);
-      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.16), rgba(0, 212, 255, 0.04));
+      border: 1px solid rgba(0, 212, 255, 0.25);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Playfair Display', serif;
-      font-weight: 900;
-      font-size: 1.2rem;
-      color: var(--accent2);
+      color: var(--cyan);
+      margin-bottom: 24px;
+      transition: transform 0.35s, background 0.35s, color 0.35s;
+    }
+
+    .b-card:hover .svg-icon {
+      transform: scale(1.1) rotate(-4deg);
+      background: var(--yellow);
+      border-color: var(--yellow);
+      color: #050811;
+    }
+
+    .b-card h3 {
+      font-size: 1.32rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+
+    .b-card p {
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    /* LAVORI / PORTFOLIO */
+    .works-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+
+    .w-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      overflow: hidden;
+      transition: transform 0.35s ease, border-color 0.3s;
+    }
+
+    .w-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(250, 204, 21, 0.4);
+    }
+
+    .w-card.full {
+      grid-column: 1 / -1;
+    }
+
+    .w-media {
+      background: #070b16;
+      padding: 44px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 290px;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .w-tag {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(5, 8, 17, 0.85);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--yellow);
+    }
+
+    .ba-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    .ba-item {
+      background: var(--surface-solid);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .ba-item img {
+      max-height: 145px;
+      max-width: 100%;
+      object-fit: contain;
+    }
+
+    .w-body {
+      padding: 32px 36px;
+    }
+
+    .w-body h3 {
+      font-size: 1.38rem;
+      margin-bottom: 8px;
+    }
+
+    .w-body p {
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    /* PARTNER MONDINO */
+    .mondino-box {
+      margin-top: 32px;
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(250, 204, 21, 0.05));
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 26px;
+      padding: 40px 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 36px;
+      flex-wrap: wrap;
+    }
+
+    .mondino-box img {
+      max-height: 70px;
+      max-width: 210px;
+      object-fit: contain;
+    }
+
+    /* PACCHETTI */
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .plan {
+      background: var(--surface);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      padding: 40px 32px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .plan:hover {
+      transform: translateY(-6px);
+      border-color: var(--border-bright);
+    }
+
+    .plan.featured {
+      background: linear-gradient(180deg, rgba(0, 212, 255, 0.12) 0%, var(--surface) 100%);
+      border: 1px solid rgba(0, 212, 255, 0.5);
+      box-shadow: 0 25px 60px rgba(0, 212, 255, 0.1);
+    }
+
+    .plan-badge {
+      position: absolute;
+      top: -13px;
+      right: 26px;
+      background: var(--cyan);
+      color: #050811;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 5px 14px;
+      border-radius: 99px;
+    }
+
+    .plan-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--yellow);
+      margin-bottom: 20px;
+    }
+
+    .plan h3 {
+      font-size: 1.55rem;
+      margin-bottom: 8px;
+    }
+
+    .plan-lead {
+      color: var(--muted);
+      font-size: 0.94rem;
+      margin-bottom: 26px;
+      min-height: 46px;
+    }
+
+    .plan-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 34px;
+      flex: 1;
+    }
+
+    .plan-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.94rem;
+      color: #e2e8f0;
+    }
+
+    .plan-list svg {
+      color: var(--cyan);
       flex-shrink: 0;
     }
 
-    .step h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
+    .plan-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 15px 24px;
+      border-radius: 99px;
       font-weight: 700;
-      margin-bottom: 6px;
-      color: var(--white);
+      font-size: 0.94rem;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      transition: all 0.25s;
     }
 
-    .step p {
+    .plan-btn:hover {
+      background: #fff;
+      color: #050811;
+    }
+
+    .plan.featured .plan-btn {
+      background: var(--yellow);
+      border-color: var(--yellow);
+      color: #050811;
+    }
+
+    .plan.featured .plan-btn:hover {
+      background: #fde047;
+      transform: scale(1.02);
+    }
+
+    /* TASTI CONTATTO CLICCABILI */
+    .contact-links-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .contact-pill-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      text-decoration: none;
+      color: #fff;
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    }
+
+    .contact-pill-card:hover {
+      transform: translateX(6px);
+      background: rgba(255, 255, 255, 0.06);
+      border-color: var(--cyan);
+    }
+
+    .contact-pill-card.wa-pill:hover {
+      border-color: var(--wa);
+      background: rgba(37, 211, 102, 0.08);
+    }
+
+    .cp-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .cp-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .cp-meta {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cp-label {
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
       color: var(--muted);
-      font-size: 0.93rem;
-      line-height: 1.75;
+    }
+
+    .cp-value {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .cp-arrow {
+      color: var(--muted);
+      transition: transform 0.25s ease, color 0.25s ease;
+    }
+
+    .contact-pill-card:hover .cp-arrow {
+      transform: translateX(4px);
+      color: #fff;
     }
 
     /* CONTATTI */
-    #contatti {
-      background: var(--ink2);
-      border-top: 1px solid var(--border);
+    .contact-card {
+      background: linear-gradient(145deg, rgba(16, 24, 46, 0.9), rgba(8, 12, 24, 0.95));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 32px;
+      padding: 60px;
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 56px;
+      align-items: center;
     }
 
-    #contatti .inner {
-      max-width: 660px;
-      margin: 0 auto;
-      text-align: center;
+    .form-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
 
-    .form-wrap {
-      text-align: left;
-      margin-top: 44px;
-    }
-
-    .form-row {
+    .row-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 12px;
+      gap: 16px;
     }
 
-    input,
-    textarea,
-    select {
+    input, select, textarea {
       width: 100%;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 14px 16px;
-      color: var(--text);
-      font-family: 'Outfit', sans-serif;
+      background: rgba(5, 8, 17, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      padding: 16px 18px;
+      color: #fff;
+      font-family: inherit;
       font-size: 0.95rem;
       outline: none;
       transition: border-color 0.2s;
     }
 
-    input:focus,
-    textarea:focus,
-    select:focus {
-      border-color: rgba(37, 99, 235, 0.45);
-    }
-
-    input::placeholder,
-    textarea::placeholder {
-      color: var(--muted);
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--cyan);
     }
 
     textarea {
       height: 110px;
       resize: none;
-      margin-bottom: 12px;
     }
 
-    select {
-      cursor: pointer;
-      margin-bottom: 12px;
-    }
-
-    select option {
-      background: var(--ink2);
-    }
-
-    .privacy-check {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      margin-bottom: 6px;
-    }
-
-    .privacy-check input[type="checkbox"] {
-      width: auto;
-      min-width: 16px;
-      height: 16px;
-      margin-top: 4px;
-      accent-color: var(--accent);
-      cursor: pointer;
-    }
-
-    .privacy-check label {
-      font-size: 0.81rem;
-      color: var(--muted);
-      line-height: 1.55;
-    }
-
-    .privacy-check a {
-      color: var(--accent2);
-      text-decoration: none;
-    }
-
-    .form-btn {
-      width: 100%;
-      padding: 17px;
-      background: var(--accent);
-      border: none;
-      border-radius: 8px;
-      color: var(--white);
-      font-family: 'Outfit', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-      margin-top: 12px;
-    }
-
-    .form-btn:hover {
-      background: #1d4ed8;
-      transform: translateY(-2px);
-      box-shadow: 0 10px 40px rgba(37, 99, 235, 0.3);
-    }
-
-    .form-btn:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    .or-divider {
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.83rem;
-      margin: 24px 0;
-      position: relative;
-    }
-
-    .or-divider::before,
-    .or-divider::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      width: 42%;
-      height: 1px;
-      background: var(--border);
-    }
-
-    .or-divider::before {
-      left: 0;
-    }
-
-    .or-divider::after {
-      right: 0;
-    }
-
-    .email-link {
+    .privacy-box {
       display: flex;
       align-items: center;
-      justify-content: center;
       gap: 10px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 16px;
-      color: var(--text);
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .privacy-box input {
+      width: 17px;
+      height: 17px;
+      accent-color: var(--cyan);
+    }
+
+    .privacy-box a {
+      color: var(--cyan);
       text-decoration: none;
-      font-weight: 600;
-      transition: border-color 0.2s, color 0.2s;
     }
 
-    .email-link:hover {
-      border-color: var(--accent);
-      color: var(--accent2);
+    .btn-send {
+      background: var(--yellow);
+      color: #050811;
+      font-weight: 800;
+      font-size: 1rem;
+      padding: 17px;
+      border: none;
+      border-radius: 99px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    /* VALIDATION */
-    input.field-error,
-    textarea.field-error,
-    select.field-error {
-      border-color: rgba(239, 68, 68, 0.6) !important;
+    .btn-send:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(250, 204, 21, 0.35);
     }
 
-    .field-msg {
-      font-size: 0.78rem;
-      color: #f87171;
-      margin-top: 4px;
-      margin-bottom: 8px;
-      display: none;
-    }
-
-    .field-msg.show {
-      display: block;
+    .field-error {
+      border-color: #ef4444 !important;
     }
 
     /* FOOTER */
     footer {
-      background: var(--ink);
+      position: relative;
+      z-index: 1;
       border-top: 1px solid var(--border);
-      padding: 36px 6%;
-    }
-
-    .footer-inner {
-      max-width: 1100px;
-      margin: 0 auto;
+      padding: 40px 6%;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    .footer-logo {
-      font-family: 'Playfair Display', serif;
-      font-weight: 900;
-      font-size: 1.15rem;
-      color: var(--white);
-    }
-
-    .footer-logo span {
-      color: var(--accent2);
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 22px;
-      flex-wrap: wrap;
-    }
-
-    .footer-links a {
+      gap: 20px;
       color: var(--muted);
-      font-size: 0.82rem;
+      font-size: 0.88rem;
+    }
+
+    footer a {
+      color: var(--muted);
       text-decoration: none;
       transition: color 0.2s;
     }
 
-    .footer-links a:hover {
-      color: var(--accent2);
+    footer a:hover {
+      color: #fff;
     }
 
-    footer p {
-      color: var(--muted);
-      font-size: 0.82rem;
+    /* TASTO WHATSAPP VERDE FISSO A DESTRA */
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 300;
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      background: var(--wa);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 28px rgba(37, 211, 102, 0.45);
+      text-decoration: none;
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s;
     }
 
-    /* MODAL */
+    .whatsapp-btn::after {
+      content: "";
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 2px solid var(--wa);
+      opacity: 0.65;
+      animation: waPing 2.2s infinite;
+    }
+
+    .whatsapp-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 14px 36px rgba(37, 211, 102, 0.6);
+    }
+
+    .whatsapp-btn svg {
+      width: 32px;
+      height: 32px;
+      fill: currentColor;
+    }
+
+    @keyframes waPing {
+      0% { transform: scale(1); opacity: 0.7; }
+      100% { transform: scale(1.4); opacity: 0; }
+    }
+
+    /* TOAST & MODAL */
+    #toast {
+      position: fixed;
+      bottom: 105px;
+      right: 28px;
+      background: var(--cyan);
+      color: #050811;
+      padding: 14px 22px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px);
+      transition: all 0.3s;
+      z-index: 400;
+    }
+
+    #toast.err {
+      background: #ef4444;
+      color: #fff;
+    }
+
     .modal-overlay {
       display: none;
       position: fixed;
       inset: 0;
-      z-index: 500;
-      background: rgba(10, 10, 15, 0.92);
+      background: rgba(5, 8, 17, 0.88);
       backdrop-filter: blur(10px);
+      z-index: 500;
       align-items: center;
       justify-content: center;
       padding: 20px;
@@ -1216,190 +1021,34 @@
       display: flex;
     }
 
-    .modal {
-      background: var(--card);
+    .modal-box {
+      background: var(--surface-solid);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      max-width: 680px;
+      border-radius: 24px;
+      max-width: 560px;
       width: 100%;
-      max-height: 82vh;
-      overflow-y: auto;
-      padding: 40px 36px;
+      padding: 36px;
       position: relative;
-    }
-
-    .modal h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
-      font-weight: 900;
-      margin-bottom: 20px;
-      color: var(--white);
-    }
-
-    .modal h4 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      font-weight: 700;
-      margin: 20px 0 8px;
-      color: var(--accent2);
-    }
-
-    .modal p,
-    .modal li {
-      color: var(--muted);
-      font-size: 0.9rem;
-      line-height: 1.8;
-    }
-
-    .modal ul {
-      padding-left: 18px;
-      margin-top: 6px;
     }
 
     .modal-close {
       position: absolute;
-      top: 16px;
-      right: 16px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border);
-      color: var(--text);
+      top: 18px;
+      right: 18px;
+      background: rgba(255, 255, 255, 0.08);
+      border: none;
+      color: #fff;
       width: 34px;
       height: 34px;
       border-radius: 50%;
-      font-size: 1rem;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: border-color 0.2s;
-    }
-
-    .modal-close:hover {
-      border-color: var(--accent);
-      color: var(--accent2);
-    }
-
-    /* COOKIE */
-    .cookie-banner {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 400;
-      background: rgba(18, 18, 25, 0.97);
-      backdrop-filter: blur(14px);
-      border-top: 1px solid var(--border);
-      padding: 20px 6%;
-      display: none;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .cookie-banner.show {
-      display: flex;
-    }
-
-    .cookie-banner p {
-      color: var(--muted);
-      font-size: 0.84rem;
-      max-width: 640px;
-      line-height: 1.6;
-    }
-
-    .cookie-banner a {
-      color: var(--accent2);
-      text-decoration: none;
-    }
-
-    .cookie-btns {
-      display: flex;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-
-    .cookie-accept {
-      background: var(--accent);
-      color: var(--white);
-      font-weight: 700;
-      font-size: 0.84rem;
-      padding: 10px 22px;
-      border-radius: 6px;
-      border: none;
-      cursor: pointer;
-    }
-
-    .cookie-decline {
-      background: transparent;
-      color: var(--muted);
-      font-size: 0.84rem;
-      padding: 10px 16px;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      cursor: pointer;
-      transition: color 0.2s;
-    }
-
-    .cookie-decline:hover {
-      color: var(--text);
-    }
-
-    /* FLOAT EMAIL */
-    .float-email {
-      position: fixed;
-      bottom: 26px;
-      right: 26px;
-      z-index: 300;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--accent);
-      color: var(--white);
-      font-weight: 700;
-      font-size: 0.86rem;
-      padding: 14px 22px;
-      border-radius: 12px;
-      box-shadow: 0 0 0 1px rgba(123, 180, 255, 0.14), 0 10px 34px rgba(37, 99, 235, 0.33);
-      text-decoration: none;
-      transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
-    }
-
-    .float-email:hover {
-      transform: scale(1.04);
-      background: #1d4ed8;
-    }
-
-    /* TOAST */
-    #toast {
-      position: fixed;
-      bottom: 90px;
-      left: 50%;
-      transform: translateX(-50%) translateY(16px);
-      background: var(--accent);
-      color: var(--white);
-      padding: 13px 26px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 0.92rem;
-      z-index: 999;
-      opacity: 0;
-      transition: all 0.4s;
-      pointer-events: none;
-      white-space: nowrap;
-      max-width: 90vw;
-      text-align: center;
-    }
-
-    #toast.error-toast {
-      background: #dc2626;
     }
 
     /* REVEAL */
     .reveal {
       opacity: 0;
-      transform: translateY(22px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
+      transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .reveal.visible {
@@ -1407,973 +1056,550 @@
       transform: translateY(0);
     }
 
-    @keyframes blink {
-
-      0%,
-      100% {
-        opacity: 1;
-      }
-
-      50% {
-        opacity: 0.15;
-      }
-    }
-
     /* RESPONSIVE */
-    @media(max-width:980px) {
-      .partner-wrap {
-        grid-template-columns: 1fr;
-        gap: 24px;
-      }
-
-      .partner-logo-box {
-        position: relative;
-        top: auto;
-        min-height: auto;
-        height: auto;
-      }
-    }
-
-    @media(max-width:860px) {
-      #problema .inner {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-
-      .services-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .pkg-grid {
-        grid-template-columns: 1fr;
-        max-width: 440px;
-      }
-
-      .pkg.expansion {
-        flex-direction: column;
-        gap: 0;
-      }
-
-      .pkg.expansion .expansion-right {
-        margin-top: 24px;
-      }
-
-      .portfolio-grid {
+    @media (max-width: 960px) {
+      .hero-container, .works-grid, .plans-grid, .contact-card {
         grid-template-columns: 1fr;
       }
 
-      .portfolio-card.full {
-        grid-column: auto;
+      .span-6, .span-4 {
+        grid-column: span 12;
       }
 
-      .form-row {
-        grid-template-columns: 1fr;
-      }
-
-      .nav-right .nav-link {
+      .hero-visual {
         display: none;
       }
-    }
 
-    @media(max-width:768px) {
-      .fidelity-wrap img {
-        width: 88%;
-        max-width: 320px;
-        height: auto;
-        object-fit: contain;
+      .contact-card {
+        padding: 36px 24px;
+      }
+
+      .ba-grid {
+        grid-template-columns: 1fr;
       }
     }
 
-    @media(max-width:580px) {
+    @media (max-width: 640px) {
+      .nav-links a:not(.nav-cta) {
+        display: none;
+      }
+
+      .row-2 {
+        grid-template-columns: 1fr;
+      }
+
       section {
-        padding: 72px 5%;
+        padding: 86px 5%;
       }
 
-      .services-grid {
-        grid-template-columns: 1fr;
-      }
-
-      h1 {
-        font-size: 2.4rem;
-      }
-
-      h2 {
-        font-size: 1.9rem;
-      }
-
-      .float-email .label {
-        display: none;
-      }
-
-      .footer-inner {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .footer-links {
-        justify-content: center;
-      }
-
-      .modal {
-        padding: 28px 18px;
-      }
-
-      .hero-stats {
-        gap: 20px;
-      }
-
-      .portfolio-img-wrap {
-        padding: 24px 18px 18px;
-        min-height: auto;
-      }
-
-      .portfolio-body {
-        padding: 24px 20px 26px;
-      }
-
-      .portfolio-body h3 {
-        font-size: 1.08rem;
-        line-height: 1.28;
-      }
-
-      .portfolio-body p {
-        font-size: 0.92rem;
-        line-height: 1.75;
-      }
-
-      .before-after {
-        flex-direction: column;
-        background: transparent;
-        border: 0;
-        gap: 18px;
-        overflow: visible;
-      }
-
-      .ba-side {
-        width: 100%;
-        min-height: auto;
-        border-radius: 16px;
-        padding: 22px 16px;
-        background: #10131c;
-        border: 1px solid rgba(96, 165, 250, 0.12);
-      }
-
-      .ba-side+.ba-side {
-        border-left: none;
-      }
-
-      .fidelity-wrap {
-        padding: 34px 18px 16px;
-      }
-
-      .fidelity-wrap img {
-        max-width: 100%;
-        max-height: none;
-        margin-top: 26px;
-      }
-
-      .catalogo-wrap {
-        padding: 34px 16px 18px;
-      }
-
-      .catalogo-img {
-        width: 100%;
-        max-height: none;
-        border-radius: 12px;
-      }
-
-      .port-badge {
-        top: 12px;
-        left: 12px;
-        font-size: 0.66rem;
-        padding: 6px 11px;
-      }
-
-      .float-email {
-        right: 18px;
-        bottom: 18px;
-        padding: 14px 16px;
-        border-radius: 14px;
-      }
-
-      .partner-logo-box {
-        padding: 28px 20px;
-        gap: 14px;
-      }
-
-      .partner-logo-box img {
-        max-width: 190px;
-        max-height: 72px;
-      }
-
-      .collab-card {
-        padding: 20px;
-        gap: 14px;
-      }
-
-      .collab-icon {
-        width: 42px;
-        height: 42px;
-        min-width: 42px;
-      }
-    }
-
-    /* HAMBURGER BUTTON */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      gap: 5px;
-      width: 40px;
-      height: 40px;
-      background: transparent;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 8px;
-      cursor: pointer;
-      transition: border-color 0.2s;
-    }
-
-    .hamburger span {
-      display: block;
-      width: 100%;
-      height: 2px;
-      background: var(--text);
-      border-radius: 2px;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-    }
-
-    .hamburger:hover {
-      border-color: var(--accent);
-    }
-
-    .hamburger.open span:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
-    }
-
-    .hamburger.open span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .hamburger.open span:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
-    }
-
-    /* MOBILE MENU */
-    .mobile-menu {
-      display: none;
-      position: fixed;
-      top: 65px;
-      left: 0;
-      right: 0;
-      z-index: 99;
-      background: rgba(13, 14, 20, 0.98);
-      backdrop-filter: blur(24px);
-      border-bottom: 1px solid var(--border);
-      flex-direction: column;
-      padding: 16px 6%;
-      gap: 4px;
-      transform: translateY(-10px);
-      opacity: 0;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-    }
-
-    .mobile-menu.open {
-      display: flex;
-      transform: translateY(0);
-      opacity: 1;
-    }
-
-    .mobile-link {
-      color: var(--muted);
-      font-size: 1rem;
-      font-weight: 500;
-      text-decoration: none;
-      padding: 14px 0;
-      border-bottom: 1px solid var(--border);
-      transition: color 0.2s;
-    }
-
-    .mobile-link:last-child {
-      border-bottom: none;
-    }
-
-    .mobile-link:hover {
-      color: var(--text);
-    }
-
-    .mobile-cta {
-      color: var(--accent2) !important;
-      font-weight: 700;
-      margin-top: 8px;
-      padding-bottom: 6px;
-    }
-
-    @media(max-width:860px) {
-      .hamburger {
-        display: flex;
+      .whatsapp-btn {
+        bottom: 20px;
+        right: 20px;
+        width: 56px;
+        height: 56px;
       }
     }
   </style>
 </head>
 
 <body>
-
-  <nav>
-    <a class="logo" href="#">CLIENTO<span>.</span></a>
-    <div class="nav-right">
-      <a class="nav-link" href="#lavori">Portfolio</a>
-      <a class="nav-link" href="#partner">Partnership</a>
-      <a class="nav-link" href="#servizi">Servizi</a>
-      <a class="nav-link" href="#pacchetti">Pacchetti</a>
-      <a class="nav-cta" href="#contatti">Contattaci →</a>
-      <button class="hamburger" id="hamburger" aria-label="Apri menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
-
-  <!-- MOBILE MENU -->
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#lavori" class="mobile-link" onclick="closeMobileMenu()">Portfolio</a>
-    <a href="#partner" class="mobile-link" onclick="closeMobileMenu()">Partnership</a>
-    <a href="#servizi" class="mobile-link" onclick="closeMobileMenu()">Servizi</a>
-    <a href="#pacchetti" class="mobile-link" onclick="closeMobileMenu()">Pacchetti</a>
-    <a href="#contatti" class="mobile-link mobile-cta" onclick="closeMobileMenu()">Contattaci →</a>
+  <!-- SFONDO DINAMICO -->
+  <div class="bg-canvas">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="bg-grid"></div>
   </div>
 
-  <!-- HERO -->
+  <!-- NAVBAR FLOATING -->
+  <header>
+    <nav>
+      <a href="#" class="logo">CLIENTO<span>.</span></a>
+      <div class="nav-links">
+        <a href="#servizi">Servizi</a>
+        <a href="#lavori">Lavori</a>
+        <a href="#pacchetti">Pacchetti</a>
+        <a href="#contatti" class="nav-cta">Inizia ora</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO SPLIT CON CARD 3D -->
   <section id="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-grid"></div>
-    <div class="hero-inner">
-      <div class="badge">
-        <div class="badge-dot"></div> Digital Growth Partner
-      </div>
-      <h1>Più clienti per<br>la tua <span class="accent-text">attività</span><br>locale.</h1>
-      <p class="hero-sub">Sito web, presenza online, identità visiva — costruiamo tutto il necessario per portare nuovi
-        clienti alla tua attività. Pensa al tuo lavoro, al resto ci pensiamo noi.</p>
-      <div class="ctas">
-        <a href="#contatti" class="btn-main">Voglio più clienti →</a>
-        <a href="#pacchetti" class="btn-ghost">Vedi i pacchetti</a>
-      </div>
-      <div class="hero-stats">
-        <div>
-          <div class="stat-num">+300<span>%</span></div>
-          <div class="stat-label">Visibilità su Google</div>
-        </div>
-        <div class="stat-sep"></div>
-        <div>
-          <div class="stat-num">48<span>h</span></div>
-          <div class="stat-label">Per essere online</div>
-        </div>
-        <div class="stat-sep"></div>
-        <div>
-          <div class="stat-num">Zero</div>
-          <div class="stat-label">Tecnicismi per te</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PORTFOLIO -->
-  <section id="lavori" style="padding-top:90px;">
-    <div class="inner">
-      <div class="sec-label reveal">Portfolio</div>
-      <h2 class="reveal">Lavori <span style="color:var(--accent2)">reali</span>,<br>risultati concreti</h2>
-      <p class="sec-sub reveal">Ecco alcuni esempi del nostro lavoro. Dal restyling del brand alla comunicazione visiva
-        completa.</p>
-
-      <div class="portfolio-grid">
-        <div class="portfolio-card full reveal">
-          <div class="portfolio-img-wrap" style="flex-direction:column; min-height:280px; padding:32px;">
-            <div class="port-badge">Restyling identità</div><br>
-            <div class="before-after">
-              <div class="ba-side">
-                <span class="ba-label before">PRIMA</span>
-                <img src="LogoVecchio.JPG" alt="Logo vecchio I Sapori di Una Volta" style="opacity:0.58;">
-              </div>
-              <div class="ba-side">
-                <span class="ba-label after">DOPO</span>
-                <img src="LogoNuovo.PNG" alt="Logo nuovo I Sapori di Una Volta" style="opacity:0.88;">
-              </div>
-            </div>
-          </div>
-          <div class="portfolio-body">
-            <h3>I Sapori di Una Volta — Restyling Logo</h3>
-            <p>Modernizzazione del logo per un'attività di eccellenze alimentari a Fossano (CN). Brand identity
-              aggiornata mantenendo l'anima artigianale.</p>
-          </div>
-        </div>
-
-        <div class="portfolio-card reveal">
-          <div class="portfolio-img-wrap fidelity-wrap">
-            <div class="port-badge">Fidelity Card</div><br>
-            <img
-              src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='190' viewBox='0 0 300 190'%3E%3Crect width='300' height='190' rx='0' fill='%23c8bfb0'/%3E%3Ctext x='150' y='40' text-anchor='middle' font-family='serif' font-size='11' font-weight='bold' fill='%23333'%3EI SAPORI DI UNA VOLTA%3C/text%3E%3Ctext x='150' y='58' text-anchor='middle' font-family='sans-serif' font-size='7' fill='%23555'%3E1 punto ogni 15%E2%82%AC %E2%80%A2 5%E2%82%AC sconto al completamento%3C/text%3E%3Crect x='20' y='68' width='260' height='96' rx='4' fill='none' stroke='%23555' stroke-width='1'/%3E%3Cline x1='72' y1='68' x2='72' y2='164' stroke='%23555' stroke-width='0.5'/%3E%3Cline x1='124' y1='68' x2='124' y2='164' stroke='%23555' stroke-width='0.5'/%3E%3Cline x1='176' y1='68' x2='176' y2='164' stroke='%23555' stroke-width='0.5'/%3E%3Cline x1='228' y1='68' x2='228' y2='164' stroke='%23555' stroke-width='0.5'/%3E%3Cline x1='20' y1='116' x2='280' y2='116' stroke='%23555' stroke-width='0.5'/%3E%3C/svg%3E"
-              alt="Fidelity Card I Sapori di Una Volta">
-          </div>
-          <div class="portfolio-body">
-            <h3>Fidelity Card — I Sapori di Una Volta</h3>
-            <p>Design su misura per la carta fedeltà con identità visiva coerente al brand. Realizzata in collaborazione
-              con Tipolitografia Mondino, Fossano.</p>
-          </div>
-        </div>
-
-        <div class="portfolio-card reveal">
-          <div class="portfolio-img-wrap catalogo-wrap">
-            <div class="port-badge">Catalogo prodotti</div><br>
-            <img src="CatalogoPasta.png" alt="Catalogo pasta I Sapori di Una Volta" class="catalogo-img">
-          </div>
-          <div class="portfolio-body">
-            <h3>Cataloghi PDF — I Sapori di Una Volta</h3>
-            <p>Cataloghi digitali e da stampa per l'intera gamma prodotti. Layout curato per uso professionale, stampati
-              da Tipolitografia Mondino.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PARTNER -->
-  <section id="partner">
-    <div class="inner">
-      <div class="sec-label reveal">Partnership</div>
-      <h2 class="reveal">Brand con cui <span style="color:var(--accent2)">collaboriamo</span></h2>
-      <p class="sec-sub reveal">Lavoriamo con partner selezionati per offrire ai nostri clienti un servizio completo:
-        dal digitale alla stampa professionale.</p>
-
-      <div class="partner-wrap">
-        <div class="reveal">
-          <div class="partner-logo-box">
-            <div class="partner-label-top">Partner ufficiale</div>
-            <img src="LogoTipografia.png" alt="Tipolitografia Mondino — Fossano">
-            <p class="partner-desc">Tipolitografia Mondino di Fossano (CN) è il nostro partner di riferimento per tutto
-              ciò che riguarda la stampa professionale: bigliettini da visita, cartelloni, locandine, cataloghi e
-              materiali grafici di alta qualità.</p>
-          </div>
-        </div>
-
-        <div>
-          <div class="sec-label reveal" style="margin-bottom:20px;">Lavori svolti in collaborazione</div>
-          <div class="collab-grid">
-            <div class="collab-card reveal">
-              <div class="collab-icon">🏷️</div>
-              <div>
-                <h4>Restyling Logo — I Sapori di Una Volta</h4>
-                <p>Progettazione e stampa del nuovo logo per l'attività di eccellenze alimentari di Fossano. Identità
-                  visiva aggiornata con materiali di alta qualità.</p>
-              </div>
-            </div>
-            <div class="collab-card reveal">
-              <div class="collab-icon">💳</div>
-              <div>
-                <h4>Fidelity Card — I Sapori di Una Volta</h4>
-                <p>Design e stampa professionale della carta fedeltà personalizzata. Grafica coerente al brand,
-                  materiale premium prodotto da Mondino.</p>
-              </div>
-            </div>
-            <div class="collab-card reveal">
-              <div class="collab-icon">📄</div>
-              <div>
-                <h4>Cataloghi Prodotti — I Sapori di Una Volta</h4>
-                <p>Impaginazione e stampa dei cataloghi prodotti. Formato professionale per uso sia digitale che
-                  cartaceo, con carta di qualità superiore.</p>
-              </div>
-            </div>
-            <div class="collab-card reveal">
-              <div class="collab-icon">🖨️</div>
-              <div>
-                <h4>Bigliettini da visita e Cartelloni</h4>
-                <p>Realizziamo per i nostri clienti qualsiasi materiale promozionale stampato: bigliettini da visita,
-                  cartelloni pubblicitari, locandine e brochure.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROBLEMA -->
-  <section id="problema">
-    <div class="inner">
+    <div class="hero-container">
       <div>
-        <div class="sec-label reveal">Il problema</div>
-        <h2 class="reveal">Stai perdendo clienti<br><span style="color:var(--accent2)">ogni giorno</span></h2>
-        <p class="sec-sub reveal">Senza una presenza online curata, i tuoi potenziali clienti vanno direttamente dai
-          concorrenti.</p>
-        <ul class="pain-list">
-          <li class="pain-item reveal">
-            <div class="pain-icon">🔍</div>
-            <div class="pain-text"><strong>Non ti trovano su Google</strong><span>Chi cerca la tua attività online non
-                ti vede — e sceglie qualcun altro.</span></div>
-          </li>
-          <li class="pain-item reveal">
-            <div class="pain-icon">💻</div>
-            <div class="pain-text"><strong>Sito web assente o vecchio</strong><span>Un sito lento o brutto su telefono
-                allontana i clienti prima che leggano chi sei.</span></div>
-          </li>
-          <li class="pain-item reveal">
-            <div class="pain-icon">📵</div>
-            <div class="pain-text"><strong>Impossibile contattarti facilmente</strong><span>Senza un sistema di contatto
-                diretto, molti rinunciano e passano oltre.</span></div>
-          </li>
-        </ul>
-      </div>
-      <div class="data-boxes reveal">
-        <div class="data-box">
-          <div class="big-num">76%</div>
-          <p>dei consumatori <strong>cerca online</strong> un'attività locale prima di visitarla. Se non sei presente,
-            perdi <strong>3 clienti su 4</strong>.</p>
+        <div class="location-pill">
+          <span class="pulse-dot"></span>
+          Fossano & Cuneo • Digitale e Stampa
         </div>
-        <div class="data-box" style="border-color:rgba(37,99,235,0.15);">
-          <div class="big-num" style="font-size:3.4rem;">92%</div>
-          <p>delle ricerche locali avviene <strong>da smartphone</strong>. Se il tuo sito non funziona su telefono,
-            praticamente non esisti.</p>
+        <h1>
+          Più clienti per<br>
+          la tua <span class="dynamic-word" id="rotatingWord">attività locale.</span>
+        </h1>
+        <p class="hero-desc">
+          <strong>Noi del team di Cliento</strong> progettiamo siti web veloci, presenza su Google e materiali stampati coordinati. Un unico referente per far crescere il tuo lavoro.
+        </p>
+        <div class="hero-btns">
+          <a href="#contatti" class="btn-primary">
+            Richiedi analisi gratuita
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+          <a href="#lavori" class="btn-glass">Esplora i lavori</a>
+        </div>
+      </div>
+
+      <!-- MOCKUP INTERATTIVO 3D -->
+      <div class="hero-visual">
+        <div class="tilt-stack" id="tiltStack">
+          <div class="float-card fc-top">
+            <div class="fc-header">
+              <span class="fc-badge" style="background:rgba(0,212,255,0.15); color:var(--cyan);">Online & Google</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </div>
+            <div class="search-pill">
+              <span>La tua attività • Fossano</span>
+              <span style="color:var(--yellow);">★★★★★</span>
+            </div>
+            <p style="font-size:0.86rem; color:var(--muted);">Sito mobile-first, scheda Maps ottimizzata e contatti diretti su WhatsApp.</p>
+          </div>
+
+          <div class="float-card fc-bottom">
+            <div class="fc-header">
+              <span class="fc-badge" style="background:rgba(250,204,21,0.15); color:var(--yellow);">Stampa & Brand</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+            </div>
+            <h4 style="font-size:1.05rem; margin-bottom:6px;">Tipolitografia Mondino</h4>
+            <p style="font-size:0.85rem; color:var(--muted);">Biglietti, menù, cartellini prodotto e cataloghi coordinati al tuo sito.</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SERVIZI -->
+  <!-- MARQUEE CLIENTI -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <div class="brand-pill">Oro Bianco <span class="brand-star">✦</span></div>
+      <div class="brand-pill">A Picciridda <span class="brand-star">✦</span></div>
+      <div class="brand-pill">I Sapori di Una Volta <span class="brand-star">✦</span></div>
+      <div class="brand-pill">Tipolitografia Mondino <span class="brand-star">✦</span></div>
+      <div class="brand-pill">Oro Bianco <span class="brand-star">✦</span></div>
+      <div class="brand-pill">A Picciridda <span class="brand-star">✦</span></div>
+      <div class="brand-pill">I Sapori di Una Volta <span class="brand-star">✦</span></div>
+      <div class="brand-pill">Tipolitografia Mondino <span class="brand-star">✦</span></div>
+    </div>
+  </div>
+
+  <!-- BENTO SERVIZI -->
   <section id="servizi">
-    <div class="inner">
-      <div class="sec-label reveal">Cosa facciamo</div>
-      <h2 class="reveal">La tua crescita, <span style="color:var(--accent2)">su misura</span></h2>
-      <p class="sec-sub reveal">Tutto il necessario per trasformare la tua presenza online in un motore di acquisizione
-        clienti.</p>
-      <div class="services-grid">
-        <div class="s-card reveal">
-          <div class="s-icon">🌐</div>
-          <h3>Sito web professionale</h3>
-          <p>Veloce, bello e ottimizzato per pc,smartphone e tablet. Costruito per convincere, non solo per essere presente. Con
-            assistenza mensile per modifiche e aggiornamenti.</p>
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="kicker">Competenze</span>
+        <h2>Tutto ciò che serve per farti scegliere.</h2>
+        <p class="sec-sub">Uniamo digitale e stampa in un sistema semplice, pensato per portare persone vere nella tua attività.</p>
+      </div>
+
+      <div class="bento-services">
+        <div class="b-card span-6 reveal">
+          <div class="svg-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+          </div>
+          <h3>Siti Web ad Alta Conversione</h3>
+          <p>Veloci, moderni e progettati prima di tutto per smartphone. Costruiti per trasformare chi visita la pagina in una chiamata o un messaggio WhatsApp.</p>
         </div>
-        <div class="s-card reveal">
-          <div class="s-icon">📱</div>
-          <h3>Gestione Instagram + Web</h3>
-          <p>Gestiamo la tua pagina Instagram e il sito web insieme, con un piano editoriale coordinato e assistenza
-            mensile dedicata in base al pacchetto desiderato.</p>
+
+        <div class="b-card span-6 reveal">
+          <div class="svg-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          </div>
+          <h3>Visibilità su Google & Maps</h3>
+          <p>Ottimizziamo la tua scheda Google Business per farti trovare per primo quando qualcuno cerca la tua attività a Fossano, Cuneo e dintorni.</p>
         </div>
-        <div class="s-card reveal">
-          <div class="s-icon">🎨</div>
-          <h3>Logo e Identità visiva</h3>
-          <p>Creiamo il tuo logo e tutta la grafica per l'impresa: bigliettini da visita, cartelloni e materiali
-            stampati in collaborazione con Tipolitografia Mondino.</p>
+
+        <div class="b-card span-4 reveal">
+          <div class="svg-icon">
+            <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          </div>
+          <h3>Instagram Locale</h3>
+          <p>Contenuti mirati, caroselli e Reel studiati per portare clienti reali in negozio.</p>
         </div>
-        <div class="s-card reveal">
-          <div class="s-icon">📍</div>
-          <h3>Google Business</h3>
-          <p>Ti facciamo comparire su Google Maps quando qualcuno cerca la tua categoria nella tua zona. Più visibilità
-            locale, subito.</p>
+
+        <div class="b-card span-4 reveal">
+          <div class="svg-icon">
+            <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><circle cx="11" cy="11" r="2"></circle></svg>
+          </div>
+          <h3>Logo & Identità</h3>
+          <p>Creiamo o rinnoviamo il tuo marchio affinché sia riconoscibile ovunque.</p>
         </div>
-        <div class="s-card reveal">
-          <div class="s-icon">📈</div>
-          <h3>SEO Locale</h3>
-          <p>Saliamo in cima ai risultati di ricerca nella tua città. Più visibilità, più chiamate, più clienti ogni
-            mese.</p>
+
+        <div class="b-card span-4 reveal">
+          <div class="svg-icon">
+            <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+          </div>
+          <h3>Stampa con Mondino</h3>
+          <p>Biglietti, menù, cartellini e cataloghi stampati con qualità professionale.</p>
         </div>
-        <div class="s-card reveal">
-          <div class="s-icon">📊</div>
-          <h3>Report mensile</h3>
-          <p>Ogni mese sai quante persone ti hanno trovato e quanti contatti hai ricevuto. In italiano semplice, senza
-            tecnicismi.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LAVORI -->
+  <section id="lavori" style="padding-top: 20px;">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="kicker">Portfolio</span>
+        <h2>Lavori reali sul territorio.</h2>
+        <p class="sec-sub">Dal restyling del marchio fino ai materiali fisici progettati per il punto vendita.</p>
+      </div>
+
+      <div class="works-grid">
+        <div class="w-card full reveal">
+          <div class="w-media">
+            <span class="w-tag">Restyling Brand</span>
+            <div class="ba-grid">
+              <div class="ba-item">
+                <span style="font-size:0.74rem; color:var(--muted); font-weight:700; letter-spacing:0.1em;">PRIMA</span>
+                <img src="LogoVecchio.JPG" alt="Logo precedente I Sapori di Una Volta" style="opacity:0.6;">
+              </div>
+              <div class="ba-item" style="border-color: rgba(0, 212, 255, 0.35);">
+                <span style="font-size:0.74rem; color:var(--cyan); font-weight:700; letter-spacing:0.1em;">DOPO</span>
+                <img src="LogoNuovo.PNG" alt="Nuovo Logo I Sapori di Una Volta">
+              </div>
+            </div>
+          </div>
+          <div class="w-body">
+            <h3>I Sapori di Una Volta — Restyling Identità</h3>
+            <p>Modernizzazione del marchio per un'attività di eccellenze gastronomiche a Fossano, pensato per etichette, punto vendita e canali digitali.</p>
+          </div>
         </div>
+
+        <div class="w-card reveal">
+          <div class="w-media">
+            <span class="w-tag">Cataloghi & Cartellini</span>
+            <img src="CatalogoPasta.png" alt="Catalogo prodotti" style="max-height:210px; border-radius:12px;">
+          </div>
+          <div class="w-body">
+            <h3>Cataloghi & Cartellini — Oro Bianco & Sapori</h3>
+            <p>Listini sfogliabili e cartellini prodotto legati a mano per valorizzare l'artigianalità al banco.</p>
+          </div>
+        </div>
+
+        <div class="w-card reveal">
+          <div class="w-media">
+            <span class="w-tag">Fidelity Card</span>
+            <img
+              src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='190' viewBox='0 0 300 190'%3E%3Crect width='300' height='190' rx='10' fill='%23e8e2d5'/%3E%3Ctext x='150' y='44' text-anchor='middle' font-family='sans-serif' font-size='11' font-weight='bold' fill='%230b0f19'%3EI SAPORI DI UNA VOLTA%3C/text%3E%3Ctext x='150' y='60' text-anchor='middle' font-family='sans-serif' font-size='7' fill='%23475569'%3E1 punto ogni 15%E2%82%AC %E2%80%A2 5%E2%82%AC sconto al completamento%3C/text%3E%3Crect x='22' y='72' width='256' height='92' rx='6' fill='none' stroke='%230b0f19' stroke-width='1.2'/%3E%3Cline x1='73' y1='72' x2='73' y2='164' stroke='%230b0f19' stroke-width='0.6'/%3E%3Cline x1='124' y1='72' x2='124' y2='164' stroke='%230b0f19' stroke-width='0.6'/%3E%3Cline x1='175' y1='72' x2='175' y2='164' stroke='%230b0f19' stroke-width='0.6'/%3E%3Cline x1='226' y1='72' x2='226' y2='164' stroke='%230b0f19' stroke-width='0.6'/%3E%3Cline x1='22' y1='118' x2='278' y2='118' stroke='%230b0f19' stroke-width='0.6'/%3E%3C/svg%3E"
+              alt="Fidelity Card" style="max-height:190px;">
+          </div>
+          <div class="w-body">
+            <h3>Fidelity Card Su Misura</h3>
+            <p>Carte fedeltà progettate per far tornare i clienti in negozio, stampate con Tipolitografia Mondino.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PARTNER MONDINO -->
+      <div class="mondino-box reveal">
+        <div style="max-width: 620px;">
+          <span class="kicker" style="margin-bottom:6px;">Partnership Tipografica</span>
+          <h3 style="font-size:1.55rem; margin-bottom:8px;">Dal digitale alla carta con Tipolitografia Mondino</h3>
+          <p style="color:var(--muted); font-size:0.96rem;">Collaboriamo con la storica tipolitografia di Fossano per consegnarti biglietti da visita, menù, cartellini e locandine già pronti.</p>
+        </div>
+        <img src="LogoTipografia.png" alt="Tipolitografia Mondino">
       </div>
     </div>
   </section>
 
   <!-- PACCHETTI -->
-  <section id="pacchetti">
-    <div class="inner">
-      <div class="sec-label reveal" style="justify-content:center; display:flex;">Pacchetti</div>
-      <h2 class="reveal" style="text-align:center;">Tre livelli, <span style="color:var(--accent2)">un obiettivo</span>
-      </h2>
-      <p class="sec-sub reveal" style="text-align:center; margin-left:auto; margin-right:auto;">Niente costi nascosti.
-        Scegli il piano adatto alla tua attività.</p>
-
-      <div class="pkg-grid">
-
-        <!-- START -->
-        <div class="pkg start reveal">
-          <div class="pkg-lv">🌱 Start</div>
-          <h3>Presenza Essenziale</h3>
-          <div class="pkg-desc">Il punto di partenza per essere finalmente trovati online in modo credibile.</div>
-          <ul class="pkg-feats">
-            <li>Sito web professionale</li>
-            <li>Ottimizzazione Google base</li>
-            <li>Form contatti intelligente</li>
-            <li>Dominio + hosting</li>
-            <li>1 mese di assistenza incluso</li>
-          </ul>
-          <a href="#contatti" class="pkg-btn pkg-btn-ghost">👉 Inizia a costruire</a>
-        </div>
-
-        <!-- GROWTH -->
-        <div class="pkg growth reveal">
-          <div class="hot-badge">Più scelto dalle aziende</div>
-          <div class="pkg-lv">⚡ Growth</div>
-          <h3>Presenza Attiva</h3>
-          <div class="pkg-desc">Il sistema completo per attrarre clienti ogni mese.</div>
-          <ul class="pkg-feats">
-            <li>Sito web strategico multi-pagina</li>
-            <li>Instagram gestito in modo coerente</li>
-            <li>Piano contenuti mensile</li>
-            <li>Google Business ottimizzato</li>
-            <li>Report performance chiaro</li>
-            <li>Supporto 3 mesi</li>
-          </ul>
-          <a href="#contatti" class="pkg-btn pkg-btn-main">👉 Inizia a crescere</a>
-        </div>
-
-        <!-- ESPANSIONE BRAND – full width -->
-        <div class="pkg expansion reveal">
-          <div class="expansion-left">
-            <div class="pkg-exp-label">💎 Espansione del Brand</div>
-            <h3>Identità e Materiali Offline</h3>
-            <div class="pkg-desc">Non un pacchetto standard. È il completamento della tua identità visiva. Perfetto per
-              chi vuole un brand forte anche offline.</div>
-          </div>
-          <div class="expansion-right">
-            <ul class="pkg-feats">
-              <li>Logo professionale o restyling brand</li>
-              <li>Biglietti da visita</li>
-              <li>Grafica coordinata per social e stampa</li>
-              <li>Locandine e materiali pubblicitari</li>
-              <li>Design personalizzato su misura</li>
-            </ul>
-            <a href="#contatti" class="pkg-btn pkg-btn-ghost">👉 Costruiamo il tuo brand</a>
-          </div>
-        </div>
-
+  <section id="pacchetti" style="padding-top: 20px;">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="kicker">Soluzioni</span>
+        <h2>Tre percorsi su misura.</h2>
+        <p class="sec-sub">Scegli la base più adatta al momento attuale della tua attività.</p>
       </div>
-      <p style="text-align:center; margin-top:26px; color:var(--muted); font-size:0.88rem;">Non sai quale scegliere? <a
-          href="#contatti" style="color:var(--accent2); font-weight:600;">Scrivici</a> — ti consigliamo noi, senza
-        impegno.</p>
-    </div>
-  </section>
 
-  <!-- STEPS -->
-  <section id="steps">
-    <div class="inner">
-      <div class="sec-label reveal">Come funziona</div>
-      <h2 class="reveal">Tre passi e sei <span style="color:var(--accent2)">operativo</span></h2>
-      <p class="sec-sub reveal">Nessuna riunione infinita. Partiamo subito.</p>
-      <div class="step-list">
-        <div class="step reveal">
-          <div class="step-n">1</div>
-          <div>
-            <h3>Ci contatti e parliamo</h3>
-            <p>Scrivici via email o compila il form. In 15 minuti capiamo cosa ti serve. Zero tecnicismi, parola.</p>
+      <div class="plans-grid">
+        <div class="plan reveal">
+          <div class="plan-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
           </div>
+          <h3>Start</h3>
+          <p class="plan-lead">Per mettere in ordine le basi ed essere trovati subito su Google.</p>
+          <ul class="plan-list">
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Sito web vetrina veloce</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Scheda Google Business</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Contatto diretto WhatsApp</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Messa online completa</li>
+          </ul>
+          <a href="#contatti" class="plan-btn" onclick="selectPackage('Pacchetto START')">Valuta Start</a>
         </div>
-        <div class="step reveal">
-          <div class="step-n">2</div>
-          <div>
-            <h3>Costruiamo tutto noi</h3>
-            <p>Sito, social, grafica, contatti: ci pensiamo noi. Approvi tu il risultato finale.
-            </p>
+
+        <div class="plan featured reveal">
+          <span class="plan-badge">Più scelto</span>
+          <div class="plan-icon" style="color:var(--cyan);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
           </div>
+          <h3>Growth</h3>
+          <p class="plan-lead">Il sistema completo per attrarre nuovi clienti ogni mese.</p>
+          <ul class="plan-list">
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Tutto il pacchetto Start</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Gestione profilo Instagram</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> SEO locale Fossano & Cuneo</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Report semplice e supporto</li>
+          </ul>
+          <a href="#contatti" class="plan-btn" onclick="selectPackage('Pacchetto GROWTH')">Valuta Growth</a>
         </div>
-        <div class="step reveal">
-          <div class="step-n">3</div>
-          <div>
-            <h3>Arrivano i clienti</h3>
-            <p>Ogni mese ricevi un report semplice con i risultati. Noi ottimizziamo, tu incassi.</p>
+
+        <div class="plan reveal">
+          <div class="plan-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
           </div>
+          <h3>Brand & Offline</h3>
+          <p class="plan-lead">Immagine coordinata e stampa per distinguerti dal vivo.</p>
+          <ul class="plan-list">
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Nuovo Logo o Restyling</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Biglietti, menù e cartellini</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Grafiche coordinate social</li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Stampa con Mondino</li>
+          </ul>
+          <a href="#contatti" class="plan-btn" onclick="selectPackage('Pacchetto BRAND & OFFLINE')">Valuta Brand & Offline</a>
         </div>
       </div>
     </div>
   </section>
 
   <!-- CONTATTI -->
-  <section id="contatti">
-    <div class="inner">
-      <div class="sec-label reveal" style="justify-content:center; display:flex;">Contatti</div>
-      <h2 class="reveal" style="text-align:center;">Inizia oggi.<br><span style="color:var(--accent2)">Senza
-          impegno.</span></h2>
-      <p style="color:var(--muted); font-size:1rem; text-align:center;" class="reveal">Compila il form oppure scrivici
-        direttamente. Rispondiamo entro poche ore.</p>
-      <div class="form-wrap reveal">
-        <form id="contactForm" novalidate>
-          <div class="form-row">
-            <div>
-              <input type="text" id="nome" placeholder="Il tuo nome *" required />
-              <div class="field-msg" id="msg-nome">Inserisci il tuo nome.</div>
-            </div>
-            <input type="text" id="attivita" placeholder="Tipo di attività (es. Panetteria)" />
+  <section id="contatti" style="padding-top: 20px;">
+    <div class="container">
+      <div class="contact-card reveal">
+        <div>
+          <span class="kicker">Contatti</span>
+          <h2 style="font-size: clamp(2rem, 3.5vw, 2.8rem);">Parliamo della tua attività.</h2>
+          <p style="color:var(--muted); margin-bottom:28px;">Compila il modulo per inviarci i dettagli direttamente su WhatsApp oppure clicca su uno dei canali qui sotto.</p>
+
+          <div class="contact-links-stack">
+            <a href="https://wa.me/393459727648?text=Ciao%20Cliento!%20Vorrei%20richiedere%20un'analisi%20gratuita%20per%20la%20mia%20attivit%C3%A0." class="contact-pill-card wa-pill" target="_blank" rel="noopener noreferrer">
+              <div class="cp-left">
+                <div class="cp-icon" style="background: rgba(37, 211, 102, 0.14); color: var(--wa);">
+                  <svg width="22" height="22" viewBox="0 0 32 32" fill="currentColor"><path d="M16.004 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.25.59 4.45 1.71 6.39L3.1 28.8l6.58-1.72c1.88 1.02 4.01 1.56 6.32 1.56h.01c7.06 0 12.8-5.74 12.8-12.8 0-3.42-1.33-6.64-3.75-9.05A12.71 12.71 0 0 0 16.004 3.2zm0 23.28h-.01c-1.91 0-3.78-.51-5.42-1.48l-.39-.23-3.9 1.02 1.04-3.8-.25-.4a10.6 10.6 0 0 1-1.63-5.63c0-5.87 4.78-10.65 10.66-10.65 2.85 0 5.52 1.11 7.53 3.12a10.58 10.58 0 0 1 3.12 7.53c0 5.88-4.78 10.66-10.65 10.66zm5.84-7.98c-.32-.16-1.89-.93-2.19-1.04-.29-.11-.51-.16-.72.16-.21.32-.83 1.04-1.01 1.25-.19.21-.37.24-.69.08-.32-.16-1.35-.5-2.57-1.59-.95-.85-1.59-1.89-1.78-2.21-.19-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.19.21-.32.32-.53.11-.21.05-.4-.03-.56-.08-.16-.72-1.73-.99-2.37-.26-.62-.52-.54-.72-.55h-.61c-.21 0-.56.08-.85.4-.29.32-1.12 1.09-1.12 2.66s1.15 3.09 1.31 3.3c.16.21 2.26 3.45 5.47 4.84.76.33 1.36.53 1.82.67.77.24 1.47.21 2.02.13.62-.09 1.89-.77 2.16-1.52.27-.75.27-1.39.19-1.52-.08-.13-.29-.21-.61-.37z"/></svg>
+                </div>
+                <div class="cp-meta">
+                  <span class="cp-label">Scrivici su WhatsApp</span>
+                  <span class="cp-value">345 972 7648</span>
+                </div>
+              </div>
+              <svg class="cp-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+
+            <a href="mailto:clientostudio26@gmail.com?subject=Richiesta%20informazioni%20—%20Cliento" class="contact-pill-card">
+              <div class="cp-left">
+                <div class="cp-icon" style="background: rgba(0, 212, 255, 0.12); color: var(--cyan);">
+                  <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </div>
+                <div class="cp-meta">
+                  <span class="cp-label">Invia una Email</span>
+                  <span class="cp-value">clientostudio26@gmail.com</span>
+                </div>
+              </div>
+              <svg class="cp-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
           </div>
-          <input type="email" id="email" placeholder="La tua email * (es. mario@email.it)" required
-            style="margin-bottom:4px;" />
-          <div class="field-msg" id="msg-email">Inserisci un indirizzo email valido.</div>
-          <select id="servizio" style="margin-top:8px;">
-            <option value="" disabled selected>Di cosa hai bisogno?</option>
-            <option>Voglio un sito web professionale</option>
-            <option>Voglio gestire Instagram + sito web</option>
-            <option>Ho bisogno di logo o materiali grafici</option>
-            <option>Voglio apparire su Google Maps</option>
-            <option>Non so da dove iniziare</option>
+        </div>
+
+        <form id="contactForm" class="form-stack" novalidate>
+          <div class="row-2">
+            <input type="text" id="nome" placeholder="Il tuo nome *" required />
+            <input type="text" id="attivita" placeholder="Attività (es. Pizzeria)" />
+          </div>
+          <div class="row-2">
+            <input type="email" id="email" placeholder="La tua email *" required />
+            <input type="tel" id="telefono" placeholder="Telefono (opzionale)" />
+          </div>
+          <select id="servizio">
+            <option value="" disabled selected>Cosa ti interessa?</option>
+            <option value="Pacchetto START">Pacchetto Start</option>
+            <option value="Pacchetto GROWTH">Pacchetto Growth</option>
+            <option value="Pacchetto BRAND & OFFLINE">Pacchetto Brand & Offline</option>
+            <option value="Analisi Gratuita">Analisi gratuita presenza online</option>
           </select>
-          <textarea id="messaggio" placeholder="Raccontaci qualcosa di più (opzionale)..."></textarea>
-          <div class="privacy-check">
+          <textarea id="messaggio" placeholder="Scrivi qui un breve messaggio (opzionale)..."></textarea>
+          <label class="privacy-box">
             <input type="checkbox" id="privacy" required />
-            <label for="privacy">Ho letto e accetto la <a href="#" onclick="openModal(event,'privacy')">Privacy
-                Policy</a> e acconsento al trattamento dei miei dati personali per ricevere risposta alla mia
-              richiesta.</label>
-          </div>
-          <div class="field-msg" id="msg-privacy">Devi accettare la Privacy Policy per continuare.</div>
-          <button type="submit" class="form-btn" id="submitBtn">📩 Invia la richiesta — è gratuita</button>
+            <span>Accetto la <a href="#" onclick="openModal(event,'privacy')">Privacy Policy</a></span>
+          </label>
+          <button type="submit" class="btn-send" id="submitBtn">Invia su WhatsApp →</button>
         </form>
-        <div class="or-divider">oppure</div>
-        <a href="https://mail.google.com/mail/?view=cm&to=clientostudio26@gmail.com" class="email-link" target="_blank" rel="noopener noreferrer">✉️ clientostudio26@gmail.com</a>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-inner">
-      <div>
-        <div class="footer-logo">CLIENTO<span>.</span></div>
-        <p style="margin-top:4px;">Digital Growth Partner per attività locali</p>
-      </div>
-      <div class="footer-links">
-        <a href="#lavori">Portfolio</a>
-        <a href="#partner">Partnership</a>
-        <a href="#servizi">Servizi</a>
-        <a href="#" onclick="openModal(event,'privacy')">Privacy Policy</a>
-        <a href="#" onclick="openModal(event,'cookie')">Cookie Policy</a>
-        <a href="https://mail.google.com/mail/?view=cm&to=clientostudio26@gmail.com" target="_blank" rel="noopener noreferrer">clientostudio26@gmail.com</a>
-      </div>
-      <p>© 2025 Cliento. Tutti i diritti riservati.</p>
+    <div><strong style="color:#fff;">CLIENTO.</strong> — Fossano & Cuneo</div>
+    <div style="display:flex; gap:24px;">
+      <a href="#servizi">Servizi</a>
+      <a href="#lavori">Lavori</a>
+      <a href="#pacchetti">Pacchetti</a>
+      <a href="#" onclick="openModal(event,'privacy')">Privacy</a>
     </div>
+    <div>© 2026 Cliento</div>
   </footer>
 
-  <a href="#contatti" class="float-email">
-    <span>✉️</span>
-    <span class="label">Scrivici subito</span>
+  <!-- TASTO WHATSAPP VERDE FISSO IN BASSO A DESTRA -->
+  <a href="https://wa.me/393459727648?text=Ciao%20Cliento!%20Vorrei%20richiedere%20un'analisi%20gratuita%20per%20la%20mia%20attivit%C3%A0." class="whatsapp-btn" target="_blank" rel="noopener noreferrer" aria-label="Contattaci su WhatsApp">
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16.004 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.25.59 4.45 1.71 6.39L3.1 28.8l6.58-1.72c1.88 1.02 4.01 1.56 6.32 1.56h.01c7.06 0 12.8-5.74 12.8-12.8 0-3.42-1.33-6.64-3.75-9.05A12.71 12.71 0 0 0 16.004 3.2zm0 23.28h-.01c-1.91 0-3.78-.51-5.42-1.48l-.39-.23-3.9 1.02 1.04-3.8-.25-.4a10.6 10.6 0 0 1-1.63-5.63c0-5.87 4.78-10.65 10.66-10.65 2.85 0 5.52 1.11 7.53 3.12a10.58 10.58 0 0 1 3.12 7.53c0 5.88-4.78 10.66-10.65 10.66zm5.84-7.98c-.32-.16-1.89-.93-2.19-1.04-.29-.11-.51-.16-.72.16-.21.32-.83 1.04-1.01 1.25-.19.21-.37.24-.69.08-.32-.16-1.35-.5-2.57-1.59-.95-.85-1.59-1.89-1.78-2.21-.19-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.19.21-.32.32-.53.11-.21.05-.4-.03-.56-.08-.16-.72-1.73-.99-2.37-.26-.62-.52-.54-.72-.55h-.61c-.21 0-.56.08-.85.4-.29.32-1.12 1.09-1.12 2.66s1.15 3.09 1.31 3.3c.16.21 2.26 3.45 5.47 4.84.76.33 1.36.53 1.82.67.77.24 1.47.21 2.02.13.62-.09 1.89-.77 2.16-1.52.27-.75.27-1.39.19-1.52-.08-.13-.29-.21-.61-.37z"/>
+    </svg>
   </a>
 
   <div id="toast"></div>
 
-  <!-- COOKIE BANNER -->
-  <div class="cookie-banner" id="cookieBanner">
-    <p>Utilizziamo cookie tecnici per il corretto funzionamento del sito. Nessun dato viene venduto a terzi. Leggi la <a
-        href="#" onclick="openModal(event,'cookie')">Cookie Policy</a> e la <a href="#"
-        onclick="openModal(event,'privacy')">Privacy Policy</a>.</p>
-    <div class="cookie-btns">
-      <button class="cookie-decline" onclick="closeCookie()">Solo necessari</button>
-      <button class="cookie-accept" onclick="closeCookie()">Accetto tutto</button>
-    </div>
-  </div>
-
   <!-- MODAL PRIVACY -->
   <div class="modal-overlay" id="modal-privacy">
-    <div class="modal">
+    <div class="modal-box">
       <button class="modal-close" onclick="closeModal('privacy')">✕</button>
-      <h3>Privacy Policy</h3>
-      <p><strong>Titolare del trattamento:</strong> Cliento — Digital Growth Partner<br>Email: clientostudio26@gmail.com
+      <h3 style="margin-bottom:14px;">Privacy Policy</h3>
+      <p style="color:var(--muted); font-size:0.9rem; line-height:1.7;">
+        <strong>Titolare:</strong> Cliento — Fossano (CN) • clientostudio26@gmail.com<br><br>
+        I dati inseriti nel modulo vengono utilizzati esclusivamente per rispondere alla tua richiesta. Puoi chiederne la cancellazione in qualsiasi momento scrivendo alla nostra email.
       </p>
-      <h4>Dati raccolti</h4>
-      <p>Raccogliamo esclusivamente i dati forniti volontariamente tramite il form di contatto: nome, email, tipo di
-        attività e messaggio. Vengono utilizzati unicamente per rispondere alla tua richiesta.</p>
-      <h4>Base giuridica</h4>
-      <p>Il trattamento si basa sul consenso espresso dall'utente (art. 6, par. 1, lett. a del GDPR) al momento
-        dell'invio del form di contatto.</p>
-      <h4>Conservazione dei dati</h4>
-      <p>I dati sono conservati per il tempo strettamente necessario a gestire la richiesta e, successivamente, per un
-        massimo di 12 mesi, salvo diverso accordo scritto.</p>
-      <h4>I tuoi diritti</h4>
-      <p>Hai diritto di accedere, rettificare, cancellare i tuoi dati, opporti al trattamento e richiedere la
-        portabilità. Per esercitare questi diritti scrivi a: <strong>clientostudio26@gmail.com</strong></p>
-    </div>
-  </div>
-
-  <!-- MODAL COOKIE -->
-  <div class="modal-overlay" id="modal-cookie">
-    <div class="modal">
-      <button class="modal-close" onclick="closeModal('cookie')">✕</button>
-      <h3>Cookie Policy</h3>
-      <p>Questo sito utilizza cookie tecnici necessari per il corretto funzionamento. Non utilizziamo cookie di
-        profilazione né condividiamo dati con inserzionisti.</p>
-      <h4>Cookie tecnici (necessari)</h4>
-      <p>Indispensabili per il funzionamento del sito. Non richiedono consenso e non raccolgono dati personali
-        identificabili.</p>
     </div>
   </div>
 
   <script>
-    /* FIX: al reload rimuove l'hash dall'URL e torna in cima alla pagina */
     if (window.location.hash) {
       history.replaceState(null, '', window.location.pathname);
       window.scrollTo(0, 0);
     }
 
-    /* SCROLL REVEAL */
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => {if (e.isIntersecting) e.target.classList.add('visible');});
-    }, {threshold: 0.08});
-    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    /* TESTO DINAMICO NELLA HERO */
+    const words = ["attività locale.", "pizzeria o ristorante.", "bottega artigiana.", "impresa sul territorio."];
+    let wordIdx = 0;
+    const wordEl = document.getElementById('rotatingWord');
+    setInterval(() => {
+      wordEl.classList.add('fade-out');
+      setTimeout(() => {
+        wordIdx = (wordIdx + 1) % words.length;
+        wordEl.textContent = words[wordIdx];
+        wordEl.classList.remove('fade-out');
+      }, 350);
+    }, 3200);
 
-    /* NAV SCROLL */
-    window.addEventListener('scroll', () => {
-      document.querySelector('nav').style.background =
-        window.scrollY > 60 ? 'rgba(13,14,20,0.98)' : 'rgba(13,14,20,0.92)';
+    /* TILT 3D SUL MOCKUP DELLA HERO */
+    const tiltStack = document.getElementById('tiltStack');
+    if (tiltStack) {
+      document.getElementById('hero').addEventListener('mousemove', e => {
+        const rect = tiltStack.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        tiltStack.style.transform = `rotateY(${x * 14}deg) rotateX(${-y * 14}deg)`;
+      });
+      document.getElementById('hero').addEventListener('mouseleave', () => {
+        tiltStack.style.transform = 'rotateY(0deg) rotateX(0deg)';
+      });
+    }
+
+    /* SPOTLIGHT SULLE CARD BENTO */
+    document.querySelectorAll('.b-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--mx', `${e.clientX - rect.left}px`);
+        card.style.setProperty('--my', `${e.clientY - rect.top}px`);
+      });
     });
 
-    /* TOAST */
-    function showToast(msg, isError) {
-      const toast = document.getElementById('toast');
-      toast.textContent = msg;
-      toast.className = isError ? 'error-toast' : '';
-      toast.style.opacity = '1';
-      toast.style.transform = 'translateX(-50%) translateY(0)';
-      setTimeout(() => {
-        toast.style.opacity = '0';
-        toast.style.transform = 'translateX(-50%) translateY(16px)';
-      }, 4500);
-    }
+    /* SCROLL REVEAL */
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    /* EMAIL VALIDATION */
-    function isValidEmail(email) {
-      return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.trim());
-    }
-
-    /* FIELD ERROR */
-    function setFieldError(fieldId, msgId, show) {
-      const field = document.getElementById(fieldId);
-      const msg = document.getElementById(msgId);
-      field.classList.toggle('field-error', show);
-      msg.classList.toggle('show', show);
-    }
-
-    /* FORM SUBMIT */
-    document.getElementById('contactForm').addEventListener('submit', async function (e) {
-      e.preventDefault();
-
-      const nome = document.getElementById('nome').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const attivita = document.getElementById('attivita').value.trim();
-      const servizio = document.getElementById('servizio').value;
-      const messaggio = document.getElementById('messaggio').value.trim();
-      const privacy = document.getElementById('privacy').checked;
-
-      let valid = true;
-
-      if (!nome) {setFieldError('nome', 'msg-nome', true); valid = false;}
-      else {setFieldError('nome', 'msg-nome', false);}
-
-      if (!isValidEmail(email)) {setFieldError('email', 'msg-email', true); valid = false;}
-      else {setFieldError('email', 'msg-email', false);}
-
-      if (!privacy) {setFieldError('privacy', 'msg-privacy', true); valid = false;}
-      else {setFieldError('privacy', 'msg-privacy', false);}
-
-      if (!valid) return;
-
-      const btn = document.getElementById('submitBtn');
-      btn.disabled = true;
-      btn.textContent = '⏳ Invio in corso...';
-
-      const payload = {
-        access_key: '5eebdc56-882d-4775-ba27-58ae3e8043f3',
-        subject: 'Nuova richiesta da ' + nome + ' — Cliento',
-        from_name: 'Cliento Sito Web',
-        replyto: email,
-        Nome: nome,
-        Email: email,
-        Attivita: attivita || 'Non specificata',
-        Servizio: servizio || 'Non specificato',
-        Messaggio: messaggio || 'Nessun messaggio aggiuntivo',
-        botcheck: ''
-      };
-
-      try {
-        const res = await fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        const data = await res.json();
-        if (data.success) {
-          showToast('✅ Richiesta inviata! Ti risponderemo al più presto.', false);
-          document.getElementById('contactForm').reset();
-        } else {
-          showToast('❌ Errore nell\'invio. Scrivici direttamente via email.', true);
+    function selectPackage(val) {
+      const sel = document.getElementById('servizio');
+      for (let i = 0; i < sel.options.length; i++) {
+        if (sel.options[i].value === val) {
+          sel.selectedIndex = i;
+          break;
         }
-      } catch (err) {
-        showToast('❌ Connessione fallita. Riprova tra poco.', true);
+      }
+    }
+
+    function showToast(msg, isError) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.className = isError ? 'err' : '';
+      t.style.opacity = '1';
+      t.style.transform = 'translateY(0)';
+      setTimeout(() => {
+        t.style.opacity = '0';
+        t.style.transform = 'translateY(10px)';
+      }, 4000);
+    }
+
+    /* INVIO FORM SU WHATSAPP + BACKUP EMAIL */
+    document.getElementById('contactForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const nome = document.getElementById('nome');
+      const email = document.getElementById('email');
+      const privacy = document.getElementById('privacy');
+
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim());
+      nome.classList.toggle('field-error', !nome.value.trim());
+      email.classList.toggle('field-error', !emailOk);
+
+      if (!nome.value.trim() || !emailOk || !privacy.checked) {
+        showToast('Compila nome, email e accetta la privacy.', true);
+        return;
       }
 
-      btn.disabled = false;
-      btn.textContent = '📩 Invia la richiesta — è gratuita';
+      const attivitaVal = document.getElementById('attivita').value.trim() || 'Non specificata';
+      const telefonoVal = document.getElementById('telefono').value.trim() || 'Non inserito';
+      const pacchettoVal = document.getElementById('servizio').value || 'Analisi Gratuita';
+      const msgVal = document.getElementById('messaggio').value.trim();
+
+      // 1. Invio silenzioso di backup via email
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: '5eebdc56-882d-4775-ba27-58ae3e8043f3',
+          subject: 'Nuova richiesta WhatsApp da ' + nome.value.trim() + ' — Cliento',
+          from_name: 'Cliento Sito Web',
+          replyto: email.value.trim(),
+          Nome: nome.value.trim(),
+          Email: email.value.trim(),
+          Telefono: telefonoVal,
+          Attivita: attivitaVal,
+          Pacchetto: pacchettoVal,
+          Messaggio: msgVal || '-'
+        })
+      }).catch(() => {});
+
+      // 2. Apertura immediata di WhatsApp con riepilogo compilato
+      let testoWa = `Ciao Cliento! Vorrei richiedere un'analisi gratuita.\n\n` +
+                    `👤 *Nome:* ${nome.value.trim()}\n` +
+                    `🏪 *Attività:* ${attivitaVal}\n` +
+                    `🎯 *Interesse:* ${pacchettoVal}\n` +
+                    `📧 *Email:* ${email.value.trim()}`;
+      if (msgVal) testoWa += `\n💬 *Note:* ${msgVal}`;
+
+      const waUrl = `https://wa.me/393459727648?text=${encodeURIComponent(testoWa)}`;
+      showToast('Apertura WhatsApp in corso...', false);
+      window.open(waUrl, '_blank', 'noopener,noreferrer');
+      this.reset();
     });
 
-    /* MODALS */
     function openModal(e, id) {
       e.preventDefault();
       document.getElementById('modal-' + id).classList.add('open');
-      document.body.style.overflow = 'hidden';
     }
 
     function closeModal(id) {
       document.getElementById('modal-' + id).classList.remove('open');
-      document.body.style.overflow = '';
     }
-
-    document.querySelectorAll('.modal-overlay').forEach(m => {
-      m.addEventListener('click', e => {
-        if (e.target === m) {m.classList.remove('open'); document.body.style.overflow = '';}
-      });
-    });
-
-    /* COOKIE */
-    window.addEventListener('load', () => {
-      try {
-        if (!localStorage.getItem('cookie_ok')) {
-          document.getElementById('cookieBanner').classList.add('show');
-        }
-      } catch (err) {
-        document.getElementById('cookieBanner').classList.add('show');
-      }
-    });
-
-    function closeCookie() {
-      try {localStorage.setItem('cookie_ok', '1');} catch (err) { }
-      document.getElementById('cookieBanner').classList.remove('show');
-    }
-
-    /* HAMBURGER MENU */
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobileMenu');
-
-    hamburger.addEventListener('click', () => {
-      const isOpen = mobileMenu.classList.contains('open');
-      if (isOpen) {
-        closeMobileMenu();
-      } else {
-        mobileMenu.classList.add('open');
-        hamburger.classList.add('open');
-        hamburger.setAttribute('aria-expanded', 'true');
-      }
-    });
-
-    function closeMobileMenu() {
-      mobileMenu.classList.remove('open');
-      hamburger.classList.remove('open');
-      hamburger.setAttribute('aria-expanded', 'false');
-    }
-
-    // Chiudi il menu cliccando fuori
-    document.addEventListener('click', (e) => {
-      if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
-        closeMobileMenu();
-      }
-    });
-
   </script>
-
 </body>
 
 </html>

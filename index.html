@@ -214,16 +214,19 @@
       50% { opacity: 0.4; transform: scale(0.8); }
     }
 
+    /* FIX TAGLIO LETTERA "g" SU SAFARI / MOBILE */
     h1 {
-      font-size: clamp(2.5rem, 5.4vw, 4.6rem);
+      font-size: clamp(2.45rem, 5.4vw, 4.6rem);
       font-weight: 800;
-      line-height: 1.08;
+      line-height: 1.16;
       letter-spacing: -0.04em;
-      margin-bottom: 22px;
+      margin-bottom: 20px;
     }
 
     .dynamic-word {
       display: inline-block;
+      padding-bottom: 0.14em;
+      margin-bottom: -0.14em;
       background: linear-gradient(90deg, var(--cyan), var(--yellow));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -362,35 +365,42 @@
       margin-bottom: 12px;
     }
 
-    /* MARQUEE CLIENTI */
+    /* MARQUEE BRAND CONTINUO SENZA SPAZI VUOTI */
     .marquee-wrap {
       position: relative;
       z-index: 1;
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
-      background: rgba(10, 15, 28, 0.6);
-      padding: 26px 0;
+      background: rgba(10, 15, 28, 0.65);
+      padding: 24px 0;
       overflow: hidden;
-    }
-
-    .marquee-track {
       display: flex;
-      width: max-content;
-      gap: 56px;
-      animation: scrollMarquee 24s linear infinite;
+      user-select: none;
     }
 
-    .marquee-wrap:hover .marquee-track {
+    .marquee-group {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      min-width: 100%;
+      gap: 48px;
+      padding-right: 48px;
+      animation: scrollContinuous 22s linear infinite;
+    }
+
+    .marquee-wrap:hover .marquee-group {
       animation-play-state: paused;
     }
 
     .brand-pill {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 14px;
-      font-size: 1.1rem;
+      white-space: nowrap;
+      font-size: 1.08rem;
       font-weight: 700;
-      color: rgba(255, 255, 255, 0.55);
+      color: rgba(255, 255, 255, 0.65);
       letter-spacing: -0.02em;
       transition: color 0.3s;
     }
@@ -404,9 +414,9 @@
       font-size: 0.9rem;
     }
 
-    @keyframes scrollMarquee {
+    @keyframes scrollContinuous {
       0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+      100% { transform: translateX(-100%); }
     }
 
     /* SEZIONI GENERALI */
@@ -441,7 +451,7 @@
     h2 {
       font-size: clamp(2rem, 4vw, 3.3rem);
       font-weight: 800;
-      line-height: 1.08;
+      line-height: 1.1;
       letter-spacing: -0.03em;
       margin-bottom: 14px;
     }
@@ -617,24 +627,35 @@
       font-size: 0.95rem;
     }
 
-    /* PARTNER MONDINO */
+    /* PARTNER MONDINO CENTRATO ED ELEGANTE */
     .mondino-box {
       margin-top: 28px;
       background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(250, 204, 21, 0.05));
       border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 24px;
-      padding: 34px 36px;
+      padding: 36px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 28px;
-      flex-wrap: wrap;
     }
 
-    .mondino-box img {
-      max-height: 65px;
-      max-width: 200px;
+    .mondino-logo-wrap {
+      background: #ffffff;
+      padding: 14px 24px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .mondino-logo-wrap img {
+      max-height: 58px;
+      max-width: 190px;
       object-fit: contain;
+      display: block;
     }
 
     /* PACCHETTI */
@@ -758,7 +779,7 @@
       transform: scale(1.02);
     }
 
-    /* TASTI CONTATTO CLICCABILI (FIX OVERFLOW MOBILE) */
+    /* TASTI CONTATTO CLICCABILI */
     .contact-links-stack {
       display: flex;
       flex-direction: column;
@@ -875,7 +896,6 @@
       gap: 14px;
     }
 
-    /* 16PX OBBLIGATORIO PER EVITARE ZOOM AUTOMATICO SU IPHONE */
     input, select, textarea {
       width: 100%;
       max-width: 100%;
@@ -951,19 +971,27 @@
       border-color: #ef4444 !important;
     }
 
-    /* FOOTER */
+    /* FOOTER CENTRATO E PULITO */
     footer {
       position: relative;
       z-index: 1;
       border-top: 1px solid var(--border);
-      padding: 38px 6% 96px;
+      padding: 40px 6% 96px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 18px;
+      gap: 20px;
       color: var(--muted);
       font-size: 0.88rem;
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 22px;
     }
 
     footer a {
@@ -1120,6 +1148,13 @@
       .ba-grid {
         grid-template-columns: 1fr;
       }
+
+      .mondino-box {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        padding: 30px 22px;
+      }
     }
 
     @media (max-width: 640px) {
@@ -1155,6 +1190,15 @@
 
       .cp-value {
         font-size: 0.88rem;
+      }
+
+      footer {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: 16px;
+        padding: 36px 20px 96px;
       }
 
       .whatsapp-btn {
@@ -1240,9 +1284,19 @@
     </div>
   </section>
 
-  <!-- MARQUEE CLIENTI -->
+  <!-- MARQUEE CLIENTI CONTINUO SENZA SPAZI VUOTI -->
   <div class="marquee-wrap">
-    <div class="marquee-track">
+    <div class="marquee-group">
+      <div class="brand-pill">Oro Bianco <span class="brand-star">✦</span></div>
+      <div class="brand-pill">A Picciridda <span class="brand-star">✦</span></div>
+      <div class="brand-pill">I Sapori di Una Volta <span class="brand-star">✦</span></div>
+      <div class="brand-pill">Tipolitografia Mondino <span class="brand-star">✦</span></div>
+      <div class="brand-pill">Oro Bianco <span class="brand-star">✦</span></div>
+      <div class="brand-pill">A Picciridda <span class="brand-star">✦</span></div>
+      <div class="brand-pill">I Sapori di Una Volta <span class="brand-star">✦</span></div>
+      <div class="brand-pill">Tipolitografia Mondino <span class="brand-star">✦</span></div>
+    </div>
+    <div class="marquee-group" aria-hidden="true">
       <div class="brand-pill">Oro Bianco <span class="brand-star">✦</span></div>
       <div class="brand-pill">A Picciridda <span class="brand-star">✦</span></div>
       <div class="brand-pill">I Sapori di Una Volta <span class="brand-star">✦</span></div>
@@ -1369,7 +1423,9 @@
           <h3 style="font-size:1.55rem; margin-bottom:8px;">Dal digitale alla carta con Tipolitografia Mondino</h3>
           <p style="color:var(--muted); font-size:0.96rem;">Collaboriamo con la storica tipolitografia di Fossano per consegnarti biglietti da visita, menù, cartellini e locandine già pronti.</p>
         </div>
-        <img src="LogoTipografia.png" alt="Tipolitografia Mondino">
+        <div class="mondino-logo-wrap">
+          <img src="LogoTipografia.png" alt="Tipolitografia Mondino">
+        </div>
       </div>
     </div>
   </section>
@@ -1501,7 +1557,7 @@
   <!-- FOOTER -->
   <footer>
     <div><strong style="color:#fff;">CLIENTO.</strong> — Fossano & Cuneo</div>
-    <div style="display:flex; gap:20px;">
+    <div class="footer-links">
       <a href="#servizi">Servizi</a>
       <a href="#lavori">Lavori</a>
       <a href="#pacchetti">Pacchetti</a>

@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
   <title>CLIENTO. — Web, Google & Stampa | Fossano e Cuneo</title>
   <meta name="description" content="Noi del team di Cliento progettiamo siti web, visibilità su Google e materiali stampati per le attività locali di Fossano e Cuneo." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +12,7 @@
   <style>
     :root {
       --bg: #050811;
-      --surface: rgba(15, 22, 41, 0.65);
+      --surface: rgba(15, 22, 41, 0.72);
       --surface-solid: #0e1528;
       --border: rgba(255, 255, 255, 0.08);
       --border-bright: rgba(0, 212, 255, 0.4);
@@ -29,7 +29,9 @@
       padding: 0;
     }
 
-    html {
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
       scroll-behavior: smooth;
     }
 
@@ -39,7 +41,6 @@
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       font-size: 16px;
       line-height: 1.65;
-      overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -95,13 +96,13 @@
     /* NAVBAR FLOATING PILL */
     header {
       position: fixed;
-      top: 20px;
+      top: 16px;
       left: 0;
       right: 0;
       z-index: 100;
       display: flex;
       justify-content: center;
-      padding: 0 5%;
+      padding: 0 16px;
     }
 
     nav {
@@ -110,18 +111,18 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 24px;
-      background: rgba(11, 16, 30, 0.72);
+      padding: 10px 20px;
+      background: rgba(11, 16, 30, 0.85);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 99px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5);
     }
 
     .logo {
       font-weight: 800;
-      font-size: 1.35rem;
+      font-size: 1.3rem;
       letter-spacing: -0.04em;
       color: #fff;
       text-decoration: none;
@@ -152,10 +153,11 @@
     .nav-cta {
       background: var(--yellow);
       color: #050811 !important;
-      padding: 10px 22px;
+      padding: 9px 20px;
       border-radius: 99px;
       font-weight: 800 !important;
-      font-size: 0.86rem !important;
+      font-size: 0.85rem !important;
+      white-space: nowrap;
       transition: transform 0.2s, box-shadow 0.2s !important;
     }
 
@@ -168,10 +170,10 @@
     #hero {
       position: relative;
       z-index: 1;
-      min-height: 95vh;
+      min-height: 92vh;
       display: flex;
       align-items: center;
-      padding: 150px 6% 90px;
+      padding: 135px 6% 80px;
     }
 
     .hero-container {
@@ -195,7 +197,7 @@
       color: var(--cyan);
       font-size: 0.8rem;
       font-weight: 700;
-      margin-bottom: 26px;
+      margin-bottom: 24px;
     }
 
     .pulse-dot {
@@ -213,11 +215,11 @@
     }
 
     h1 {
-      font-size: clamp(2.8rem, 5.4vw, 4.6rem);
+      font-size: clamp(2.5rem, 5.4vw, 4.6rem);
       font-weight: 800;
-      line-height: 1.06;
+      line-height: 1.08;
       letter-spacing: -0.04em;
-      margin-bottom: 24px;
+      margin-bottom: 22px;
     }
 
     .dynamic-word {
@@ -234,10 +236,10 @@
     }
 
     .hero-desc {
-      font-size: 1.12rem;
+      font-size: 1.08rem;
       color: var(--muted);
       max-width: 530px;
-      margin-bottom: 38px;
+      margin-bottom: 34px;
       line-height: 1.7;
     }
 
@@ -248,7 +250,7 @@
 
     .hero-btns {
       display: flex;
-      gap: 16px;
+      gap: 14px;
       flex-wrap: wrap;
     }
 
@@ -256,8 +258,8 @@
       background: var(--yellow);
       color: #050811;
       font-weight: 800;
-      font-size: 0.98rem;
-      padding: 16px 32px;
+      font-size: 0.96rem;
+      padding: 15px 28px;
       border-radius: 99px;
       text-decoration: none;
       display: inline-flex;
@@ -276,8 +278,8 @@
       background: rgba(255, 255, 255, 0.04);
       color: #fff;
       font-weight: 600;
-      font-size: 0.98rem;
-      padding: 16px 30px;
+      font-size: 0.96rem;
+      padding: 15px 28px;
       border-radius: 99px;
       border: 1px solid rgba(255, 255, 255, 0.12);
       text-decoration: none;
@@ -367,14 +369,14 @@
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
       background: rgba(10, 15, 28, 0.6);
-      padding: 28px 0;
+      padding: 26px 0;
       overflow: hidden;
     }
 
     .marquee-track {
       display: flex;
       width: max-content;
-      gap: 64px;
+      gap: 56px;
       animation: scrollMarquee 24s linear infinite;
     }
 
@@ -386,7 +388,7 @@
       display: flex;
       align-items: center;
       gap: 14px;
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       font-weight: 700;
       color: rgba(255, 255, 255, 0.55);
       letter-spacing: -0.02em;
@@ -411,17 +413,19 @@
     section {
       position: relative;
       z-index: 1;
-      padding: 120px 6%;
+      padding: 110px 6%;
+      scroll-margin-top: 90px;
     }
 
     .container {
       max-width: 1180px;
       margin: 0 auto;
+      width: 100%;
     }
 
     .sec-head {
       max-width: 640px;
-      margin-bottom: 64px;
+      margin-bottom: 56px;
     }
 
     .kicker {
@@ -435,7 +439,7 @@
     }
 
     h2 {
-      font-size: clamp(2.2rem, 4vw, 3.3rem);
+      font-size: clamp(2rem, 4vw, 3.3rem);
       font-weight: 800;
       line-height: 1.08;
       letter-spacing: -0.03em;
@@ -444,22 +448,22 @@
 
     .sec-sub {
       color: var(--muted);
-      font-size: 1.08rem;
+      font-size: 1.05rem;
     }
 
     /* BENTO GRID SERVIZI */
     .bento-services {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
-      gap: 24px;
+      gap: 22px;
     }
 
     .b-card {
       background: var(--surface);
       backdrop-filter: blur(16px);
       border: 1px solid var(--border);
-      border-radius: 26px;
-      padding: 38px 34px;
+      border-radius: 24px;
+      padding: 34px 28px;
       position: relative;
       overflow: hidden;
       transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s, background 0.3s;
@@ -489,16 +493,16 @@
     .span-4 { grid-column: span 4; }
 
     .svg-icon {
-      width: 54px;
-      height: 54px;
-      border-radius: 16px;
+      width: 52px;
+      height: 52px;
+      border-radius: 15px;
       background: linear-gradient(135deg, rgba(0, 212, 255, 0.16), rgba(0, 212, 255, 0.04));
       border: 1px solid rgba(0, 212, 255, 0.25);
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--cyan);
-      margin-bottom: 24px;
+      margin-bottom: 22px;
       transition: transform 0.35s, background 0.35s, color 0.35s;
     }
 
@@ -510,7 +514,7 @@
     }
 
     .b-card h3 {
-      font-size: 1.32rem;
+      font-size: 1.28rem;
       font-weight: 700;
       margin-bottom: 10px;
       letter-spacing: -0.02em;
@@ -518,20 +522,20 @@
 
     .b-card p {
       color: var(--muted);
-      font-size: 0.96rem;
+      font-size: 0.95rem;
     }
 
     /* LAVORI / PORTFOLIO */
     .works-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 28px;
+      gap: 24px;
     }
 
     .w-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 26px;
+      border-radius: 24px;
       overflow: hidden;
       transition: transform 0.35s ease, border-color 0.3s;
     }
@@ -547,24 +551,29 @@
 
     .w-media {
       background: #070b16;
-      padding: 44px 32px;
+      padding: 52px 24px 36px;
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 290px;
+      min-height: 270px;
       position: relative;
       border-bottom: 1px solid var(--border);
     }
 
+    .w-media img {
+      max-width: 100%;
+      height: auto;
+    }
+
     .w-tag {
       position: absolute;
-      top: 20px;
-      left: 20px;
+      top: 16px;
+      left: 16px;
       background: rgba(5, 8, 17, 0.85);
       border: 1px solid var(--border);
-      padding: 6px 14px;
+      padding: 5px 13px;
       border-radius: 99px;
-      font-size: 0.74rem;
+      font-size: 0.72rem;
       font-weight: 700;
       color: var(--yellow);
     }
@@ -572,7 +581,7 @@
     .ba-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 24px;
+      gap: 20px;
       width: 100%;
       max-width: 800px;
     }
@@ -580,51 +589,51 @@
     .ba-item {
       background: var(--surface-solid);
       border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 28px;
+      border-radius: 16px;
+      padding: 24px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
     }
 
     .ba-item img {
-      max-height: 145px;
+      max-height: 140px;
       max-width: 100%;
       object-fit: contain;
     }
 
     .w-body {
-      padding: 32px 36px;
+      padding: 28px 30px;
     }
 
     .w-body h3 {
-      font-size: 1.38rem;
+      font-size: 1.32rem;
       margin-bottom: 8px;
     }
 
     .w-body p {
       color: var(--muted);
-      font-size: 0.96rem;
+      font-size: 0.95rem;
     }
 
     /* PARTNER MONDINO */
     .mondino-box {
-      margin-top: 32px;
+      margin-top: 28px;
       background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(250, 204, 21, 0.05));
       border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 26px;
-      padding: 40px 44px;
+      border-radius: 24px;
+      padding: 34px 36px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 36px;
+      gap: 28px;
       flex-wrap: wrap;
     }
 
     .mondino-box img {
-      max-height: 70px;
-      max-width: 210px;
+      max-height: 65px;
+      max-width: 200px;
       object-fit: contain;
     }
 
@@ -632,7 +641,7 @@
     .plans-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 26px;
+      gap: 24px;
       align-items: stretch;
     }
 
@@ -640,8 +649,8 @@
       background: var(--surface);
       backdrop-filter: blur(16px);
       border: 1px solid var(--border);
-      border-radius: 26px;
-      padding: 40px 32px;
+      border-radius: 24px;
+      padding: 36px 28px;
       display: flex;
       flex-direction: column;
       position: relative;
@@ -662,7 +671,7 @@
     .plan-badge {
       position: absolute;
       top: -13px;
-      right: 26px;
+      right: 24px;
       background: var(--cyan);
       color: #050811;
       font-size: 0.72rem;
@@ -674,35 +683,34 @@
     }
 
     .plan-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
+      width: 46px;
+      height: 46px;
+      border-radius: 13px;
       background: rgba(255, 255, 255, 0.05);
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--yellow);
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .plan h3 {
-      font-size: 1.55rem;
+      font-size: 1.5rem;
       margin-bottom: 8px;
     }
 
     .plan-lead {
       color: var(--muted);
       font-size: 0.94rem;
-      margin-bottom: 26px;
-      min-height: 46px;
+      margin-bottom: 24px;
     }
 
     .plan-list {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 14px;
-      margin-bottom: 34px;
+      gap: 13px;
+      margin-bottom: 30px;
       flex: 1;
     }
 
@@ -724,7 +732,7 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 15px 24px;
+      padding: 14px 22px;
       border-radius: 99px;
       font-weight: 700;
       font-size: 0.94rem;
@@ -750,18 +758,21 @@
       transform: scale(1.02);
     }
 
-    /* TASTI CONTATTO CLICCABILI */
+    /* TASTI CONTATTO CLICCABILI (FIX OVERFLOW MOBILE) */
     .contact-links-stack {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
+      width: 100%;
     }
 
     .contact-pill-card {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 16px 20px;
+      gap: 12px;
+      width: 100%;
+      padding: 14px 16px;
       border-radius: 18px;
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.09);
@@ -771,7 +782,7 @@
     }
 
     .contact-pill-card:hover {
-      transform: translateX(6px);
+      transform: translateX(4px);
       background: rgba(255, 255, 255, 0.06);
       border-color: var(--cyan);
     }
@@ -784,12 +795,14 @@
     .cp-left {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
+      min-width: 0;
+      flex: 1;
     }
 
     .cp-icon {
-      width: 44px;
-      height: 44px;
+      width: 42px;
+      height: 42px;
       border-radius: 12px;
       display: flex;
       align-items: center;
@@ -800,10 +813,12 @@
     .cp-meta {
       display: flex;
       flex-direction: column;
+      min-width: 0;
+      flex: 1;
     }
 
     .cp-label {
-      font-size: 0.74rem;
+      font-size: 0.7rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.06em;
@@ -811,13 +826,16 @@
     }
 
     .cp-value {
-      font-size: 1rem;
+      font-size: 0.94rem;
       font-weight: 700;
       color: #fff;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .cp-arrow {
       color: var(--muted);
+      flex-shrink: 0;
       transition: transform 0.25s ease, color 0.25s ease;
     }
 
@@ -828,39 +846,56 @@
 
     /* CONTATTI */
     .contact-card {
-      background: linear-gradient(145deg, rgba(16, 24, 46, 0.9), rgba(8, 12, 24, 0.95));
+      background: linear-gradient(145deg, rgba(16, 24, 46, 0.92), rgba(8, 12, 24, 0.96));
       border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 32px;
-      padding: 60px;
+      border-radius: 28px;
+      padding: 56px;
       display: grid;
       grid-template-columns: 1fr 1.15fr;
-      gap: 56px;
+      gap: 48px;
       align-items: center;
+      width: 100%;
+    }
+
+    .contact-info-col {
+      min-width: 0;
     }
 
     .form-stack {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
+      min-width: 0;
+      width: 100%;
     }
 
     .row-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 16px;
+      gap: 14px;
     }
 
+    /* 16PX OBBLIGATORIO PER EVITARE ZOOM AUTOMATICO SU IPHONE */
     input, select, textarea {
       width: 100%;
-      background: rgba(5, 8, 17, 0.8);
+      max-width: 100%;
+      background: rgba(5, 8, 17, 0.85);
       border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 14px;
-      padding: 16px 18px;
+      padding: 15px 16px;
       color: #fff;
       font-family: inherit;
-      font-size: 0.95rem;
+      font-size: 16px;
       outline: none;
       transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 42px;
     }
 
     input:focus, select:focus, textarea:focus {
@@ -876,14 +911,18 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      font-size: 0.82rem;
+      font-size: 0.84rem;
       color: var(--muted);
     }
 
-    .privacy-box input {
-      width: 17px;
-      height: 17px;
+    .privacy-box input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      padding: 0;
+      border-radius: 4px;
+      -webkit-appearance: auto;
       accent-color: var(--cyan);
+      flex-shrink: 0;
     }
 
     .privacy-box a {
@@ -896,7 +935,7 @@
       color: #050811;
       font-weight: 800;
       font-size: 1rem;
-      padding: 17px;
+      padding: 16px;
       border: none;
       border-radius: 99px;
       cursor: pointer;
@@ -917,12 +956,12 @@
       position: relative;
       z-index: 1;
       border-top: 1px solid var(--border);
-      padding: 40px 6%;
+      padding: 38px 6% 96px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 20px;
+      gap: 18px;
       color: var(--muted);
       font-size: 0.88rem;
     }
@@ -940,11 +979,11 @@
     /* TASTO WHATSAPP VERDE FISSO A DESTRA */
     .whatsapp-btn {
       position: fixed;
-      bottom: 28px;
-      right: 28px;
+      bottom: 22px;
+      right: 22px;
       z-index: 300;
-      width: 62px;
-      height: 62px;
+      width: 58px;
+      height: 58px;
       border-radius: 50%;
       background: var(--wa);
       color: #fff;
@@ -972,8 +1011,8 @@
     }
 
     .whatsapp-btn svg {
-      width: 32px;
-      height: 32px;
+      width: 30px;
+      height: 30px;
       fill: currentColor;
     }
 
@@ -985,11 +1024,14 @@
     /* TOAST & MODAL */
     #toast {
       position: fixed;
-      bottom: 105px;
-      right: 28px;
+      bottom: 92px;
+      right: 20px;
+      left: 20px;
+      max-width: 380px;
+      margin-left: auto;
       background: var(--cyan);
       color: #050811;
-      padding: 14px 22px;
+      padding: 14px 20px;
       border-radius: 12px;
       font-weight: 700;
       font-size: 0.9rem;
@@ -1027,14 +1069,14 @@
       border-radius: 24px;
       max-width: 560px;
       width: 100%;
-      padding: 36px;
+      padding: 32px;
       position: relative;
     }
 
     .modal-close {
       position: absolute;
-      top: 18px;
-      right: 18px;
+      top: 16px;
+      right: 16px;
       background: rgba(255, 255, 255, 0.08);
       border: none;
       color: #fff;
@@ -1047,7 +1089,7 @@
     /* REVEAL */
     .reveal {
       opacity: 0;
-      transform: translateY(28px);
+      transform: translateY(24px);
       transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
@@ -1071,7 +1113,8 @@
       }
 
       .contact-card {
-        padding: 36px 24px;
+        padding: 32px 22px;
+        gap: 32px;
       }
 
       .ba-grid {
@@ -1080,6 +1123,19 @@
     }
 
     @media (max-width: 640px) {
+      header {
+        top: 12px;
+        padding: 0 14px;
+      }
+
+      nav {
+        padding: 9px 16px;
+      }
+
+      .nav-links {
+        gap: 0;
+      }
+
       .nav-links a:not(.nav-cta) {
         display: none;
       }
@@ -1089,14 +1145,23 @@
       }
 
       section {
-        padding: 86px 5%;
+        padding: 76px 18px;
+      }
+
+      .contact-card {
+        padding: 28px 18px;
+        border-radius: 24px;
+      }
+
+      .cp-value {
+        font-size: 0.88rem;
       }
 
       .whatsapp-btn {
-        bottom: 20px;
-        right: 20px;
-        width: 56px;
-        height: 56px;
+        bottom: 18px;
+        right: 18px;
+        width: 54px;
+        height: 54px;
       }
     }
   </style>
@@ -1372,10 +1437,10 @@
   <section id="contatti" style="padding-top: 20px;">
     <div class="container">
       <div class="contact-card reveal">
-        <div>
+        <div class="contact-info-col">
           <span class="kicker">Contatti</span>
-          <h2 style="font-size: clamp(2rem, 3.5vw, 2.8rem);">Parliamo della tua attività.</h2>
-          <p style="color:var(--muted); margin-bottom:28px;">Compila il modulo per inviarci i dettagli direttamente su WhatsApp oppure clicca su uno dei canali qui sotto.</p>
+          <h2 style="font-size: clamp(1.9rem, 3.5vw, 2.8rem);">Parliamo della tua attività.</h2>
+          <p style="color:var(--muted); margin-bottom:24px;">Compila il modulo per inviarci i dettagli direttamente su WhatsApp oppure clicca su uno dei canali qui sotto.</p>
 
           <div class="contact-links-stack">
             <a href="https://wa.me/393459727648?text=Ciao%20Cliento!%20Vorrei%20richiedere%20un'analisi%20gratuita%20per%20la%20mia%20attivit%C3%A0." class="contact-pill-card wa-pill" target="_blank" rel="noopener noreferrer">
@@ -1388,7 +1453,7 @@
                   <span class="cp-value">345 972 7648</span>
                 </div>
               </div>
-              <svg class="cp-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              <svg class="cp-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </a>
 
             <a href="mailto:clientostudio26@gmail.com?subject=Richiesta%20informazioni%20—%20Cliento" class="contact-pill-card">
@@ -1401,7 +1466,7 @@
                   <span class="cp-value">clientostudio26@gmail.com</span>
                 </div>
               </div>
-              <svg class="cp-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              <svg class="cp-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </a>
           </div>
         </div>
@@ -1436,7 +1501,7 @@
   <!-- FOOTER -->
   <footer>
     <div><strong style="color:#fff;">CLIENTO.</strong> — Fossano & Cuneo</div>
-    <div style="display:flex; gap:24px;">
+    <div style="display:flex; gap:20px;">
       <a href="#servizi">Servizi</a>
       <a href="#lavori">Lavori</a>
       <a href="#pacchetti">Pacchetti</a>
@@ -1559,7 +1624,6 @@
       const pacchettoVal = document.getElementById('servizio').value || 'Analisi Gratuita';
       const msgVal = document.getElementById('messaggio').value.trim();
 
-      // 1. Invio silenzioso di backup via email
       fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -1577,7 +1641,6 @@
         })
       }).catch(() => {});
 
-      // 2. Apertura immediata di WhatsApp con riepilogo compilato
       let testoWa = `Ciao Cliento! Vorrei richiedere un'analisi gratuita.\n\n` +
                     `👤 *Nome:* ${nome.value.trim()}\n` +
                     `🏪 *Attività:* ${attivitaVal}\n` +

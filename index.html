@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CLIENTO. — Web, Google & Stampa </title>
+<title>CLIENTO. — Web, Google & Stampa | Fossano e Cuneo</title>
 <meta name="description" content="Noi del team di Cliento progettiamo siti web, visibilità su Google e materiali stampati per le attività locali di Fossano e Cuneo.">
 <meta name="theme-color" content="#02050a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -314,7 +314,7 @@ footer{padding:28px 20px 90px;gap:10px}
 <section id="hero">
 <div class="hc">
 <div>
-<div class="pill fade"><span class="dot"></span>Fossano &amp; Cuneo · Digitale e stampa</div>
+<div class="pill fade"><span class="dot"></span>Digitale e stampa</div>
 <h1><span class="ln"><span>Più clienti per</span></span><span class="ln"><span>la tua <em id="rw" style="font-style:normal">attività locale.</em></span></span></h1>
 <p class="hd fade"><b>Noi del team di Cliento</b> progettiamo siti web veloci, presenza su Google e materiali stampati coordinati. Un unico referente per far crescere il tuo lavoro.</p>
 <div class="hb fade b">
@@ -524,8 +524,10 @@ pmq.addEventListener('change',function(e){if(!e.matches)pkl.style.transform='';e
 document.querySelectorAll('[data-pk]').forEach(function(a){a.addEventListener('click',function(){$('servizio').value=a.dataset.pk})});
 /* toast */
 var tt;function toast(m,err){var t=$('toast');t.textContent=m;t.className=err?'err':'';t.style.opacity=1;t.style.transform='none';clearTimeout(tt);tt=setTimeout(function(){t.style.opacity=0;t.style.transform='translateY(10px)'},4000)}
-/* email: copia indirizzo */
-$('mail').addEventListener('click',function(){if(navigator.clipboard)navigator.clipboard.writeText('clientostudio26@gmail.com').then(function(){toast('Email copiata: clientostudio26@gmail.com')}).catch(function(){})});
+/* email: Gmail web su PC, app Mail/Gmail con destinatario e oggetto su telefono + copia indirizzo */
+var mailEl=$('mail'),isMob=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)||(navigator.maxTouchPoints>1&&innerWidth<1024);
+if(isMob){mailEl.href='mailto:clientostudio26@gmail.com?subject=Richiesta%20informazioni%20%E2%80%94%20Cliento';mailEl.removeAttribute('target')}
+mailEl.addEventListener('click',function(){if(navigator.clipboard)navigator.clipboard.writeText('clientostudio26@gmail.com').then(function(){toast('Email copiata: clientostudio26@gmail.com')}).catch(function(){})});
 /* privacy */
 function om(e){e.preventDefault();$('mo').classList.add('open')}
 function cm(){$('mo').classList.remove('open')}

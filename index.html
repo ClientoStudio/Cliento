@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CLIENTO. — Web, Google & Stampa | Fossano e Cuneo</title>
+<title>CLIENTO. — Web, Google & Stampa </title>
 <meta name="description" content="Noi del team di Cliento progettiamo siti web, visibilità su Google e materiali stampati per le attività locali di Fossano e Cuneo.">
 <meta name="theme-color" content="#02050a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -97,8 +97,7 @@ h1 .ln:nth-child(2)>span{animation-delay:.12s}
 .mg span::after{content:"✦";color:var(--c);font-size:.8rem}
 @keyframes mv{to{transform:translateX(-100%)}}
 /* sezioni */
-section{position:relative;z-index:1;padding:100px 6%;scroll-margin-top:80px;content-visibility:auto;contain-intrinsic-size:auto 700px}
-#hero,#lavori{content-visibility:visible}
+section{position:relative;z-index:1;padding:100px 6%;scroll-margin-top:80px}
 .ct{max-width:1180px;margin:0 auto}
 .sh{max-width:640px;margin-bottom:52px}
 .k{display:inline-block;font-size:.84rem;font-weight:600;color:var(--c);margin-bottom:12px}
@@ -169,6 +168,7 @@ h2{font-size:clamp(1.9rem,4vw,3.1rem);font-weight:800;line-height:1.12;letter-sp
 .sx p{color:var(--m);font-size:.92rem}
 /* pacchetti */
 .pl3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
+.pk-ctrl{display:none}
 .pk{position:relative;display:flex;flex-direction:column;background:var(--s);border:1px solid var(--line);border-radius:26px;padding:36px 28px;transition:transform .4s var(--e),border-color .3s}
 .pk:hover{transform:translateY(-6px);border-color:rgba(31,210,255,.45)}
 .pk.ft{background:linear-gradient(180deg,rgba(31,210,255,.14),var(--s) 70%);border-color:rgba(31,210,255,.6);box-shadow:0 0 60px rgba(31,210,255,.14);}
@@ -255,10 +255,17 @@ h2{font-size:1.7rem}
 .sx h3{margin-bottom:2px;align-self:end}
 .mb{margin-top:18px;padding:22px 18px;gap:16px}
 .ml{padding:10px 18px}
-.pl3{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin:0 -18px;padding:18px 18px 8px;scrollbar-width:none}
-.pl3::-webkit-scrollbar{display:none}
+.pl3-w{overflow:hidden;padding-top:16px}
+.pl3{display:flex;gap:16px;margin:0;padding:0;transition:transform .45s var(--e);will-change:transform;touch-action:pan-y}
 .pl3 .rv{opacity:1;transform:none}
-.pk{flex:0 0 80%;scroll-snap-align:center;padding:28px 22px}
+.pk{flex:0 0 100%;width:100%;padding:28px 22px;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.pk:hover{transform:none}
+.pk-ctrl{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px}
+.pk-b{width:38px;height:38px;border-radius:50%;background:rgba(8,17,28,.85);border:1px solid rgba(31,210,255,.4);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,color .2s}
+.pk-b:active{background:var(--c);color:#02050a}
+.pk-dots{display:flex;align-items:center;gap:8px}
+.pk-dt{width:9px;height:9px;border:0;border-radius:99px;background:rgba(255,255,255,.2);cursor:pointer;transition:width .3s var(--e),background .3s}
+.pk-dt.a{width:30px;background:var(--c)}
 .cd{padding:24px 16px;gap:22px}
 textarea{height:84px}
 footer{padding:28px 20px 90px;gap:10px}
@@ -386,7 +393,8 @@ footer{padding:28px 20px 90px;gap:10px}
 <section id="pacchetti" style="padding-top:20px">
 <div class="ct">
 <div class="sh rv"><span class="k">Soluzioni</span><h2>Tre percorsi su misura.</h2><p class="ss">Scegli la base più adatta al momento attuale della tua attività.</p></div>
-<div class="pl3">
+<div class="pl3-w" id="pkw">
+<div class="pl3" id="pkl">
 <div class="pk rv"><div class="pi"><svg class="i"><use href="#bolt"/></svg></div><h3>Start</h3><p class="pd">Per mettere in ordine le basi ed essere trovati subito su Google.</p>
 <ul><li><svg class="i"><use href="#ok"/></svg>Sito web vetrina</li><li><svg class="i"><use href="#ok"/></svg>Scheda Google Business</li><li><svg class="i"><use href="#ok"/></svg>Contatto diretto WhatsApp</li><li><svg class="i"><use href="#ok"/></svg>Messa online completa</li></ul>
 <a href="#contatti" class="pb" data-pk="Pacchetto START">Valuta Start</a></div>
@@ -396,6 +404,12 @@ footer{padding:28px 20px 90px;gap:10px}
 <div class="pk rv" style="--d:.2s"><div class="pi"><svg class="i"><use href="#lay"/></svg></div><h3>Brand &amp; Offline</h3><p class="pd">Immagine coordinata e stampa per distinguerti dal vivo.</p>
 <ul><li><svg class="i"><use href="#ok"/></svg>Assistenza prioritaria</li><li><svg class="i"><use href="#ok"/></svg>Biglietti, stampe e marketing</li><li><svg class="i"><use href="#ok"/></svg>Grafiche coordinate social</li><li><svg class="i"><use href="#ok"/></svg>Nuovo logo o restyling</li></ul>
 <a href="#contatti" class="pb" data-pk="Pacchetto BRAND & OFFLINE">Valuta Brand &amp; Offline</a></div>
+</div>
+<div class="pk-ctrl" aria-label="Navigazione pacchetti">
+<button type="button" class="pk-b" id="pkp" aria-label="Pacchetto precedente"><svg class="i"><use href="#cl"/></svg></button>
+<div class="pk-dots" id="pkd"><button type="button" class="pk-dt a" aria-label="Pacchetto Start"></button><button type="button" class="pk-dt" aria-label="Pacchetto Growth"></button><button type="button" class="pk-dt" aria-label="Pacchetto Brand & Offline"></button></div>
+<button type="button" class="pk-b" id="pkn" aria-label="Pacchetto successivo"><svg class="i"><use href="#cr"/></svg></button>
+</div>
 </div>
 </div>
 </section>
@@ -495,6 +509,17 @@ stg.addEventListener('pointerleave',function(){hold=false;sync();var ci=cd[cur].
 if(fine&&!rm)stg.addEventListener('pointermove',function(e){if(busy||drag||tp)return;tp=true;var px=e.clientX,py=e.clientY;requestAnimationFrame(function(){tp=false;var c=cd[cur],r=c.getBoundingClientRect(),x=(px-r.left)/r.width-.5,y=(py-r.top)/r.height-.5;if(Math.abs(x)<.8&&Math.abs(y)<.8)c.firstElementChild.style.transform='perspective(900px) rotateX('+-y*10+'deg) rotateY('+x*10+'deg)'})});
 new IntersectionObserver(function(e){vis=e[0].isIntersecting;sync()}).observe(cs);
 document.addEventListener('visibilitychange',sync);
+/* carosello pacchetti solo mobile */
+var pkl=$('pkl'),pkd=$('pkd').children,pi=0,pmq=matchMedia('(max-width:640px)'),pdrag=false,pmv=false,px0=0,pdx=0;
+function pgo(n){pi=(n+3)%3;if(pmq.matches)pkl.style.transform='translate3d(calc('+(-pi*100)+'% - '+(pi*16)+'px),0,0)';for(var j=0;j<3;j++)pkd[j].classList.toggle('a',j===pi)}
+$('pkp').onclick=function(){pgo(pi-1)};$('pkn').onclick=function(){pgo(pi+1)};
+for(var j=0;j<3;j++)(function(j){pkd[j].onclick=function(){pgo(j)}})(j);
+pkl.addEventListener('pointerdown',function(e){if(!pmq.matches||(e.pointerType==='mouse'&&e.button))return;pdrag=true;pmv=false;px0=e.clientX;pdx=0;pkl.style.transition='none'});
+addEventListener('pointermove',function(e){if(!pdrag)return;pdx=e.clientX-px0;if(!pmv&&Math.abs(pdx)>8)pmv=true;if(pmv)pkl.style.transform='translate3d(calc('+(-pi*100)+'% + '+(pdx-pi*16)+'px),0,0)'});
+function pend(){if(!pdrag)return;pdrag=false;pkl.style.transition='';if(pmv&&Math.abs(pdx)>40)pgo(Math.max(0,Math.min(2,pi+(pdx<0?1:-1))));else pgo(pi)}
+addEventListener('pointerup',pend);addEventListener('pointercancel',pend);
+pkl.addEventListener('click',function(e){if(pmv){e.preventDefault();pmv=false}},true);
+pmq.addEventListener('change',function(e){if(!e.matches)pkl.style.transform='';else pgo(pi)});
 /* pacchetti -> select */
 document.querySelectorAll('[data-pk]').forEach(function(a){a.addEventListener('click',function(){$('servizio').value=a.dataset.pk})});
 /* toast */

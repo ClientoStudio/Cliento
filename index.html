@@ -93,7 +93,7 @@ h1 .ln:nth-child(2)>span{animation-delay:.12s}
 @keyframes mv{to{transform:translateX(-100%)}}
 /* sezioni */
 section{position:relative;z-index:1;padding:100px 6%;scroll-margin-top:80px;content-visibility:auto;contain-intrinsic-size:auto 700px}
-#hero{content-visibility:visible}
+#hero,#lavori.ready{content-visibility:visible}
 .ct{max-width:1180px;margin:0 auto}
 .sh{max-width:640px;margin-bottom:52px}
 .k{display:inline-block;font-size:.84rem;font-weight:600;color:var(--c);margin-bottom:12px}
@@ -258,6 +258,8 @@ h2{font-size:1.7rem}
 textarea{height:84px}
 footer{padding:28px 20px 90px;gap:10px}
 .cs{--h:1.62}
+.stg{contain:none}
+.cd2{contain:none;-webkit-backface-visibility:hidden;backface-visibility:hidden}
 .pn p{display:none}.pn{padding:14px}
 .cd2[data-a="1"]::after,.cd2[data-a="2"]::after{opacity:.72}
 .nb{width:38px;height:38px;margin-top:-19px}.nb.l{left:8px}.nb.r{right:8px}
@@ -349,10 +351,10 @@ footer{padding:28px 20px 90px;gap:10px}
 <div class="sh rv"><span class="k">Lavori</span><h2>Progetti che si vedono e si toccano.</h2><p class="ss">Trascina, tocca le card laterali o usa le frecce: ogni lavoro nasce per un'attività reale del territorio.</p></div>
 <div class="cs rv" id="cs">
 <div class="stg" id="stg">
-<article class="cd2"><div class="cin"><div class="who"><b>OB</b><span>Oro Bianco<small>Packaging</small></span></div><div class="ty2"><svg class="i"><use href="#lay"/></svg></div><div class="cp2"><img src="CaciottaCuoreMorbido.png" alt="Cartellino con spago Caciotta Cuore Morbido — Oro Bianco" decoding="async" draggable="false"></div><div class="pn"><h3>Cartellino con spago</h3><p>Cartellini sagomati legati a mano con spago naturale: l'artigianalità si vede prima dell'assaggio.</p><a href="#contatti" class="mo2">Richiedi un lavoro così <svg class="i"><use href="#ar"/></svg></a></div></div></article>
-<article class="cd2"><div class="cin"><div class="who"><b>OB</b><span>Oro Bianco<small>Stand da banco A5</small></span></div><div class="ty2"><svg class="i"><use href="#prn"/></svg></div><div class="cp2"><img src="oroBiancoStand.png" alt="Espositore da banco formato A5 — Oro Bianco" decoding="async" draggable="false"></div><div class="pn"><h3>Stand da banco A5</h3><p>Espositore da banco che cattura lo sguardo e comunica qualità al primo colpo.</p><a href="#contatti" class="mo2">Richiedi un lavoro così <svg class="i"><use href="#ar"/></svg></a></div></div></article>
-<article class="cd2"><div class="cin"><div class="who"><b>SU</b><span>I Sapori di Una Volta<small>Restyling logo</small></span></div><div class="ty2"><svg class="i"><use href="#pen"/></svg></div><div class="cp2"><div class="ba"><div>PRIMA<img src="LogoVecchio.JPG" alt="Logo precedente I Sapori di Una Volta" style="opacity:.6" decoding="async" draggable="false"></div><div>DOPO<img src="LogoNuovo.PNG" alt="Nuovo logo I Sapori di Una Volta" decoding="async" draggable="false"></div></div></div><div class="pn"><h3>Nuova identità visiva</h3><p>Nuovo marchio per una storica realtà di Fossano: più leggibile su etichette, insegne e social.</p><a href="#contatti" class="mo2">Richiedi un lavoro così <svg class="i"><use href="#ar"/></svg></a></div></div></article>
-<article class="cd2"><div class="cin"><div class="who"><b>C</b><span>Catalogo prodotti<small>Grafica editoriale</small></span></div><div class="ty2"><svg class="i"><use href="#lay"/></svg></div><div class="cp2"><img src="CatalogoPasta.png" alt="Catalogo prodotti gastronomici" decoding="async" draggable="false"></div><div class="pn"><h3>Catalogo e listini</h3><p>Specialità, ingredienti e formati impaginati con chiarezza, su carta e su smartphone.</p><a href="#contatti" class="mo2">Richiedi un lavoro così <svg class="i"><use href="#ar"/></svg></a></div></div></article>
+<article class="cd2"><div class="cin"><div class="who"><b>OB</b><span>Oro Bianco<small>Packaging</small></span></div><div class="ty2"><svg class="i"><use href="#lay"/></svg></div><div class="cp2"><img src="CaciottaCuoreMorbido.png" alt="Cartellino con spago Caciotta Cuore Morbido — Oro Bianco" loading="eager" decoding="async" draggable="false"></div><div class="pn"><h3>Cartellino con spago</h3><p>Cartellini sagomati legati a mano con spago naturale: l'artigianalità si vede prima dell'assaggio.</p><a href="#contatti" class="mo2">Richiedi un lavoro così <svg class="i"><use href="#ar"/></svg></a></div></div></article>
+<article class="cd2"><div class="cin"><div class="who"><b>OB</b><span>Oro Bianco<small>Stand da banco A5</small></span></div><div class="ty2"><svg class="i"><use href="#prn"/></svg></div><div class="cp2"><img src="oroBiancoStand.png" alt="Espositore da banco formato A5 — Oro Bianco" loading="eager" decoding="async" draggable="false"></div><div class="pn"><h3>Stand da banco A5</h3><p>Espositore da banco che cattura lo sguardo e comunica qualità al primo colpo.</p><a href="#contatti" class="mo2">Richiedi un lavoro così <svg class="i"><use href="#ar"/></svg></a></div></div></article>
+<article class="cd2"><div class="cin"><div class="who"><b>SU</b><span>I Sapori di Una Volta<small>Restyling logo</small></span></div><div class="ty2"><svg class="i"><use href="#pen"/></svg></div><div class="cp2"><div class="ba"><div>PRIMA<img src="LogoVecchio.JPG" alt="Logo precedente I Sapori di Una Volta" style="opacity:.6" loading="eager" decoding="async" draggable="false"></div><div>DOPO<img src="LogoNuovo.PNG" alt="Nuovo logo I Sapori di Una Volta" loading="eager" decoding="async" draggable="false"></div></div></div><div class="pn"><h3>Nuova identità visiva</h3><p>Nuovo marchio per una storica realtà di Fossano: più leggibile su etichette, insegne e social.</p><a href="#contatti" class="mo2">Richiedi un lavoro così <svg class="i"><use href="#ar"/></svg></a></div></div></article>
+<article class="cd2"><div class="cin"><div class="who"><b>C</b><span>Catalogo prodotti<small>Grafica editoriale</small></span></div><div class="ty2"><svg class="i"><use href="#lay"/></svg></div><div class="cp2"><img src="CatalogoPasta.png" alt="Catalogo prodotti gastronomici" loading="eager" decoding="async" draggable="false"></div><div class="pn"><h3>Catalogo e listini</h3><p>Specialità, ingredienti e formati impaginati con chiarezza, su carta e su smartphone.</p><a href="#contatti" class="mo2">Richiedi un lavoro così <svg class="i"><use href="#ar"/></svg></a></div></div></article>
 <article class="cd2"><div class="cin"><div class="who"><b>SU</b><span>I Sapori di Una Volta<small>Fidelity card</small></span></div><div class="ty2"><svg class="i"><use href="#prn"/></svg></div><div class="cp2"><svg viewBox="0 0 300 190" role="img" aria-label="Fidelity card su misura"><rect width="300" height="190" rx="12" fill="#e8e2d5"/><text x="150" y="44" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0b0f19">I SAPORI DI UNA VOLTA</text><text x="150" y="60" text-anchor="middle" font-family="sans-serif" font-size="7" fill="#475569">1 punto ogni 15€ • 5€ di sconto al completamento</text><g fill="none" stroke="#0b0f19"><rect x="22" y="72" width="256" height="92" rx="6" stroke-width="1.2"/><path stroke-width=".6" d="M73 72v92M124 72v92M175 72v92M226 72v92M22 118h256"/></g></svg></div><div class="pn"><h3>Fidelity card su misura</h3><p>Carte fedeltà su cartoncino spesso, per far tornare in negozio chi entra una volta.</p><a href="#contatti" class="mo2">Richiedi un lavoro così <svg class="i"><use href="#ar"/></svg></a></div></div></article>
 <button type="button" class="nb l" id="pv" aria-label="Lavoro precedente"><svg class="i"><use href="#cl"/></svg></button><button type="button" class="nb r" id="nx" aria-label="Lavoro successivo"><svg class="i"><use href="#cr"/></svg></button>
 </div>
@@ -464,10 +466,15 @@ var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isInter
 document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
 /* carosello coverflow 3D */
 var bgE=document.querySelector('.bg'),cs=$('cs'),stg=$('stg'),dots=$('dots'),cd=stg.querySelectorAll('.cd2'),dt=dots.children,N=cd.length,cur=0,hold=false,vis=false,drag=false,mv=false,busy=false,bt,tp=false,x0=0,dx=0,XS=[0,88,128],SC=[1,.88,.76];
+var lv=$('lavori'),lvIo=new IntersectionObserver(function(en){if(en[0].isIntersecting){lv.classList.add('ready');stg.querySelectorAll('img').forEach(function(im){if(im.decode)im.decode().catch(function(){})});lvIo.disconnect()}},{rootMargin:'600px 0px'});
+if(lv)lvIo.observe(lv);
 function sync(){cs.classList.toggle('hold',hold||drag||!vis||document.hidden)}
-function lay(){for(var i=0;i<N;i++){var d=i-cur;if(d>N/2)d-=N;if(d<-N/2)d+=N;var a=Math.min(Math.abs(d),2),sg=d<0?-1:1,c=cd[i];
+function lay(){var rst=[];for(var i=0;i<N;i++){var d=i-cur;if(d>N/2)d-=N;if(d<-N/2)d+=N;var a=Math.min(Math.abs(d),2),sg=d<0?-1:1,c=cd[i],wrap=c._d!==undefined&&Math.abs(d-c._d)>2;
+c._d=d;
+if(wrap){c.style.transition='none';rst.push(c)}else if(c.style.transition==='none'){c.style.transition=''}
 c.style.transform='translate(-50%,-50%) translate3d('+sg*XS[a]+'%,0,'+(-a*90)+'px) rotateY('+(-sg*(a?30+a*4:0))+'deg) scale('+SC[a]+')';
-c.style.zIndex=10-a;c.dataset.a=a;c.classList.toggle('on',d===0);c.setAttribute('aria-hidden',d!==0);if(d!==0)c.firstElementChild.style.transform=''}}
+c.style.zIndex=10-a;c.dataset.a=a;c.classList.toggle('on',d===0);c.setAttribute('aria-hidden',d!==0);if(d!==0)c.firstElementChild.style.transform=''}
+if(rst.length)requestAnimationFrame(function(){requestAnimationFrame(function(){for(var j=0;j<rst.length;j++)rst[j].style.transition=''})})}
 function go(i){cur=(i+N)%N;lay();busy=true;bgE.classList.add("p");clearTimeout(bt);bt=setTimeout(function(){busy=false;bgE.classList.remove("p")},650);
 var ci=cur;requestAnimationFrame(function(){for(var k=0;k<N;k++)dt[k].classList.remove('a');void dots.offsetWidth;dt[ci].classList.add('a')})}
 for(var i=0;i<N;i++)(function(i){dt[i].onclick=function(){go(i)}})(i);

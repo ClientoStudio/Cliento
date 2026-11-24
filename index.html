@@ -9,6 +9,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="CaciottaCuoreMorbido.png">
+<link rel="preload" as="image" href="oroBiancoStand.png">
+<link rel="preload" as="image" href="LogoVecchio.JPG">
+<link rel="preload" as="image" href="LogoNuovo.PNG">
+<link rel="preload" as="image" href="CatalogoPasta.png">
 <style>
 :root{--bg:#02050a;--s:#08111c;--s2:#0c1826;--line:rgba(255,255,255,.08);--c:#1fd2ff;--c2:#0a7bff;--t:#fff;--m:#8fa3b8;--wa:#25d366;--e:cubic-bezier(.22,1,.36,1)}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -93,7 +98,7 @@ h1 .ln:nth-child(2)>span{animation-delay:.12s}
 @keyframes mv{to{transform:translateX(-100%)}}
 /* sezioni */
 section{position:relative;z-index:1;padding:100px 6%;scroll-margin-top:80px;content-visibility:auto;contain-intrinsic-size:auto 700px}
-#hero,#lavori.ready{content-visibility:visible}
+#hero,#lavori{content-visibility:visible}
 .ct{max-width:1180px;margin:0 auto}
 .sh{max-width:640px;margin-bottom:52px}
 .k{display:inline-block;font-size:.84rem;font-weight:600;color:var(--c);margin-bottom:12px}
@@ -116,19 +121,19 @@ h2{font-size:clamp(1.9rem,4vw,3.1rem);font-weight:800;line-height:1.12;letter-sp
 .cs{--cw:min(350px,70vw);--h:1.5;position:relative;border-radius:28px;border:1px solid var(--line);background:radial-gradient(70% 90% at 50% 40%,#0b1b2c,#04080f 80%);box-shadow:0 30px 80px rgba(0,0,0,.5)}
 .stg{contain:layout paint;position:relative;height:calc(var(--cw)*var(--h) + 90px);perspective:1500px;touch-action:pan-y;cursor:grab;-webkit-user-select:none;user-select:none;overflow:hidden}
 .stg.dg{cursor:grabbing}
-.cd2{position:absolute;left:50%;top:50%;width:var(--cw);height:calc(var(--cw)*var(--h));transition:transform .55s cubic-bezier(.33,1,.68,1);will-change:transform;contain:layout style}
+.cd2{position:absolute;left:50%;top:50%;width:var(--cw);height:calc(var(--cw)*var(--h));transition:transform .55s cubic-bezier(.33,1,.68,1);will-change:transform;contain:layout style;-webkit-backface-visibility:hidden;backface-visibility:hidden}
 .cd2::before{content:"";position:absolute;inset:0;border-radius:26px;box-shadow:0 0 0 1px rgba(31,210,255,.7),0 0 60px rgba(31,210,255,.28);opacity:0;transition:opacity .45s;will-change:opacity;pointer-events:none}
 .cd2.on::before{opacity:1}
 .cd2::after{content:"";position:absolute;inset:0;border-radius:26px;background:#02050a;opacity:0;transition:opacity .45s;will-change:opacity;pointer-events:none}
 .cd2[data-a="1"]::after{opacity:.4}.cd2[data-a="2"]::after{opacity:.6}
-.cin{position:absolute;inset:0;display:flex;flex-direction:column;padding:12px;border-radius:26px;overflow:hidden;background:linear-gradient(160deg,#10263c,#050b14);border:1px solid rgba(31,210,255,.22);box-shadow:0 30px 60px rgba(0,0,0,.6)}
+.cin{position:absolute;inset:0;display:flex;flex-direction:column;padding:12px;border-radius:26px;overflow:hidden;background:linear-gradient(160deg,#10263c,#050b14);border:1px solid rgba(31,210,255,.22);box-shadow:0 30px 60px rgba(0,0,0,.6);-webkit-transform:translateZ(0);transform:translateZ(0);-webkit-backface-visibility:hidden;backface-visibility:hidden}
 .cin.rt{transition:transform .3s ease-out}
-.who{position:absolute;z-index:2;left:14px;top:14px;display:flex;align-items:center;gap:9px;padding:6px 14px 6px 6px;border-radius:99px;background:rgba(8,17,28,.88);border:1px solid rgba(255,255,255,.1);max-width:calc(100% - 68px)}
+.who{position:absolute;left:14px;top:14px;display:flex;align-items:center;gap:9px;padding:6px 14px 6px 6px;border-radius:99px;background:rgba(8,17,28,.88);border:1px solid rgba(255,255,255,.1);max-width:calc(100% - 68px)}
 .who b{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--c2),var(--c));color:#02050a;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;flex-shrink:0}
 .who span{display:flex;flex-direction:column;line-height:1.25;font-size:.78rem;font-weight:700;min-width:0}
 .who span,.who small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .who small{font-size:.66rem;color:var(--m);font-weight:600}
-.ty2{position:absolute;z-index:2;right:14px;top:14px;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(31,210,255,.12);border:1px solid rgba(31,210,255,.35);color:var(--c)}
+.ty2{position:absolute;right:14px;top:14px;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(31,210,255,.12);border:1px solid rgba(31,210,255,.35);color:var(--c)}
 .cp2{position:relative;flex:1;min-height:0;margin:52px 6px 12px}
 .cp2>*{position:absolute;inset:0;width:100%;height:100%}
 .cp2>img,.cp2>svg{object-fit:contain;border-radius:12px;-webkit-user-drag:none}
@@ -136,7 +141,7 @@ h2{font-size:clamp(1.9rem,4vw,3.1rem);font-weight:800;line-height:1.12;letter-sp
 .ba div{display:flex;flex-direction:column;align-items:center;gap:6px;min-height:0;padding:10px;border-radius:14px;background:var(--s2);border:1px solid var(--line);font-size:.68rem;font-weight:600;color:var(--m)}
 .ba div+div{border-color:rgba(31,210,255,.5);color:var(--c)}
 .ba img{flex:1;height:0;width:100%;object-fit:contain}
-.pn{position:relative;z-index:2;flex:none;padding:16px 16px 14px;border-radius:20px;background:rgba(8,17,28,.9);border:1px solid rgba(255,255,255,.1)}
+.pn{position:relative;flex:none;padding:16px 16px 14px;border-radius:20px;background:rgba(8,17,28,.9);border:1px solid rgba(255,255,255,.1)}
 .pn h3{font-size:1rem;line-height:1.25;margin-bottom:6px;letter-spacing:-.02em}
 .pn p{font-size:.8rem;color:var(--m);line-height:1.5;margin-bottom:12px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .mo2{display:flex;align-items:center;justify-content:center;gap:8px;padding:11px;border-radius:12px;background:rgba(31,210,255,.12);border:1px solid rgba(31,210,255,.3);color:var(--c);font-weight:700;font-size:.82rem;transition:all .25s}
@@ -259,7 +264,7 @@ textarea{height:84px}
 footer{padding:28px 20px 90px;gap:10px}
 .cs{--h:1.62}
 .stg{contain:none}
-.cd2{contain:none;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.cd2{contain:none}
 .pn p{display:none}.pn{padding:14px}
 .cd2[data-a="1"]::after,.cd2[data-a="2"]::after{opacity:.72}
 .nb{width:38px;height:38px;margin-top:-19px}.nb.l{left:8px}.nb.r{right:8px}
@@ -349,7 +354,7 @@ footer{padding:28px 20px 90px;gap:10px}
 <section id="lavori">
 <div class="ct">
 <div class="sh rv"><span class="k">Lavori</span><h2>Progetti che si vedono e si toccano.</h2><p class="ss">Trascina, tocca le card laterali o usa le frecce: ogni lavoro nasce per un'attività reale del territorio.</p></div>
-<div class="cs rv" id="cs">
+<div class="cs" id="cs">
 <div class="stg" id="stg">
 <article class="cd2"><div class="cin"><div class="who"><b>OB</b><span>Oro Bianco<small>Packaging</small></span></div><div class="ty2"><svg class="i"><use href="#lay"/></svg></div><div class="cp2"><img src="CaciottaCuoreMorbido.png" alt="Cartellino con spago Caciotta Cuore Morbido — Oro Bianco" loading="eager" decoding="async" draggable="false"></div><div class="pn"><h3>Cartellino con spago</h3><p>Cartellini sagomati legati a mano con spago naturale: l'artigianalità si vede prima dell'assaggio.</p><a href="#contatti" class="mo2">Richiedi un lavoro così <svg class="i"><use href="#ar"/></svg></a></div></div></article>
 <article class="cd2"><div class="cin"><div class="who"><b>OB</b><span>Oro Bianco<small>Stand da banco A5</small></span></div><div class="ty2"><svg class="i"><use href="#prn"/></svg></div><div class="cp2"><img src="oroBiancoStand.png" alt="Espositore da banco formato A5 — Oro Bianco" loading="eager" decoding="async" draggable="false"></div><div class="pn"><h3>Stand da banco A5</h3><p>Espositore da banco che cattura lo sguardo e comunica qualità al primo colpo.</p><a href="#contatti" class="mo2">Richiedi un lavoro così <svg class="i"><use href="#ar"/></svg></a></div></div></article>
@@ -466,8 +471,7 @@ var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isInter
 document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
 /* carosello coverflow 3D */
 var bgE=document.querySelector('.bg'),cs=$('cs'),stg=$('stg'),dots=$('dots'),cd=stg.querySelectorAll('.cd2'),dt=dots.children,N=cd.length,cur=0,hold=false,vis=false,drag=false,mv=false,busy=false,bt,tp=false,x0=0,dx=0,XS=[0,88,128],SC=[1,.88,.76];
-var lv=$('lavori'),lvIo=new IntersectionObserver(function(en){if(en[0].isIntersecting){lv.classList.add('ready');stg.querySelectorAll('img').forEach(function(im){if(im.decode)im.decode().catch(function(){})});lvIo.disconnect()}},{rootMargin:'600px 0px'});
-if(lv)lvIo.observe(lv);
+stg.querySelectorAll('img').forEach(function(im){if(im.decode)im.decode().catch(function(){})});
 function sync(){cs.classList.toggle('hold',hold||drag||!vis||document.hidden)}
 function lay(){var rst=[];for(var i=0;i<N;i++){var d=i-cur;if(d>N/2)d-=N;if(d<-N/2)d+=N;var a=Math.min(Math.abs(d),2),sg=d<0?-1:1,c=cd[i],wrap=c._d!==undefined&&Math.abs(d-c._d)>2;
 c._d=d;

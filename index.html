@@ -1,1982 +1,497 @@
 <!DOCTYPE html>
 <html lang="it">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-  <title>CLIENTO. — Web, Google & Stampa | Fossano e Cuneo</title>
-  <meta name="description" content="Noi del team di Cliento progettiamo siti web, visibilità su Google e materiali stampati per le attività locali di Fossano e Cuneo." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #050811;
-      --surface: rgba(15, 22, 41, 0.72);
-      --surface-solid: #0e1528;
-      --border: rgba(255, 255, 255, 0.08);
-      --border-bright: rgba(0, 212, 255, 0.4);
-      --text: #ffffff;
-      --muted: #94a3b8;
-      --cyan: #00d4ff;
-      --yellow: #facc15;
-      --wa: #25D366;
-    }
-
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html, body {
-      max-width: 100%;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 16px;
-      line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* AURORA ANIMATA + GRIGLIA PROSPETTICA */
-    .bg-canvas {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
-    .bg-grid {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-      background-size: 64px 64px;
-      mask-image: radial-gradient(ellipse 80% 60% at 50% 25%, #000 20%, transparent 85%);
-    }
-
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(110px);
-      opacity: 0.45;
-      animation: floatOrb 16s ease-in-out infinite alternate;
-    }
-
-    .orb-1 {
-      width: 520px;
-      height: 520px;
-      background: radial-gradient(circle, rgba(0, 212, 255, 0.35), transparent 70%);
-      top: -140px;
-      left: 10%;
-    }
-
-    .orb-2 {
-      width: 440px;
-      height: 440px;
-      background: radial-gradient(circle, rgba(250, 204, 21, 0.18), transparent 70%);
-      top: 120px;
-      right: 5%;
-      animation-delay: -6s;
-    }
-
-    @keyframes floatOrb {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(40px, 30px) scale(1.12); }
-    }
-
-    /* NAVBAR FLOATING PILL */
-    header {
-      position: fixed;
-      top: 16px;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: center;
-      padding: 0 16px;
-    }
-
-    nav {
-      width: 100%;
-      max-width: 1140px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 20px;
-      background: rgba(11, 16, 30, 0.85);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 99px;
-      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5);
-    }
-
-    .logo {
-      font-weight: 800;
-      font-size: 1.3rem;
-      letter-spacing: -0.04em;
-      color: #fff;
-      text-decoration: none;
-    }
-
-    .logo span {
-      color: var(--yellow);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-    }
-
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 600;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover {
-      color: #fff;
-    }
-
-    .nav-cta {
-      background: var(--yellow);
-      color: #050811 !important;
-      padding: 9px 20px;
-      border-radius: 99px;
-      font-weight: 800 !important;
-      font-size: 0.85rem !important;
-      white-space: nowrap;
-      transition: transform 0.2s, box-shadow 0.2s !important;
-    }
-
-    .nav-cta:hover {
-      transform: scale(1.04);
-      box-shadow: 0 0 24px rgba(250, 204, 21, 0.4);
-    }
-
-    /* HERO SPLIT CON TILT 3D */
-    #hero {
-      position: relative;
-      z-index: 1;
-      min-height: 92vh;
-      display: flex;
-      align-items: center;
-      padding: 135px 6% 80px;
-    }
-
-    .hero-container {
-      max-width: 1180px;
-      margin: 0 auto;
-      width: 100%;
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 56px;
-      align-items: center;
-    }
-
-    .location-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 16px;
-      border-radius: 99px;
-      background: rgba(0, 212, 255, 0.08);
-      border: 1px solid rgba(0, 212, 255, 0.25);
-      color: var(--cyan);
-      font-size: 0.8rem;
-      font-weight: 700;
-      margin-bottom: 24px;
-    }
-
-    .pulse-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--yellow);
-      box-shadow: 0 0 10px var(--yellow);
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.8); }
-    }
-
-    /* FIX TAGLIO LETTERA "g" SU SAFARI / MOBILE */
-    h1 {
-      font-size: clamp(2.45rem, 5.4vw, 4.6rem);
-      font-weight: 800;
-      line-height: 1.16;
-      letter-spacing: -0.04em;
-      margin-bottom: 20px;
-    }
-
-    .dynamic-word {
-      display: inline-block;
-      padding-bottom: 0.14em;
-      margin-bottom: -0.14em;
-      background: linear-gradient(90deg, var(--cyan), var(--yellow));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      transition: opacity 0.35s ease, transform 0.35s ease;
-    }
-
-    .dynamic-word.fade-out {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-
-    .hero-desc {
-      font-size: 1.08rem;
-      color: var(--muted);
-      max-width: 530px;
-      margin-bottom: 34px;
-      line-height: 1.7;
-    }
-
-    .hero-desc strong {
-      color: #fff;
-      font-weight: 600;
-    }
-
-    .hero-btns {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    .btn-primary {
-      background: var(--yellow);
-      color: #050811;
-      font-weight: 800;
-      font-size: 0.96rem;
-      padding: 15px 28px;
-      border-radius: 99px;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      box-shadow: 0 12px 32px rgba(250, 204, 21, 0.25);
-      transition: transform 0.25s, box-shadow 0.25s;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 18px 40px rgba(250, 204, 21, 0.4);
-    }
-
-    .btn-glass {
-      background: rgba(255, 255, 255, 0.04);
-      color: #fff;
-      font-weight: 600;
-      font-size: 0.96rem;
-      padding: 15px 28px;
-      border-radius: 99px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      text-decoration: none;
-      transition: border-color 0.2s, background 0.2s;
-    }
-
-    .btn-glass:hover {
-      border-color: var(--cyan);
-      background: rgba(0, 212, 255, 0.08);
-    }
-
-    /* HERO 3D FLOATING SHOWCASE */
-    .hero-visual {
-      perspective: 1000px;
-      display: flex;
-      justify-content: center;
-    }
-
-    .tilt-stack {
-      position: relative;
-      width: 100%;
-      max-width: 420px;
-      height: 410px;
-      transform-style: preserve-3d;
-      transition: transform 0.15s ease-out;
-    }
-
-    .float-card {
-      position: absolute;
-      border-radius: 22px;
-      padding: 26px;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55);
-    }
-
-    .fc-top {
-      width: 330px;
-      top: 10px;
-      left: 0;
-      background: linear-gradient(145deg, rgba(20, 30, 56, 0.9), rgba(10, 15, 30, 0.95));
-      border: 1px solid rgba(0, 212, 255, 0.35);
-      transform: translateZ(30px);
-    }
-
-    .fc-bottom {
-      width: 310px;
-      bottom: 15px;
-      right: 0;
-      background: linear-gradient(145deg, rgba(28, 34, 52, 0.92), rgba(14, 18, 32, 0.96));
-      border: 1px solid rgba(250, 204, 21, 0.35);
-      transform: translateZ(55px);
-    }
-
-    .fc-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 14px;
-    }
-
-    .fc-badge {
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      padding: 4px 10px;
-      border-radius: 99px;
-    }
-
-    .search-pill {
-      background: rgba(255, 255, 255, 0.06);
-      border-radius: 12px;
-      padding: 12px 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 12px;
-    }
-
-    /* MARQUEE BRAND CONTINUO SENZA SPAZI VUOTI */
-    .marquee-wrap {
-      position: relative;
-      z-index: 1;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      background: rgba(10, 15, 28, 0.65);
-      padding: 24px 0;
-      overflow: hidden;
-      display: flex;
-      user-select: none;
-    }
-
-    .marquee-group {
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      min-width: 100%;
-      gap: 48px;
-      padding-right: 48px;
-      animation: scrollContinuous 22s linear infinite;
-    }
-
-    .marquee-wrap:hover .marquee-group {
-      animation-play-state: paused;
-    }
-
-    .brand-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 14px;
-      white-space: nowrap;
-      font-size: 1.08rem;
-      font-weight: 700;
-      color: rgba(255, 255, 255, 0.65);
-      letter-spacing: -0.02em;
-      transition: color 0.3s;
-    }
-
-    .brand-pill:hover {
-      color: #fff;
-    }
-
-    .brand-star {
-      color: var(--cyan);
-      font-size: 0.9rem;
-    }
-
-    @keyframes scrollContinuous {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-100%); }
-    }
-
-    /* SEZIONI GENERALI */
-    section {
-      position: relative;
-      z-index: 1;
-      padding: 110px 6%;
-      scroll-margin-top: 90px;
-    }
-
-    .container {
-      max-width: 1180px;
-      margin: 0 auto;
-      width: 100%;
-    }
-
-    .sec-head {
-      max-width: 640px;
-      margin-bottom: 56px;
-    }
-
-    .kicker {
-      display: inline-block;
-      font-size: 0.78rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--cyan);
-      margin-bottom: 12px;
-    }
-
-    h2 {
-      font-size: clamp(2rem, 4vw, 3.3rem);
-      font-weight: 800;
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      margin-bottom: 14px;
-    }
-
-    .sec-sub {
-      color: var(--muted);
-      font-size: 1.05rem;
-    }
-
-    /* BENTO GRID SERVIZI */
-    .bento-services {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 22px;
-    }
-
-    .b-card {
-      background: var(--surface);
-      backdrop-filter: blur(16px);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 34px 28px;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s, background 0.3s;
-    }
-
-    .b-card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(380px circle at var(--mx, 50%) var(--my, 50%), rgba(0, 212, 255, 0.14), transparent 65%);
-      opacity: 0;
-      transition: opacity 0.3s;
-      pointer-events: none;
-    }
-
-    .b-card:hover {
-      transform: translateY(-6px);
-      border-color: var(--border-bright);
-      background: rgba(20, 30, 56, 0.85);
-    }
-
-    .b-card:hover::after {
-      opacity: 1;
-    }
-
-    .span-6 { grid-column: span 6; }
-    .span-4 { grid-column: span 4; }
-
-    .svg-icon {
-      width: 52px;
-      height: 52px;
-      border-radius: 15px;
-      background: linear-gradient(135deg, rgba(0, 212, 255, 0.16), rgba(0, 212, 255, 0.04));
-      border: 1px solid rgba(0, 212, 255, 0.25);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--cyan);
-      margin-bottom: 22px;
-      transition: transform 0.35s, background 0.35s, color 0.35s;
-    }
-
-    .b-card:hover .svg-icon {
-      transform: scale(1.1) rotate(-4deg);
-      background: var(--yellow);
-      border-color: var(--yellow);
-      color: #050811;
-    }
-
-    .b-card h3 {
-      font-size: 1.28rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-      letter-spacing: -0.02em;
-    }
-
-    .b-card p {
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-   /* CAROSELLO PORTFOLIO DINAMICO */
-    .carousel-shell {
-      position: relative;
-      background: var(--surface);
-      backdrop-filter: blur(18px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 28px;
-      overflow: hidden;
-      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
-    }
-
-    .carousel-progress {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--cyan), var(--yellow));
-      width: 0%;
-      z-index: 10;
-      transition: width 0.1s linear;
-    }
-
-    .carousel-viewport {
-      overflow: hidden;
-      width: 100%;
-    }
-
-    .carousel-track {
-      display: flex;
-      transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
-      will-change: transform;
-    }
-
-    .c-slide {
-      flex: 0 0 100%;
-      width: 100%;
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      min-height: 410px;
-    }
-
-    .c-media {
-      background: radial-gradient(circle at center, #0e1629 0%, #060a14 100%);
-      padding: 44px 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      border-right: 1px solid var(--border);
-    }
-
-    .c-media img {
-      max-height: 280px;
-      max-width: 100%;
-      width: auto;
-      object-fit: contain;
-      border-radius: 14px;
-      filter: drop-shadow(0 18px 34px rgba(0, 0, 0, 0.55));
-      transition: transform 0.45s ease;
-    }
-
-    .c-slide:hover .c-media img {
-      transform: scale(1.03);
-    }
-
-    .ba-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-      width: 100%;
-      max-width: 520px;
-    }
-
-    .ba-item {
-      background: var(--surface-solid);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 22px 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .ba-item img {
-      max-height: 135px;
-      max-width: 100%;
-      object-fit: contain;
-      filter: none;
-    }
-
-    .c-info {
-      padding: 46px 42px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .c-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      width: fit-content;
-      background: rgba(250, 204, 21, 0.12);
-      border: 1px solid rgba(250, 204, 21, 0.3);
-      color: var(--yellow);
-      font-size: 0.74rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      padding: 6px 14px;
-      border-radius: 99px;
-      margin-bottom: 18px;
-    }
-
-    .c-info h3 {
-      font-size: clamp(1.45rem, 2.4vw, 1.9rem);
-      font-weight: 800;
-      line-height: 1.18;
-      letter-spacing: -0.02em;
-      margin-bottom: 14px;
-    }
-
-    .c-info p {
-      color: var(--muted);
-      font-size: 1rem;
-      line-height: 1.7;
-      margin-bottom: 24px;
-    }
-
-    .c-client-tag {
-      font-size: 0.84rem;
-      font-weight: 700;
-      color: var(--cyan);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    /* BARRA CONTROLLI CAROSELLO */
-    .carousel-controls {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 28px;
-      background: rgba(5, 8, 17, 0.75);
-      border-top: 1px solid var(--border);
-    }
-
-    .c-dots {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .c-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 99px;
-      background: rgba(255, 255, 255, 0.2);
-      border: none;
-      cursor: pointer;
-      transition: width 0.35s ease, background 0.35s ease;
-    }
-
-    .c-dot.active {
-      width: 32px;
-      background: var(--yellow);
-    }
-
-    .c-arrows {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .c-nav-btn {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: background 0.2s, border-color 0.2s, transform 0.2s;
-    }
-
-    .c-nav-btn:hover {
-      background: var(--cyan);
-      border-color: var(--cyan);
-      color: #050811;
-      transform: scale(1.06);
-    }
-
-    @media (max-width: 960px) {
-      .c-slide {
-        grid-template-columns: 1fr;
-        min-height: auto;
-      }
-
-      .c-media {
-        border-right: none;
-        border-bottom: 1px solid var(--border);
-        padding: 36px 20px;
-        min-height: 260px;
-      }
-
-      .c-media img {
-        max-height: 220px;
-      }
-
-      .c-info {
-        padding: 28px 24px;
-      }
-
-      .carousel-controls {
-        padding: 14px 20px;
-      }
-    }
-
-    /* PARTNER MONDINO CENTRATO ED ELEGANTE */
-    .mondino-box {
-      margin-top: 28px;
-      background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(250, 204, 21, 0.05));
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 24px;
-      padding: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 28px;
-    }
-
-    .mondino-logo-wrap {
-      background: #ffffff;
-      padding: 14px 24px;
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-    }
-
-    .mondino-logo-wrap img {
-      max-height: 58px;
-      max-width: 190px;
-      object-fit: contain;
-      display: block;
-    }
-
-    /* PACCHETTI */
-    .plans-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      align-items: stretch;
-    }
-
-    .plan {
-      background: var(--surface);
-      backdrop-filter: blur(16px);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 36px 28px;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      transition: transform 0.3s, border-color 0.3s;
-    }
-
-    .plan:hover {
-      transform: translateY(-6px);
-      border-color: var(--border-bright);
-    }
-
-    .plan.featured {
-      background: linear-gradient(180deg, rgba(0, 212, 255, 0.12) 0%, var(--surface) 100%);
-      border: 1px solid rgba(0, 212, 255, 0.5);
-      box-shadow: 0 25px 60px rgba(0, 212, 255, 0.1);
-    }
-
-    .plan-badge {
-      position: absolute;
-      top: -13px;
-      right: 24px;
-      background: var(--cyan);
-      color: #050811;
-      font-size: 0.72rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      padding: 5px 14px;
-      border-radius: 99px;
-    }
-
-    .plan-icon {
-      width: 46px;
-      height: 46px;
-      border-radius: 13px;
-      background: rgba(255, 255, 255, 0.05);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--yellow);
-      margin-bottom: 18px;
-    }
-
-    .plan h3 {
-      font-size: 1.5rem;
-      margin-bottom: 8px;
-    }
-
-    .plan-lead {
-      color: var(--muted);
-      font-size: 0.94rem;
-      margin-bottom: 24px;
-    }
-
-    .plan-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 13px;
-      margin-bottom: 30px;
-      flex: 1;
-    }
-
-    .plan-list li {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 0.94rem;
-      color: #e2e8f0;
-    }
-
-    .plan-list svg {
-      color: var(--cyan);
-      flex-shrink: 0;
-    }
-
-    .plan-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 14px 22px;
-      border-radius: 99px;
-      font-weight: 700;
-      font-size: 0.94rem;
-      text-decoration: none;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: #fff;
-      transition: all 0.25s;
-    }
-
-    .plan-btn:hover {
-      background: #fff;
-      color: #050811;
-    }
-
-    .plan.featured .plan-btn {
-      background: var(--yellow);
-      border-color: var(--yellow);
-      color: #050811;
-    }
-
-    .plan.featured .plan-btn:hover {
-      background: #fde047;
-      transform: scale(1.02);
-    }
-
-    /* TASTI CONTATTO CLICCABILI */
-    .contact-links-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      width: 100%;
-    }
-
-    .contact-pill-card {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      width: 100%;
-      padding: 14px 16px;
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.09);
-      text-decoration: none;
-      color: #fff;
-      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
-    }
-
-    .contact-pill-card:hover {
-      transform: translateX(4px);
-      background: rgba(255, 255, 255, 0.06);
-      border-color: var(--cyan);
-    }
-
-    .contact-pill-card.wa-pill:hover {
-      border-color: var(--wa);
-      background: rgba(37, 211, 102, 0.08);
-    }
-
-    .cp-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 0;
-      flex: 1;
-    }
-
-    .cp-icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .cp-meta {
-      display: flex;
-      flex-direction: column;
-      min-width: 0;
-      flex: 1;
-    }
-
-    .cp-label {
-      font-size: 0.7rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--muted);
-    }
-
-    .cp-value {
-      font-size: 0.94rem;
-      font-weight: 700;
-      color: #fff;
-      overflow-wrap: anywhere;
-      word-break: break-word;
-    }
-
-    .cp-arrow {
-      color: var(--muted);
-      flex-shrink: 0;
-      transition: transform 0.25s ease, color 0.25s ease;
-    }
-
-    .contact-pill-card:hover .cp-arrow {
-      transform: translateX(4px);
-      color: #fff;
-    }
-
-    /* CONTATTI */
-    .contact-card {
-      background: linear-gradient(145deg, rgba(16, 24, 46, 0.92), rgba(8, 12, 24, 0.96));
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 28px;
-      padding: 56px;
-      display: grid;
-      grid-template-columns: 1fr 1.15fr;
-      gap: 48px;
-      align-items: center;
-      width: 100%;
-    }
-
-    .contact-info-col {
-      min-width: 0;
-    }
-
-    .form-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      min-width: 0;
-      width: 100%;
-    }
-
-    .row-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      max-width: 100%;
-      background: rgba(5, 8, 17, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 14px;
-      padding: 15px 16px;
-      color: #fff;
-      font-family: inherit;
-      font-size: 16px;
-      outline: none;
-      transition: border-color 0.2s;
-      -webkit-appearance: none;
-    }
-
-    select {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 16px center;
-      padding-right: 42px;
-    }
-
-    input:focus, select:focus, textarea:focus {
-      border-color: var(--cyan);
-    }
-
-    textarea {
-      height: 110px;
-      resize: none;
-    }
-
-    .privacy-box {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.84rem;
-      color: var(--muted);
-    }
-
-    .privacy-box input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
-      padding: 0;
-      border-radius: 4px;
-      -webkit-appearance: auto;
-      accent-color: var(--cyan);
-      flex-shrink: 0;
-    }
-
-    .privacy-box a {
-      color: var(--cyan);
-      text-decoration: none;
-    }
-
-    .btn-send {
-      background: var(--yellow);
-      color: #050811;
-      font-weight: 800;
-      font-size: 1rem;
-      padding: 16px;
-      border: none;
-      border-radius: 99px;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .btn-send:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(250, 204, 21, 0.35);
-    }
-
-    .field-error {
-      border-color: #ef4444 !important;
-    }
-
-    /* FOOTER CENTRATO E PULITO */
-    footer {
-      position: relative;
-      z-index: 1;
-      border-top: 1px solid var(--border);
-      padding: 40px 6% 96px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 20px;
-      color: var(--muted);
-      font-size: 0.88rem;
-    }
-
-    .footer-links {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 22px;
-    }
-
-    footer a {
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    footer a:hover {
-      color: #fff;
-    }
-
-    /* TASTO WHATSAPP VERDE FISSO A DESTRA */
-    .whatsapp-btn {
-      position: fixed;
-      bottom: 22px;
-      right: 22px;
-      z-index: 300;
-      width: 58px;
-      height: 58px;
-      border-radius: 50%;
-      background: var(--wa);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 10px 28px rgba(37, 211, 102, 0.45);
-      text-decoration: none;
-      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s;
-    }
-
-    .whatsapp-btn::after {
-      content: "";
-      position: absolute;
-      inset: -4px;
-      border-radius: 50%;
-      border: 2px solid var(--wa);
-      opacity: 0.65;
-      animation: waPing 2.2s infinite;
-    }
-
-    .whatsapp-btn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 14px 36px rgba(37, 211, 102, 0.6);
-    }
-
-    .whatsapp-btn svg {
-      width: 30px;
-      height: 30px;
-      fill: currentColor;
-    }
-
-    @keyframes waPing {
-      0% { transform: scale(1); opacity: 0.7; }
-      100% { transform: scale(1.4); opacity: 0; }
-    }
-
-    /* TOAST & MODAL */
-    #toast {
-      position: fixed;
-      bottom: 92px;
-      right: 20px;
-      left: 20px;
-      max-width: 380px;
-      margin-left: auto;
-      background: var(--cyan);
-      color: #050811;
-      padding: 14px 20px;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 0.9rem;
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(10px);
-      transition: all 0.3s;
-      z-index: 400;
-    }
-
-    #toast.err {
-      background: #ef4444;
-      color: #fff;
-    }
-
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(5, 8, 17, 0.88);
-      backdrop-filter: blur(10px);
-      z-index: 500;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .modal-overlay.open {
-      display: flex;
-    }
-
-    .modal-box {
-      background: var(--surface-solid);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      max-width: 560px;
-      width: 100%;
-      padding: 32px;
-      position: relative;
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      background: rgba(255, 255, 255, 0.08);
-      border: none;
-      color: #fff;
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      cursor: pointer;
-    }
-
-    /* REVEAL */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 960px) {
-      .hero-container, .works-grid, .plans-grid, .contact-card {
-        grid-template-columns: 1fr;
-      }
-
-      .span-6, .span-4 {
-        grid-column: span 12;
-      }
-
-      .hero-visual {
-        display: none;
-      }
-
-      .contact-card {
-        padding: 32px 22px;
-        gap: 32px;
-      }
-
-      .ba-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .mondino-box {
-        flex-direction: column;
-        text-align: center;
-        align-items: center;
-        padding: 30px 22px;
-      }
-    }
-
-    @media (max-width: 640px) {
-      header {
-        top: 12px;
-        padding: 0 14px;
-      }
-
-      nav {
-        padding: 9px 16px;
-      }
-
-      .nav-links {
-        gap: 0;
-      }
-
-      .nav-links a:not(.nav-cta) {
-        display: none;
-      }
-
-      .row-2 {
-        grid-template-columns: 1fr;
-      }
-
-      section {
-        padding: 76px 18px;
-      }
-
-      .contact-card {
-        padding: 28px 18px;
-        border-radius: 24px;
-      }
-
-      .cp-value {
-        font-size: 0.88rem;
-      }
-
-      footer {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        gap: 16px;
-        padding: 36px 20px 96px;
-      }
-
-      .whatsapp-btn {
-        bottom: 18px;
-        right: 18px;
-        width: 54px;
-        height: 54px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CLIENTO. — Web, Google & Stampa | Fossano e Cuneo</title>
+<meta name="description" content="Noi del team di Cliento progettiamo siti web, visibilità su Google e materiali stampati per le attività locali di Fossano e Cuneo.">
+<meta name="theme-color" content="#02050a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#02050a;--s:#08111c;--s2:#0c1826;--line:rgba(255,255,255,.08);--c:#1fd2ff;--c2:#0a7bff;--t:#fff;--m:#8fa3b8;--wa:#25d366;--e:cubic-bezier(.22,1,.36,1)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;max-width:100%;overflow-x:hidden}
+body{background:var(--bg);color:var(--t);font:400 16px/1.65 'Sora',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--c);outline-offset:3px}
+.i{width:1.25em;height:1.25em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.i.f{fill:currentColor;stroke:none}
+/* sfondo leggero: solo gradienti statici + un layer animato con transform */
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(60% 50% at 15% 0%,rgba(10,123,255,.16),transparent 70%),radial-gradient(50% 40% at 90% 10%,rgba(31,210,255,.12),transparent 70%)}
+.bg::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:64px 64px;-webkit-mask-image:radial-gradient(ellipse 80% 55% at 50% 20%,#000 20%,transparent 80%);mask-image:radial-gradient(ellipse 80% 55% at 50% 20%,#000 20%,transparent 80%)}
+.bg::after{content:"";position:absolute;width:60vmax;height:60vmax;left:-10vmax;top:-30vmax;background:radial-gradient(circle,rgba(31,210,255,.10),transparent 65%);animation:drift 18s ease-in-out infinite alternate;will-change:transform}
+@keyframes drift{to{transform:translate3d(30vw,12vh,0)}}
+.glow{position:fixed;left:0;top:0;width:480px;height:480px;margin:-240px 0 0 -240px;z-index:0;pointer-events:none;background:radial-gradient(circle,rgba(31,210,255,.10),transparent 65%);opacity:0;transition:opacity .4s;will-change:transform}
+#bar{position:fixed;top:0;left:0;height:2px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--c2),var(--c));z-index:200}
+/* nav */
+header{position:fixed;top:14px;left:0;right:0;z-index:100;display:flex;justify-content:center;padding:0 14px}
+nav{width:100%;max-width:1120px;display:flex;align-items:center;justify-content:space-between;padding:9px 12px 9px 22px;background:rgba(5,10,18,.82);border:1px solid var(--line);border-radius:99px;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);transition:box-shadow .3s}
+nav.sc{box-shadow:0 14px 40px rgba(0,0,0,.6),0 0 0 1px rgba(31,210,255,.12)}
+.logo{font-weight:800;font-size:1.25rem;letter-spacing:-.05em}
+.logo b{color:var(--c)}
+.nl{display:flex;align-items:center;gap:30px}
+.nl a{color:var(--m);font-size:.86rem;font-weight:600;transition:color .2s}
+.nl a:hover{color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-weight:800;font-size:.92rem;padding:15px 28px;border-radius:99px;border:0;cursor:pointer;background:linear-gradient(135deg,var(--c),#5fe3ff);color:#02050a!important;box-shadow:0 10px 34px rgba(31,210,255,.28);transition:transform .25s var(--e),box-shadow .25s;position:relative;overflow:hidden}
+.btn::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:shine 4s ease-in-out infinite}
+@keyframes shine{0%,60%{left:-60%}100%{left:130%}}
+.btn:hover{transform:translateY(-3px);box-shadow:0 16px 44px rgba(31,210,255,.5)}
+.btn.sm{padding:10px 20px;font-size:.82rem}
+.btn .i{transition:transform .25s}
+.btn:hover .i{transform:translateX(4px)}
+.ghost{display:inline-flex;align-items:center;font-weight:600;font-size:.92rem;padding:15px 28px;border-radius:99px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.03);transition:border-color .2s,background .2s}
+.ghost:hover{border-color:var(--c);background:rgba(31,210,255,.08)}
+/* hero */
+#hero{position:relative;z-index:1;min-height:94vh;display:flex;align-items:center;padding:130px 6% 70px}
+.hc{max-width:1180px;margin:0 auto;width:100%;display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:9px;padding:7px 16px;border-radius:99px;background:rgba(31,210,255,.08);border:1px solid rgba(31,210,255,.28);color:var(--c);font-size:.8rem;font-weight:600;margin-bottom:26px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--c);box-shadow:0 0 10px var(--c);animation:pl 2s infinite}
+@keyframes pl{50%{opacity:.35;transform:scale(.7)}}
+h1{font-size:clamp(2.3rem,5.2vw,4.4rem);font-weight:800;line-height:1.14;letter-spacing:-.045em;margin-bottom:22px}
+h1 .ln{display:block;overflow:hidden;padding-bottom:.12em;margin-bottom:-.12em}
+h1 .ln>span{display:block;transform:translateY(110%);animation:up .9s var(--e) forwards}
+h1 .ln:nth-child(2)>span{animation-delay:.12s}
+@keyframes up{to{transform:none}}
+#rw{color:var(--c);display:inline-block;transition:opacity .35s,transform .35s;text-shadow:0 0 40px rgba(31,210,255,.45)}
+#rw.o{opacity:0;transform:translateY(10px)}
+.hd{font-size:1.04rem;color:var(--m);max-width:520px;margin-bottom:34px}
+.hd b{color:#fff;font-weight:600}
+.hb{display:flex;gap:14px;flex-wrap:wrap}
+.fade{opacity:0;animation:fi .9s var(--e) .45s forwards}
+.fade.b{animation-delay:.65s}
+@keyframes fi{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+/* hero visual */
+.hv{perspective:1000px;display:flex;justify-content:center}
+.ts{position:relative;width:100%;max-width:440px;height:450px;transform-style:preserve-3d;transition:transform .2s ease-out}
+.fc{position:absolute;border-radius:22px;padding:24px;background:linear-gradient(150deg,rgba(14,28,46,.96),rgba(5,10,18,.98));border:1px solid rgba(31,210,255,.3);box-shadow:0 30px 60px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.06)}
+.fc1{width:350px;top:0;left:0;transform:translateZ(30px)}
+.fc2{width:310px;bottom:0;right:0;transform:translateZ(60px);animation:flo 6s ease-in-out infinite}
+@keyframes flo{50%{translate:0 -10px}}
+.badge{display:inline-flex;font-size:.72rem;font-weight:600;padding:4px 11px;border-radius:99px;background:rgba(31,210,255,.12);color:var(--c);margin-bottom:14px}
+.sp{background:rgba(255,255,255,.06);border-radius:12px;padding:12px 14px;font-size:.86rem;font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:12px;min-height:46px}
+.sp .i{color:var(--c)}
+.cur{display:inline-block;width:2px;height:1em;background:var(--c);vertical-align:-2px;margin-left:2px;animation:bl 1s steps(2) infinite}
+@keyframes bl{50%{opacity:0}}
+.res{display:flex;flex-direction:column;gap:8px}
+.r{padding:10px 12px;border-radius:10px;font-size:.78rem;color:var(--m);background:rgba(255,255,255,.03);display:flex;justify-content:space-between;opacity:.5}
+.r.me{color:#fff;border:1px solid rgba(31,210,255,.45);background:rgba(31,210,255,.08);opacity:0;transform:translateY(8px);transition:all .6s var(--e)}
+.res.on .r.me{opacity:1;transform:none;box-shadow:0 0 28px rgba(31,210,255,.25)}
+.r.me em{font-style:normal;color:var(--c)}
+.fc2 h4{font-size:1.02rem;margin-bottom:6px}
+.fc2 p,.fc1>p{font-size:.84rem;color:var(--m)}
+/* marquee */
+.mq{position:relative;z-index:1;border-block:1px solid var(--line);background:rgba(5,10,18,.7);padding:22px 0;overflow:hidden;display:flex}
+.mg{flex-shrink:0;display:flex;align-items:center;gap:48px;padding-right:48px;animation:mv 26s linear infinite}
+.mq:hover .mg{animation-play-state:paused}
+.mg span{white-space:nowrap;font-weight:600;font-size:1.05rem;color:rgba(255,255,255,.55);display:flex;align-items:center;gap:48px}
+.mg span::after{content:"✦";color:var(--c);font-size:.8rem}
+@keyframes mv{to{transform:translateX(-100%)}}
+/* sezioni */
+section{position:relative;z-index:1;padding:100px 6%;scroll-margin-top:80px;content-visibility:auto;contain-intrinsic-size:auto 700px}
+#hero{content-visibility:visible}
+.ct{max-width:1180px;margin:0 auto}
+.sh{max-width:640px;margin-bottom:52px}
+.k{display:inline-block;font-size:.84rem;font-weight:600;color:var(--c);margin-bottom:12px}
+h2{font-size:clamp(1.9rem,4vw,3.1rem);font-weight:800;line-height:1.12;letter-spacing:-.035em;margin-bottom:14px}
+.ss{color:var(--m)}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .8s var(--e) var(--d,0s),transform .8s var(--e) var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+/* bento */
+.bg2{display:grid;grid-template-columns:repeat(12,1fr);gap:20px}
+.c6{grid-column:span 6}.c4{grid-column:span 4}
+.bc{position:relative;overflow:hidden;background:var(--s);border:1px solid var(--line);border-radius:26px;padding:34px 28px;transition:transform .4s var(--e),border-color .3s}
+.bc::after{content:"";position:absolute;inset:0;background:radial-gradient(360px circle at var(--mx,50%) var(--my,50%),rgba(31,210,255,.16),transparent 65%);opacity:0;transition:opacity .3s;pointer-events:none}
+.bc:hover{transform:translateY(-6px);border-color:rgba(31,210,255,.45)}
+.bc:hover::after{opacity:1}
+.ic{width:52px;height:52px;border-radius:15px;display:flex;align-items:center;justify-content:center;color:var(--c);background:rgba(31,210,255,.08);border:1px solid rgba(31,210,255,.25);margin-bottom:22px;transition:all .4s var(--e)}
+.bc:hover .ic{background:var(--c);color:#02050a;transform:scale(1.08) rotate(-5deg)}
+.bc h3{font-size:1.2rem;margin-bottom:10px;letter-spacing:-.02em}
+.bc p{color:var(--m);font-size:.93rem}
+/* carosello */
+.cs{position:relative;background:var(--s);border:1px solid var(--line);border-radius:28px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 0 1px rgba(31,210,255,.06)}
+.vp{overflow:hidden;touch-action:pan-y;cursor:grab;-webkit-user-select:none;user-select:none}
+.vp.dg{cursor:grabbing}
+.tr{display:flex;will-change:transform;transition:transform .85s var(--e)}
+.vp.dg .tr{transition:none}
+.sl{flex:0 0 100%;min-width:0;display:grid;grid-template-columns:1.1fr .9fr;height:470px}
+.cm{position:relative;overflow:hidden;background:radial-gradient(circle at 50% 45%,#10263c,#03070d 75%);border-right:1px solid var(--line)}
+.cm::before,.cm::after{content:"";position:absolute;left:50%;top:50%;width:300px;height:300px;margin:-150px 0 0 -150px;border-radius:50%;border:1px solid rgba(31,210,255,.4);opacity:0}
+.on .cm::before{animation:rp 3.6s ease-out infinite}
+.on .cm::after{animation:rp 3.6s ease-out 1.8s infinite}
+@keyframes rp{from{transform:scale(.6);opacity:.7}to{transform:scale(1.9);opacity:0}}
+.gn{position:absolute;left:20px;bottom:-12px;font-size:9rem;font-weight:800;line-height:1;color:transparent;-webkit-text-stroke:1px rgba(31,210,255,.25);pointer-events:none;opacity:0;transform:translateX(-40px);transition:all 1s var(--e)}
+.on .gn{opacity:1;transform:none}
+.pic{position:absolute;inset:36px;transform:translate(var(--px,0),var(--py,0));transition:transform .25s ease-out}
+.pic>img,.pic>.ba,.pic>svg{position:absolute;inset:0;width:100%;height:100%;opacity:0;transform:scale(1.15) translateY(24px);-webkit-user-drag:none}
+.pic>img{object-fit:contain;border-radius:12px;filter:drop-shadow(0 22px 38px rgba(0,0,0,.65))}
+.on .pic>*{animation:zi 1.1s var(--e) .1s forwards,fl 6s ease-in-out 1.3s infinite}
+@keyframes zi{to{opacity:1;transform:none}}
+@keyframes fl{50%{translate:0 -10px}}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ba div{display:flex;flex-direction:column;align-items:center;gap:8px;min-height:0;padding:14px;border-radius:16px;background:var(--s2);border:1px solid var(--line);font-size:.72rem;font-weight:600;color:var(--m)}
+.ba div+div{border-color:rgba(31,210,255,.5);color:var(--c);box-shadow:0 0 30px rgba(31,210,255,.15)}
+.ba img{flex:1;height:0;width:100%;object-fit:contain}
+.ci{padding:44px 42px;display:flex;flex-direction:column;justify-content:center}
+.ci>*{opacity:0}
+.on .ci>*{animation:fi .9s var(--e) .25s forwards}
+.on .ci>:nth-child(2){animation-delay:.35s}
+.on .ci>:nth-child(3){animation-delay:.45s}
+.on .ci>:nth-child(4){animation-delay:.55s}
+.cb{width:fit-content;font-size:.76rem;font-weight:600;color:var(--c);background:rgba(31,210,255,.1);border:1px solid rgba(31,210,255,.3);padding:6px 14px;border-radius:99px;margin-bottom:18px}
+.ci h3{font-size:clamp(1.35rem,2.3vw,1.8rem);font-weight:800;line-height:1.2;letter-spacing:-.03em;margin-bottom:14px}
+.ci p{color:var(--m);margin-bottom:22px;font-size:.96rem}
+.ct2{font-size:.84rem;font-weight:600;color:var(--c)}
+.cc{display:flex;align-items:center;gap:18px;padding:18px 24px;border-top:1px solid var(--line);background:rgba(2,5,10,.75)}
+.tabs{display:flex;gap:12px;flex:1;min-width:0}
+.tb{flex:1;min-width:0;padding:0;border:0;background:none;cursor:pointer;text-align:left;color:var(--m);font-size:.78rem;font-weight:600;transition:color .3s}
+.tb:hover,.tb.a{color:#fff}
+.tb i{display:block;height:3px;margin-bottom:9px;border-radius:3px;background:rgba(255,255,255,.14);overflow:hidden}
+.tb i::after{content:"";display:block;height:100%;background:linear-gradient(90deg,var(--c2),var(--c));transform:scaleX(0);transform-origin:0 50%}
+.tb.a i::after{transform:scaleX(var(--p,0))}
+.tb span{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cn{font-size:.9rem;font-weight:600;color:var(--m);white-space:nowrap}
+.cn b{color:var(--c);font-weight:800}
+.ar{display:flex;gap:10px}
+.nb{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .25s}
+.nb:hover{background:var(--c);border-color:var(--c);color:#02050a;transform:scale(1.08)}
+.mb{margin-top:26px;display:flex;align-items:center;justify-content:space-between;gap:28px;padding:34px;border-radius:26px;border:1px solid rgba(31,210,255,.22);background:linear-gradient(135deg,rgba(10,123,255,.12),rgba(31,210,255,.05))}
+.mb h3{font-size:1.45rem;margin-bottom:8px;letter-spacing:-.025em}
+.mb p{color:var(--m);font-size:.94rem;max-width:600px}
+.ml{background:#fff;padding:14px 24px;border-radius:16px;flex-shrink:0;box-shadow:0 14px 34px rgba(0,0,0,.4)}
+.ml img{max-height:56px;max-width:190px;object-fit:contain}
+/* processo */
+.st{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;position:relative}
+.sx{padding:30px 28px;border-radius:24px;border:1px solid var(--line);background:var(--s)}
+.sx b{display:flex;width:40px;height:40px;border-radius:50%;align-items:center;justify-content:center;color:#02050a;background:var(--c);font-weight:800;margin-bottom:18px;box-shadow:0 0 24px rgba(31,210,255,.5)}
+.sx h3{font-size:1.1rem;margin-bottom:8px}
+.sx p{color:var(--m);font-size:.92rem}
+/* pacchetti */
+.pl3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
+.pk{position:relative;display:flex;flex-direction:column;background:var(--s);border:1px solid var(--line);border-radius:26px;padding:36px 28px;transition:transform .4s var(--e),border-color .3s}
+.pk:hover{transform:translateY(-6px);border-color:rgba(31,210,255,.45)}
+.pk.ft{background:linear-gradient(180deg,rgba(31,210,255,.14),var(--s) 70%);border-color:rgba(31,210,255,.6);box-shadow:0 0 60px rgba(31,210,255,.14);animation:gl 4s ease-in-out infinite}
+@keyframes gl{50%{box-shadow:0 0 90px rgba(31,210,255,.26)}}
+.tag{position:absolute;top:-13px;right:24px;background:var(--c);color:#02050a;font-size:.74rem;font-weight:800;padding:5px 14px;border-radius:99px}
+.pi{width:46px;height:46px;border-radius:13px;background:rgba(31,210,255,.08);color:var(--c);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.pk h3{font-size:1.5rem;margin-bottom:8px;letter-spacing:-.03em}
+.pd{color:var(--m);font-size:.92rem;margin-bottom:24px}
+.pk ul{list-style:none;display:flex;flex-direction:column;gap:13px;margin-bottom:30px;flex:1}
+.pk li{display:flex;align-items:center;gap:12px;font-size:.92rem;color:#dbe7f3}
+.pk li .i{color:var(--c)}
+.pb{display:flex;align-items:center;justify-content:center;padding:14px 22px;border-radius:99px;font-weight:700;font-size:.92rem;border:1px solid rgba(255,255,255,.18);transition:all .25s}
+.pb:hover{background:#fff;color:#02050a}
+.ft .pb{background:var(--c);border-color:var(--c);color:#02050a}
+/* contatti */
+.cd{display:grid;grid-template-columns:1fr 1.15fr;gap:48px;align-items:center;padding:52px;border-radius:30px;border:1px solid rgba(31,210,255,.2);background:linear-gradient(150deg,#0a1626,#03070d)}
+.cd>*{min-width:0}
+.cl{display:flex;flex-direction:column;gap:12px;margin-top:24px}
+.cp{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid var(--line);transition:transform .25s var(--e),border-color .25s,background .25s}
+.cp:hover{transform:translateX(5px);border-color:var(--c);background:rgba(31,210,255,.06)}
+.cp.w:hover{border-color:var(--wa);background:rgba(37,211,102,.08)}
+.cpi{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:rgba(31,210,255,.12);color:var(--c)}
+.w .cpi{background:rgba(37,211,102,.14);color:var(--wa)}
+.cpm{display:flex;flex-direction:column;min-width:0;flex:1}
+.cpm small{font-size:.72rem;font-weight:600;color:var(--m)}
+.cpm span{font-size:.92rem;font-weight:700;overflow-wrap:anywhere}
+.fs{display:flex;flex-direction:column;gap:14px}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+input,select,textarea{width:100%;background:rgba(2,5,10,.85);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:15px 16px;color:#fff;font:inherit;font-size:16px;outline:none;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none;appearance:none}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238fa3b8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:42px}
+input:focus,select:focus,textarea:focus{border-color:var(--c);box-shadow:0 0 0 3px rgba(31,210,255,.15)}
+textarea{height:110px;resize:none}
+.pv{display:flex;align-items:center;gap:10px;font-size:.84rem;color:var(--m)}
+.pv input{width:18px;height:18px;padding:0;-webkit-appearance:auto;appearance:auto;accent-color:var(--c);flex-shrink:0}
+.pv a{color:var(--c)}
+.fe{border-color:#ef4444!important}
+footer{position:relative;z-index:1;border-top:1px solid var(--line);padding:40px 6% 96px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;color:var(--m);font-size:.88rem}
+footer nav{all:unset;display:flex;gap:22px;flex-wrap:wrap;justify-content:center}
+footer a:hover{color:#fff}
+.wab{position:fixed;bottom:20px;right:20px;z-index:300;width:58px;height:58px;border-radius:50%;background:var(--wa);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 28px rgba(37,211,102,.45);transition:transform .3s var(--e)}
+.wab::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--wa);animation:pg2 2.2s infinite}
+.wab:hover{transform:scale(1.1)}
+.wab .i{width:30px;height:30px}
+@keyframes pg2{from{transform:scale(1);opacity:.7}to{transform:scale(1.4);opacity:0}}
+#toast{position:fixed;bottom:92px;right:20px;left:20px;max-width:380px;margin-left:auto;background:var(--c);color:#02050a;padding:14px 20px;border-radius:12px;font-weight:700;font-size:.9rem;opacity:0;pointer-events:none;transform:translateY(10px);transition:all .3s;z-index:400}
+#toast.err{background:#ef4444;color:#fff}
+.mo{display:none;position:fixed;inset:0;background:rgba(2,5,10,.9);z-index:500;align-items:center;justify-content:center;padding:20px}
+.mo.open{display:flex}
+.mx{background:var(--s);border:1px solid var(--line);border-radius:24px;max-width:560px;width:100%;padding:32px;position:relative}
+.mx button{position:absolute;top:16px;right:16px;width:34px;height:34px;border-radius:50%;border:0;cursor:pointer;background:rgba(255,255,255,.08)}
+@media(max-width:960px){
+.hc,.cd,.pl3,.st{grid-template-columns:1fr}
+.c6,.c4{grid-column:span 12}
+.hv{margin-top:12px}.ts{height:450px}
+.sl{grid-template-columns:1fr;height:auto}
+.cm{height:270px;border-right:0;border-bottom:1px solid var(--line)}
+.pic{inset:24px}
+.gn{font-size:6rem}
+.ci{padding:26px 22px 30px}
+.cc{padding:14px 16px;gap:12px}
+.cd{padding:30px 20px;gap:30px}
+.mb{flex-direction:column;text-align:center;padding:28px 20px}
+}
+@media(max-width:640px){
+.nl a:not(.btn){display:none}
+.tb span,.cn{display:none}
+section{padding:70px 18px}
+#hero{padding:112px 18px 50px;min-height:auto}
+.r2{grid-template-columns:1fr}
+.ts{height:auto;display:flex;flex-direction:column;gap:14px;transform:none!important}
+.fc{position:relative;width:100%!important;transform:none}
+.fc2{animation:none}
+footer{flex-direction:column;text-align:center;padding:36px 20px 96px}
+.glow{display:none}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.01ms!important}h1 .ln>span{transform:none}.fade,.rv,.ci>*{opacity:1;transform:none}.pic>*{opacity:1;transform:none}}
+</style>
 </head>
-
 <body>
-  <!-- SFONDO DINAMICO -->
-  <div class="bg-canvas">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="bg-grid"></div>
-  </div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="ar" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+<symbol id="ok" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+<symbol id="mon" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></symbol>
+<symbol id="pin" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+<symbol id="ig" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></symbol>
+<symbol id="pen" viewBox="0 0 24 24"><path d="m12 19 7-7 3 3-7 7zM18 13l-1.5-7.5L2 2l3.5 14.5L13 18z"/><circle cx="11" cy="11" r="2"/></symbol>
+<symbol id="prn" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></symbol>
+<symbol id="bolt" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></symbol>
+<symbol id="tr" viewBox="0 0 24 24"><path d="m23 6-9.5 9.5-5-5L1 18M17 6h6v6"/></symbol>
+<symbol id="lay" viewBox="0 0 24 24"><path d="m12 2 10 5-10 5L2 7zM2 17l10 5 10-5M2 12l10 5 10-5"/></symbol>
+<symbol id="se" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></symbol>
+<symbol id="ml" viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="m22 6-10 7L2 6"/></symbol>
+<symbol id="cl" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+<symbol id="cr" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+<symbol id="wa" viewBox="0 0 32 32"><path d="M16 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.25.59 4.45 1.71 6.39L3.1 28.8l6.58-1.72c1.88 1.02 4.01 1.56 6.32 1.56h.01c7.06 0 12.8-5.74 12.8-12.8 0-3.42-1.33-6.64-3.75-9.05A12.71 12.71 0 0 0 16 3.2zm0 23.28h-.01c-1.91 0-3.78-.51-5.42-1.48l-.39-.23-3.9 1.02 1.04-3.8-.25-.4a10.6 10.6 0 0 1-1.63-5.63c0-5.87 4.78-10.65 10.66-10.65 2.85 0 5.52 1.11 7.53 3.12a10.58 10.58 0 0 1 3.12 7.53c0 5.88-4.78 10.66-10.65 10.66zm5.84-7.98c-.32-.16-1.89-.93-2.19-1.04-.29-.11-.51-.16-.72.16-.21.32-.83 1.04-1.01 1.25-.19.21-.37.24-.69.08-.32-.16-1.35-.5-2.57-1.59-.95-.85-1.59-1.89-1.78-2.21-.19-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.19.21-.32.32-.53.11-.21.05-.4-.03-.56-.08-.16-.72-1.73-.99-2.37-.26-.62-.52-.54-.72-.55h-.61c-.21 0-.56.08-.85.4-.29.32-1.12 1.09-1.12 2.66s1.15 3.09 1.31 3.3c.16.21 2.26 3.45 5.47 4.84.76.33 1.36.53 1.82.67.77.24 1.47.21 2.02.13.62-.09 1.89-.77 2.16-1.52.27-.75.27-1.39.19-1.52-.08-.13-.29-.21-.61-.37z"/></symbol>
+</svg>
+<div id="bar"></div>
+<div class="bg"></div>
+<div class="glow" id="glow"></div>
 
-  <!-- NAVBAR FLOATING -->
-  <header>
-    <nav>
-      <a href="#" class="logo">CLIENTO<span>.</span></a>
-      <div class="nav-links">
-        <a href="#servizi">Servizi</a>
-        <a href="#lavori">Lavori</a>
-        <a href="#pacchetti">Pacchetti</a>
-        <a href="#contatti" class="nav-cta">Inizia ora</a>
-      </div>
-    </nav>
-  </header>
+<header>
+<nav id="nav">
+<a href="#" class="logo">CLIENTO<b>.</b></a>
+<div class="nl">
+<a href="#servizi">Servizi</a><a href="#lavori">Lavori</a><a href="#pacchetti">Pacchetti</a>
+<a href="#contatti" class="btn sm">Inizia ora</a>
+</div>
+</nav>
+</header>
 
-  <!-- HERO SPLIT CON CARD 3D -->
-  <section id="hero">
-    <div class="hero-container">
-      <div>
-        <div class="location-pill">
-          <span class="pulse-dot"></span>
-          Fossano & Cuneo • Digitale e Stampa
-        </div>
-        <h1>
-          Più clienti per<br>
-          la tua <span class="dynamic-word" id="rotatingWord">attività locale.</span>
-        </h1>
-        <p class="hero-desc">
-          <strong>Noi del team di Cliento</strong> progettiamo siti web veloci, presenza su Google e materiali stampati coordinati. Un unico referente per far crescere il tuo lavoro.
-        </p>
-        <div class="hero-btns">
-          <a href="#contatti" class="btn-primary">
-            Richiedi analisi gratuita
-            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-          </a>
-          <a href="#lavori" class="btn-glass">Esplora i lavori</a>
-        </div>
-      </div>
+<section id="hero">
+<div class="hc">
+<div>
+<div class="pill fade"><span class="dot"></span>Fossano &amp; Cuneo · Digitale e stampa</div>
+<h1><span class="ln"><span>Più clienti per</span></span><span class="ln"><span>la tua <em id="rw" style="font-style:normal">attività locale.</em></span></span></h1>
+<p class="hd fade"><b>Noi del team di Cliento</b> progettiamo siti web veloci, presenza su Google e materiali stampati coordinati. Un unico referente per far crescere il tuo lavoro.</p>
+<div class="hb fade b">
+<a href="#contatti" class="btn mag">Richiedi analisi gratuita <svg class="i"><use href="#ar"/></svg></a>
+<a href="#lavori" class="ghost">Esplora i lavori</a>
+</div>
+</div>
+<div class="hv fade b">
+<div class="ts" id="ts">
+<div class="fc fc1">
+<span class="badge">Online &amp; Google</span>
+<div class="sp"><svg class="i"><use href="#se"/></svg><span id="ty"></span><i class="cur"></i></div>
+<div class="res" id="res">
+<div class="r me"><span>La tua attività</span><em>★★★★★ 1°</em></div>
+<div class="r"><span>Concorrente</span><span>★★★</span></div>
+<div class="r"><span>Altro locale</span><span>★★★★</span></div>
+</div>
+</div>
+<div class="fc fc2">
+<span class="badge">Stampa &amp; Brand</span>
+<h4>Tipolitografia Mondino</h4>
+<p>Biglietti, menù, cartellini prodotto e cataloghi coordinati al tuo sito.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
 
-      <!-- MOCKUP INTERATTIVO 3D -->
-      <div class="hero-visual">
-        <div class="tilt-stack" id="tiltStack">
-          <div class="float-card fc-top">
-            <div class="fc-header">
-              <span class="fc-badge" style="background:rgba(0,212,255,0.15); color:var(--cyan);">Online & Google</span>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            </div>
-            <div class="search-pill">
-              <span>La tua attività • Fossano</span>
-              <span style="color:var(--yellow);">★★★★★</span>
-            </div>
-            <p style="font-size:0.86rem; color:var(--muted);">Sito mobile-first, scheda Maps ottimizzata e contatti diretti su WhatsApp.</p>
-          </div>
+<div class="mq" aria-label="Alcuni clienti"><div class="mg"><span>Oro Bianco</span><span>A Picciridda</span><span>I Sapori di Una Volta</span><span>Tipolitografia Mondino</span><span>Oro Bianco</span><span>A Picciridda</span><span>I Sapori di Una Volta</span><span>Tipolitografia Mondino</span></div></div>
 
-          <div class="float-card fc-bottom">
-            <div class="fc-header">
-              <span class="fc-badge" style="background:rgba(250,204,21,0.15); color:var(--yellow);">Stampa & Brand</span>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--yellow)" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
-            </div>
-            <h4 style="font-size:1.05rem; margin-bottom:6px;">Tipolitografia Mondino</h4>
-            <p style="font-size:0.85rem; color:var(--muted);">Biglietti, menù, cartellini prodotto e cataloghi coordinati al tuo sito.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<section id="servizi">
+<div class="ct">
+<div class="sh rv"><span class="k">Competenze</span><h2>Tutto ciò che serve per farti scegliere.</h2><p class="ss">Uniamo digitale e stampa in un sistema semplice, pensato per portare persone vere nella tua attività.</p></div>
+<div class="bg2">
+<div class="bc c6 rv"><div class="ic"><svg class="i"><use href="#mon"/></svg></div><h3>Siti web ad alta conversione</h3><p>Veloci, moderni e progettati prima di tutto per smartphone. Costruiti per trasformare chi visita la pagina in una chiamata o un messaggio WhatsApp.</p></div>
+<div class="bc c6 rv" style="--d:.08s"><div class="ic"><svg class="i"><use href="#pin"/></svg></div><h3>Visibilità su Google &amp; Maps</h3><p>Ottimizziamo la tua scheda Google Business per farti trovare per primo quando qualcuno cerca la tua attività a Fossano, Cuneo e dintorni.</p></div>
+<div class="bc c4 rv"><div class="ic"><svg class="i"><use href="#ig"/></svg></div><h3>Instagram locale</h3><p>Contenuti mirati, caroselli e Reel studiati per portare clienti reali in negozio.</p></div>
+<div class="bc c4 rv" style="--d:.08s"><div class="ic"><svg class="i"><use href="#pen"/></svg></div><h3>Logo &amp; identità</h3><p>Creiamo o rinnoviamo il tuo marchio affinché sia riconoscibile ovunque.</p></div>
+<div class="bc c4 rv" style="--d:.16s"><div class="ic"><svg class="i"><use href="#prn"/></svg></div><h3>Stampa con Mondino</h3><p>Biglietti, menù, cartellini e cataloghi stampati con qualità professionale.</p></div>
+</div>
+</div>
+</section>
 
-  <!-- MARQUEE CLIENTI CONTINUO SENZA SPAZI VUOTI -->
-  <div class="marquee-wrap">
-    <div class="marquee-group">
-      <div class="brand-pill">Oro Bianco <span class="brand-star">✦</span></div>
-      <div class="brand-pill">A Picciridda <span class="brand-star">✦</span></div>
-      <div class="brand-pill">I Sapori di Una Volta <span class="brand-star">✦</span></div>
-      <div class="brand-pill">Tipolitografia Mondino <span class="brand-star">✦</span></div>
-      <div class="brand-pill">Oro Bianco <span class="brand-star">✦</span></div>
-      <div class="brand-pill">A Picciridda <span class="brand-star">✦</span></div>
-      <div class="brand-pill">I Sapori di Una Volta <span class="brand-star">✦</span></div>
-      <div class="brand-pill">Tipolitografia Mondino <span class="brand-star">✦</span></div>
-    </div>
-    <div class="marquee-group" aria-hidden="true">
-      <div class="brand-pill">Oro Bianco <span class="brand-star">✦</span></div>
-      <div class="brand-pill">A Picciridda <span class="brand-star">✦</span></div>
-      <div class="brand-pill">I Sapori di Una Volta <span class="brand-star">✦</span></div>
-      <div class="brand-pill">Tipolitografia Mondino <span class="brand-star">✦</span></div>
-      <div class="brand-pill">Oro Bianco <span class="brand-star">✦</span></div>
-      <div class="brand-pill">A Picciridda <span class="brand-star">✦</span></div>
-      <div class="brand-pill">I Sapori di Una Volta <span class="brand-star">✦</span></div>
-      <div class="brand-pill">Tipolitografia Mondino <span class="brand-star">✦</span></div>
-    </div>
-  </div>
+<section id="lavori">
+<div class="ct">
+<div class="sh rv"><span class="k">Lavori</span><h2>Progetti che si vedono e si toccano.</h2><p class="ss">Scorri, trascina o usa le frecce: ogni lavoro nasce per un'attività reale del territorio.</p></div>
+<div class="cs rv" id="cs">
+<div class="vp" id="vp"><div class="tr" id="tr">
+<div class="sl"><div class="cm"><span class="gn">01</span><div class="pic"><img src="CaciottaCuoreMorbido.png" alt="Cartellino con spago Caciotta Cuore Morbido — Oro Bianco" decoding="async" draggable="false"></div></div><div class="ci"><span class="cb">Packaging &amp; dettagli artigianali</span><h3>Cartellino con spago — Caciotta Cuore Morbido</h3><p>Il dettaglio che fa la differenza al banco: cartellini sagomati e legati a mano con spago naturale, per raccontare l'artigianalità del prodotto prima ancora dell'assaggio.</p><div class="ct2">✦ Progetto realizzato per Oro Bianco</div></div></div>
+<div class="sl"><div class="cm"><span class="gn">02</span><div class="pic"><img src="oroBiancoStand.png" alt="Espositore da banco formato A5 — Oro Bianco" decoding="async" draggable="false"></div></div><div class="ci"><span class="cb">Espositori punto vendita · A5</span><h3>Stand da banco — Oro Bianco</h3><p>Espositore formato A5 progettato per catturare lo sguardo dei clienti al bancone, valorizzare l'identità del caseificio e comunicare qualità immediata.</p><div class="ct2">✦ Stampa professionale con Tipolitografia Mondino</div></div></div>
+<div class="sl"><div class="cm"><span class="gn">03</span><div class="pic"><div class="ba"><div>PRIMA<img src="LogoVecchio.JPG" alt="Logo precedente I Sapori di Una Volta" style="opacity:.6" loading="lazy" decoding="async" draggable="false"></div><div>DOPO<img src="LogoNuovo.PNG" alt="Nuovo logo I Sapori di Una Volta" loading="lazy" decoding="async" draggable="false"></div></div></div></div><div class="ci"><span class="cb">Restyling brand identity</span><h3>Nuova identità — I Sapori di Una Volta</h3><p>Rinnovamento completo del marchio per una storica realtà di eccellenze gastronomiche a Fossano: linee pulite, leggibilità immediata su etichette, insegne e social.</p><div class="ct2">✦ Rebranding completo · Fossano</div></div></div>
+<div class="sl"><div class="cm"><span class="gn">04</span><div class="pic"><img src="CatalogoPasta.png" alt="Catalogo prodotti gastronomici" loading="lazy" decoding="async" draggable="false"></div></div><div class="ci"><span class="cb">Cataloghi &amp; listini</span><h3>Catalogo prodotti &amp; listini sfogliabili</h3><p>Impaginazione chiara e invitante per presentare ogni specialità con descrizioni curate, ingredienti e formati disponibili, su carta e su smartphone.</p><div class="ct2">✦ Grafica editoriale &amp; digitale</div></div></div>
+<div class="sl"><div class="cm"><span class="gn">05</span><div class="pic"><svg viewBox="0 0 300 190" role="img" aria-label="Fidelity card su misura" style="filter:drop-shadow(0 22px 38px rgba(0,0,0,.65))"><rect width="300" height="190" rx="12" fill="#e8e2d5"/><text x="150" y="44" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0b0f19">I SAPORI DI UNA VOLTA</text><text x="150" y="60" text-anchor="middle" font-family="sans-serif" font-size="7" fill="#475569">1 punto ogni 15€ • 5€ di sconto al completamento</text><g fill="none" stroke="#0b0f19"><rect x="22" y="72" width="256" height="92" rx="6" stroke-width="1.2"/><path stroke-width=".6" d="M73 72v92M124 72v92M175 72v92M226 72v92M22 118h256"/></g></svg></div></div><div class="ci"><span class="cb">Fidelizzazione clienti</span><h3>Fidelity card su misura</h3><p>Carte fedeltà progettate per trasformare chi entra una volta in un cliente abituale, stampate su cartoncino ad alto spessore con Tipolitografia Mondino.</p><div class="ct2">✦ Strategia di ritorno in negozio</div></div></div>
+</div></div>
+<div class="cc">
+<div class="tabs" id="tabs"><button type="button" class="tb" aria-label="Vai al lavoro 1"><i></i><span>Cartellino</span></button><button type="button" class="tb" aria-label="Vai al lavoro 2"><i></i><span>Stand A5</span></button><button type="button" class="tb" aria-label="Vai al lavoro 3"><i></i><span>Rebranding</span></button><button type="button" class="tb" aria-label="Vai al lavoro 4"><i></i><span>Catalogo</span></button><button type="button" class="tb" aria-label="Vai al lavoro 5"><i></i><span>Fidelity card</span></button></div>
+<div class="cn"><b id="cn">01</b> / 05</div>
+<div class="ar"><button type="button" class="nb" id="pv" aria-label="Lavoro precedente"><svg class="i"><use href="#cl"/></svg></button><button type="button" class="nb" id="nx" aria-label="Lavoro successivo"><svg class="i"><use href="#cr"/></svg></button></div>
+</div>
+</div>
+<div class="mb rv">
+<div><span class="k">Partnership tipografica</span><h3>Dal digitale alla carta con Tipolitografia Mondino</h3><p>Collaboriamo con la storica tipolitografia di Fossano per consegnarti biglietti da visita, menù, cartellini e locandine già pronti.</p></div>
+<div class="ml"><img src="LogoTipografia.png" alt="Tipolitografia Mondino" loading="lazy" decoding="async"></div>
+</div>
+</div>
+</section>
 
-  <!-- BENTO SERVIZI -->
-  <section id="servizi">
-    <div class="container">
-      <div class="sec-head reveal">
-        <span class="kicker">Competenze</span>
-        <h2>Tutto ciò che serve per farti scegliere.</h2>
-        <p class="sec-sub">Uniamo digitale e stampa in un sistema semplice, pensato per portare persone vere nella tua attività.</p>
-      </div>
+<section id="metodo" style="padding-top:20px">
+<div class="ct">
+<div class="sh rv"><span class="k">Come lavoriamo</span><h2>Dall'idea al primo cliente in tre passi.</h2></div>
+<div class="st">
+<div class="sx rv"><b>1</b><h3>Analisi gratuita</h3><p>Guardiamo come ti trovano oggi online e cosa manca per farti scegliere.</p></div>
+<div class="sx rv" style="--d:.1s"><b>2</b><h3>Progetto su misura</h3><p>Sito, Google e grafiche stampate nascono insieme, con lo stesso stile.</p></div>
+<div class="sx rv" style="--d:.2s"><b>3</b><h3>Online e in stampa</h3><p>Pubblichiamo tutto e ti seguiamo, così continui a ricevere contatti.</p></div>
+</div>
+</div>
+</section>
 
-      <div class="bento-services">
-        <div class="b-card span-6 reveal">
-          <div class="svg-icon">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-          </div>
-          <h3>Siti Web ad Alta Conversione</h3>
-          <p>Veloci, moderni e progettati prima di tutto per smartphone. Costruiti per trasformare chi visita la pagina in una chiamata o un messaggio WhatsApp.</p>
-        </div>
+<section id="pacchetti" style="padding-top:20px">
+<div class="ct">
+<div class="sh rv"><span class="k">Soluzioni</span><h2>Tre percorsi su misura.</h2><p class="ss">Scegli la base più adatta al momento attuale della tua attività.</p></div>
+<div class="pl3">
+<div class="pk rv"><div class="pi"><svg class="i"><use href="#bolt"/></svg></div><h3>Start</h3><p class="pd">Per mettere in ordine le basi ed essere trovati subito su Google.</p>
+<ul><li><svg class="i"><use href="#ok"/></svg>Sito web vetrina</li><li><svg class="i"><use href="#ok"/></svg>Scheda Google Business</li><li><svg class="i"><use href="#ok"/></svg>Contatto diretto WhatsApp</li><li><svg class="i"><use href="#ok"/></svg>Messa online completa</li></ul>
+<a href="#contatti" class="pb" data-pk="Pacchetto START">Valuta Start</a></div>
+<div class="pk ft rv" style="--d:.1s"><span class="tag">Più scelto</span><div class="pi"><svg class="i"><use href="#tr"/></svg></div><h3>Growth</h3><p class="pd">Il sistema completo per attrarre nuovi clienti ogni mese.</p>
+<ul><li><svg class="i"><use href="#ok"/></svg>Tutto il pacchetto Start</li><li><svg class="i"><use href="#ok"/></svg>Gestione brand identity</li><li><svg class="i"><use href="#ok"/></svg>Supporto 7/7</li><li><svg class="i"><use href="#ok"/></svg>Report mensile</li></ul>
+<a href="#contatti" class="pb" data-pk="Pacchetto GROWTH">Valuta Growth</a></div>
+<div class="pk rv" style="--d:.2s"><div class="pi"><svg class="i"><use href="#lay"/></svg></div><h3>Brand &amp; Offline</h3><p class="pd">Immagine coordinata e stampa per distinguerti dal vivo.</p>
+<ul><li><svg class="i"><use href="#ok"/></svg>Assistenza prioritaria</li><li><svg class="i"><use href="#ok"/></svg>Biglietti, stampe e marketing</li><li><svg class="i"><use href="#ok"/></svg>Grafiche coordinate social</li><li><svg class="i"><use href="#ok"/></svg>Nuovo logo o restyling</li></ul>
+<a href="#contatti" class="pb" data-pk="Pacchetto BRAND & OFFLINE">Valuta Brand &amp; Offline</a></div>
+</div>
+</div>
+</section>
 
-        <div class="b-card span-6 reveal">
-          <div class="svg-icon">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-          </div>
-          <h3>Visibilità su Google & Maps</h3>
-          <p>Ottimizziamo la tua scheda Google Business per farti trovare per primo quando qualcuno cerca la tua attività a Fossano, Cuneo e dintorni.</p>
-        </div>
+<section id="contatti" style="padding-top:20px">
+<div class="ct">
+<div class="cd rv">
+<div>
+<span class="k">Contatti</span>
+<h2 style="font-size:clamp(1.8rem,3.4vw,2.7rem)">Parliamo della tua attività.</h2>
+<p class="ss">Compila il modulo per inviarci i dettagli direttamente su WhatsApp oppure scegli uno dei canali qui sotto.</p>
+<div class="cl">
+<a href="https://wa.me/393459727648?text=Ciao%20Cliento!%20Vorrei%20richiedere%20un'analisi%20gratuita%20per%20la%20mia%20attivit%C3%A0." class="cp w" target="_blank" rel="noopener noreferrer"><div class="cpi"><svg class="i f"><use href="#wa"/></svg></div><div class="cpm"><small>Scrivici su WhatsApp</small><span>345 972 7648</span></div><svg class="i"><use href="#ar"/></svg></a>
+<a href="https://mail.google.com/mail/?view=cm&fs=1&to=clientostudio26@gmail.com&su=Richiesta%20informazioni%20%E2%80%94%20Cliento" class="cp" id="mail" target="_blank" rel="noopener noreferrer"><div class="cpi"><svg class="i"><use href="#ml"/></svg></div><div class="cpm"><small>Invia una email (si copia anche l'indirizzo)</small><span>clientostudio26@gmail.com</span></div><svg class="i"><use href="#ar"/></svg></a>
+</div>
+</div>
+<form id="cf" class="fs" novalidate>
+<div class="r2"><input type="text" id="nome" placeholder="Il tuo nome *" autocomplete="name" required><input type="text" id="attivita" placeholder="Attività (es. Pizzeria)"></div>
+<div class="r2"><input type="email" id="email" placeholder="La tua email *" autocomplete="email" required><input type="tel" id="telefono" placeholder="Telefono (opzionale)" autocomplete="tel"></div>
+<select id="servizio"><option value="" disabled selected>Cosa ti interessa?</option><option value="Pacchetto START">Pacchetto Start</option><option value="Pacchetto GROWTH">Pacchetto Growth</option><option value="Pacchetto BRAND & OFFLINE">Pacchetto Brand &amp; Offline</option><option value="Analisi Gratuita">Analisi gratuita presenza online</option></select>
+<textarea id="messaggio" placeholder="Scrivi qui un breve messaggio (opzionale)..."></textarea>
+<label class="pv"><input type="checkbox" id="privacy" required><span>Accetto la <a href="#" id="pp">Privacy Policy</a></span></label>
+<button type="submit" class="btn" style="width:100%">Invia la tua richiesta <svg class="i"><use href="#ar"/></svg></button>
+</form>
+</div>
+</div>
+</section>
 
-        <div class="b-card span-4 reveal">
-          <div class="svg-icon">
-            <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-          </div>
-          <h3>Instagram Locale</h3>
-          <p>Contenuti mirati, caroselli e Reel studiati per portare clienti reali in negozio.</p>
-        </div>
+<footer>
+<div><strong>CLIENTO.</strong> — Fossano &amp; Cuneo</div>
+<nav><a href="#servizi">Servizi</a><a href="#lavori">Lavori</a><a href="#pacchetti">Pacchetti</a><a href="#" id="pp2">Privacy</a></nav>
+<div>© 2026 Cliento</div>
+</footer>
 
-        <div class="b-card span-4 reveal">
-          <div class="svg-icon">
-            <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><circle cx="11" cy="11" r="2"></circle></svg>
-          </div>
-          <h3>Logo & Identità</h3>
-          <p>Creiamo o rinnoviamo il tuo marchio affinché sia riconoscibile ovunque.</p>
-        </div>
+<a href="https://wa.me/393459727648?text=Ciao%20Cliento!%20Vorrei%20richiedere%20un'analisi%20gratuita%20per%20la%20mia%20attivit%C3%A0." class="wab" target="_blank" rel="noopener noreferrer" aria-label="Contattaci su WhatsApp"><svg class="i f"><use href="#wa"/></svg></a>
+<div id="toast" role="status"></div>
+<div class="mo" id="mo"><div class="mx"><button type="button" id="mc" aria-label="Chiudi">✕</button><h3 style="margin-bottom:14px">Privacy Policy</h3><p style="color:var(--m);font-size:.9rem;line-height:1.7"><strong style="color:#fff">Titolare:</strong> Cliento — Fossano (CN) · clientostudio26@gmail.com<br><br>I dati inseriti nel modulo vengono utilizzati esclusivamente per rispondere alla tua richiesta. Puoi chiederne la cancellazione in qualsiasi momento scrivendo alla nostra email.</p></div></div>
 
-        <div class="b-card span-4 reveal">
-          <div class="svg-icon">
-            <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
-          </div>
-          <h3>Stampa con Mondino</h3>
-          <p>Biglietti, menù, cartellini e cataloghi stampati con qualità professionale.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="carousel-shell reveal" id="portfolioCarousel">
-        <div class="carousel-progress" id="carouselProgress"></div>
-
-        <div class="carousel-viewport" id="carouselViewport">
-          <div class="carousel-track" id="carouselTrack">
-
-            <!-- SLIDE 1: ORO BIANCO CARTELLINO CON SPAGO -->
-            <div class="c-slide">
-              <div class="c-media">
-                <img src="CaciottaCuoreMorbido.png" alt="Cartellino con spago Caciotta Cuore Morbido — Oro Bianco">
-              </div>
-              <div class="c-info">
-                <span class="c-badge">Packaging & Dettagli Artigianali</span>
-                <h3>Cartellino con Spago — Caciotta Cuore Morbido</h3>
-                <p>Il dettaglio che fa la differenza al banco: cartellini sagomati e legati a mano con spago naturale per raccontare l'artigianalità del prodotto prima ancora dell'assaggio.</p>
-                <div class="c-client-tag">✦ Progetto realizzato per Oro Bianco</div>
-              </div>
-            </div>
-
-            <!-- SLIDE 2: ORO BIANCO STAND DA BANCO A5 -->
-            <div class="c-slide">
-              <div class="c-media">
-                <img src="oroBiancoStand.png" alt="Espositore da banco formato A5 — Oro Bianco">
-              </div>
-              <div class="c-info">
-                <span class="c-badge">Espositori Punto Vendita • A5</span>
-                <h3>Stand da Banco — Oro Bianco</h3>
-                <p>Espositore formato A5 progettato per catturare lo sguardo dei clienti al bancone, valorizzare l'identità del caseificio e comunicare qualità immediata.</p>
-                <div class="c-client-tag">✦ Stampa professionale con Tipolitografia Mondino</div>
-              </div>
-            </div>
-
-            <!-- SLIDE 3: RESTYLING I SAPORI DI UNA VOLTA -->
-            <div class="c-slide">
-              <div class="c-media">
-                <div class="ba-grid">
-                  <div class="ba-item">
-                    <span style="font-size:0.72rem; color:var(--muted); font-weight:700; letter-spacing:0.1em;">PRIMA</span>
-                    <img src="LogoVecchio.JPG" alt="Logo precedente I Sapori di Una Volta" style="opacity:0.6;">
-                  </div>
-                  <div class="ba-item" style="border-color: rgba(0, 212, 255, 0.4);">
-                    <span style="font-size:0.72rem; color:var(--cyan); font-weight:700; letter-spacing:0.1em;">DOPO</span>
-                    <img src="LogoNuovo.PNG" alt="Nuovo Logo I Sapori di Una Volta">
-                  </div>
-                </div>
-              </div>
-              <div class="c-info">
-                <span class="c-badge">Restyling Brand Identity</span>
-                <h3>Nuova Identità — I Sapori di Una Volta</h3>
-                <p>Rinnovamento completo del marchio per una storica realtà di eccellenze gastronomiche a Fossano: linee pulite, leggibilità immediata su etichette, insegne e social.</p>
-                <div class="c-client-tag">✦ Rebranding completo • Fossano</div>
-              </div>
-            </div>
-
-            <!-- SLIDE 4: CATALOGO PRODOTTI -->
-            <div class="c-slide">
-              <div class="c-media">
-                <img src="CatalogoPasta.png" alt="Catalogo prodotti gastronomici">
-              </div>
-              <div class="c-info">
-                <span class="c-badge">Cataloghi & Listini</span>
-                <h3>Catalogo Prodotti & Listini Sfogliabili</h3>
-                <p>Impaginazione chiara e invitante per presentare ogni specialità con descrizioni curate, ingredienti e formati disponibili sia su carta che su smartphone.</p>
-                <div class="c-client-tag">✦ Grafica editoriale & digitale</div>
-              </div>
-            </div>
-
-            <!-- SLIDE 5: FIDELITY CARD -->
-            <div class="c-slide">
-              <div class="c-media">
-                <img
-                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='200' viewBox='0 0 300 190'%3E%3Crect width='300' height='190' rx='12' fill='%23e8e2d5'/%3E%3Ctext x='150' y='44' text-anchor='middle' font-family='sans-serif' font-size='11' font-weight='bold' fill='%230b0f19'%3EI SAPORI DI UNA VOLTA%3C/text%3E%3Ctext x='150' y='60' text-anchor='middle' font-family='sans-serif' font-size='7' fill='%23475569'%3E1 punto ogni 15%E2%82%AC %E2%80%A2 5%E2%82%AC sconto al completamento%3C/text%3E%3Crect x='22' y='72' width='256' height='92' rx='6' fill='none' stroke='%230b0f19' stroke-width='1.2'/%3E%3Cline x1='73' y1='72' x2='73' y2='164' stroke='%230b0f19' stroke-width='0.6'/%3E%3Cline x1='124' y1='72' x2='124' y2='164' stroke='%230b0f19' stroke-width='0.6'/%3E%3Cline x1='175' y1='72' x2='175' y2='164' stroke='%230b0f19' stroke-width='0.6'/%3E%3Cline x1='226' y1='72' x2='226' y2='164' stroke='%230b0f19' stroke-width='0.6'/%3E%3Cline x1='22' y1='118' x2='278' y2='118' stroke='%230b0f19' stroke-width='0.6'/%3E%3C/svg%3E"
-                  alt="Fidelity Card su misura">
-              </div>
-              <div class="c-info">
-                <span class="c-badge">Fidelizzazione Clienti</span>
-                <h3>Fidelity Card Su Misura</h3>
-                <p>Carte fedeltà progettate per trasformare chi entra una volta in un cliente abituale, stampate su cartoncino ad alto spessore con Tipolitografia Mondino.</p>
-                <div class="c-client-tag">✦ Strategia di ritorno in negozio</div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- CONTROLLI CAROSELLO -->
-        <div class="carousel-controls">
-          <div class="c-dots" id="carouselDots"></div>
-          <div class="c-arrows">
-            <button type="button" class="c-nav-btn" id="prevSlide" aria-label="Lavoro precedente">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-            </button>
-            <button type="button" class="c-nav-btn" id="nextSlide" aria-label="Lavoro successivo">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- PARTNER MONDINO -->
-      <div class="mondino-box reveal">
-        <div style="max-width: 620px;">
-          <span class="kicker" style="margin-bottom:6px;">Partnership Tipografica</span>
-          <h3 style="font-size:1.55rem; margin-bottom:8px;">Dal digitale alla carta con Tipolitografia Mondino</h3>
-          <p style="color:var(--muted); font-size:0.96rem;">Collaboriamo con la storica tipolitografia di Fossano per consegnarti biglietti da visita, menù, cartellini e locandine già pronti.</p>
-        </div>
-        <div class="mondino-logo-wrap">
-          <img src="LogoTipografia.png" alt="Tipolitografia Mondino">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PACCHETTI -->
-  <section id="pacchetti" style="padding-top: 20px;">
-    <div class="container">
-      <div class="sec-head reveal">
-        <span class="kicker">Soluzioni</span>
-        <h2>Tre percorsi su misura.</h2>
-        <p class="sec-sub">Scegli la base più adatta al momento attuale della tua attività.</p>
-      </div>
-
-      <div class="plans-grid">
-        <div class="plan reveal">
-          <div class="plan-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-          </div>
-          <h3>Start</h3>
-          <p class="plan-lead">Per mettere in ordine le basi ed essere trovati subito su Google.</p>
-          <ul class="plan-list">
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Sito web vetrina</li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Scheda Google Business</li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Contatto diretto WhatsApp</li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Messa online completa</li>
-          </ul>
-          <a href="#contatti" class="plan-btn" onclick="selectPackage('Pacchetto START')">Valuta Start</a>
-        </div>
-
-        <div class="plan featured reveal">
-          <span class="plan-badge">Più scelto</span>
-          <div class="plan-icon" style="color:var(--cyan);">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
-          </div>
-          <h3>Growth</h3>
-          <p class="plan-lead">Il sistema completo per attrarre nuovi clienti ogni mese.</p>
-          <ul class="plan-list">
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Tutto il pacchetto Start </li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Gestione brand identity </li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Supporto 7/7</li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Report mensile</li>
-          </ul>
-          <a href="#contatti" class="plan-btn" onclick="selectPackage('Pacchetto GROWTH')">Valuta Growth</a>
-        </div>
-
-        <div class="plan reveal">
-          <div class="plan-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-          </div>
-          <h3>Brand & Offline</h3>
-          <p class="plan-lead">Immagine coordinata e stampa per distinguerti dal vivo.</p>
-          <ul class="plan-list">
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Assistenza prioritaria </li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Bigliettini,stampe e marketing </li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Grafiche coordinate social </li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Nuovo Logo o Restyling </li>
-          </ul>
-          <a href="#contatti" class="plan-btn" onclick="selectPackage('Pacchetto BRAND & OFFLINE')">Valuta Brand & Offline</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTATTI -->
-  <section id="contatti" style="padding-top: 20px;">
-    <div class="container">
-      <div class="contact-card reveal">
-        <div class="contact-info-col">
-          <span class="kicker">Contatti</span>
-          <h2 style="font-size: clamp(1.9rem, 3.5vw, 2.8rem);">Parliamo della tua attività.</h2>
-          <p style="color:var(--muted); margin-bottom:24px;">Compila il modulo per inviarci i dettagli direttamente su WhatsApp oppure clicca su uno dei canali qui sotto.</p>
-
-          <div class="contact-links-stack">
-            <a href="https://wa.me/393459727648?text=Ciao%20Cliento!%20Vorrei%20richiedere%20un'analisi%20gratuita%20per%20la%20mia%20attivit%C3%A0." class="contact-pill-card wa-pill" target="_blank" rel="noopener noreferrer">
-              <div class="cp-left">
-                <div class="cp-icon" style="background: rgba(37, 211, 102, 0.14); color: var(--wa);">
-                  <svg width="22" height="22" viewBox="0 0 32 32" fill="currentColor"><path d="M16.004 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.25.59 4.45 1.71 6.39L3.1 28.8l6.58-1.72c1.88 1.02 4.01 1.56 6.32 1.56h.01c7.06 0 12.8-5.74 12.8-12.8 0-3.42-1.33-6.64-3.75-9.05A12.71 12.71 0 0 0 16.004 3.2zm0 23.28h-.01c-1.91 0-3.78-.51-5.42-1.48l-.39-.23-3.9 1.02 1.04-3.8-.25-.4a10.6 10.6 0 0 1-1.63-5.63c0-5.87 4.78-10.65 10.66-10.65 2.85 0 5.52 1.11 7.53 3.12a10.58 10.58 0 0 1 3.12 7.53c0 5.88-4.78 10.66-10.65 10.66zm5.84-7.98c-.32-.16-1.89-.93-2.19-1.04-.29-.11-.51-.16-.72.16-.21.32-.83 1.04-1.01 1.25-.19.21-.37.24-.69.08-.32-.16-1.35-.5-2.57-1.59-.95-.85-1.59-1.89-1.78-2.21-.19-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.19.21-.32.32-.53.11-.21.05-.4-.03-.56-.08-.16-.72-1.73-.99-2.37-.26-.62-.52-.54-.72-.55h-.61c-.21 0-.56.08-.85.4-.29.32-1.12 1.09-1.12 2.66s1.15 3.09 1.31 3.3c.16.21 2.26 3.45 5.47 4.84.76.33 1.36.53 1.82.67.77.24 1.47.21 2.02.13.62-.09 1.89-.77 2.16-1.52.27-.75.27-1.39.19-1.52-.08-.13-.29-.21-.61-.37z"/></svg>
-                </div>
-                <div class="cp-meta">
-                  <span class="cp-label">Scrivici su WhatsApp</span>
-                  <span class="cp-value">345 972 7648</span>
-                </div>
-              </div>
-              <svg class="cp-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </a>
-
-            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=clientostudio26@gmail.com&su=Richiesta%20informazioni%20—%20Cliento"
-               class="contact-pill-card"
-               target="_blank"
-               rel="noopener noreferrer"
-               onclick="copyEmailFallback()">
-              <div class="cp-left">
-                <div class="cp-icon" style="background: rgba(0, 212, 255, 0.12); color: var(--cyan);">
-                  <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                </div>
-                <div class="cp-meta">
-                  <span class="cp-label">Invia una Email (o tocca per copiare)</span>
-                  <span class="cp-value">clientostudio26@gmail.com</span>
-                </div>
-              </div>
-              <svg class="cp-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </a>
-          </div>
-        </div>
-
-        <form id="contactForm" class="form-stack" novalidate>
-          <div class="row-2">
-            <input type="text" id="nome" placeholder="Il tuo nome *" required />
-            <input type="text" id="attivita" placeholder="Attività (es. Pizzeria)" />
-          </div>
-          <div class="row-2">
-            <input type="email" id="email" placeholder="La tua email *" required />
-            <input type="tel" id="telefono" placeholder="Telefono (opzionale)" />
-          </div>
-          <select id="servizio">
-            <option value="" disabled selected>Cosa ti interessa?</option>
-            <option value="Pacchetto START">Pacchetto Start</option>
-            <option value="Pacchetto GROWTH">Pacchetto Growth</option>
-            <option value="Pacchetto BRAND & OFFLINE">Pacchetto Brand & Offline</option>
-            <option value="Analisi Gratuita">Analisi gratuita presenza online</option>
-          </select>
-          <textarea id="messaggio" placeholder="Scrivi qui un breve messaggio (opzionale)..."></textarea>
-          <label class="privacy-box">
-            <input type="checkbox" id="privacy" required />
-            <span>Accetto la <a href="#" onclick="openModal(event,'privacy')">Privacy Policy</a></span>
-          </label>
-          <button type="submit" class="btn-send" id="submitBtn">Invia la tua richiesta→</button>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div><strong style="color:#fff;">CLIENTO.</strong> — Fossano & Cuneo</div>
-    <div class="footer-links">
-      <a href="#servizi">Servizi</a>
-      <a href="#lavori">Lavori</a>
-      <a href="#pacchetti">Pacchetti</a>
-      <a href="#" onclick="openModal(event,'privacy')">Privacy</a>
-    </div>
-    <div>© 2026 Cliento</div>
-  </footer>
-
-  <!-- TASTO WHATSAPP VERDE FISSO IN BASSO A DESTRA -->
-  <a href="https://wa.me/393459727648?text=Ciao%20Cliento!%20Vorrei%20richiedere%20un'analisi%20gratuita%20per%20la%20mia%20attivit%C3%A0." class="whatsapp-btn" target="_blank" rel="noopener noreferrer" aria-label="Contattaci su WhatsApp">
-    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-      <path d="M16.004 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.25.59 4.45 1.71 6.39L3.1 28.8l6.58-1.72c1.88 1.02 4.01 1.56 6.32 1.56h.01c7.06 0 12.8-5.74 12.8-12.8 0-3.42-1.33-6.64-3.75-9.05A12.71 12.71 0 0 0 16.004 3.2zm0 23.28h-.01c-1.91 0-3.78-.51-5.42-1.48l-.39-.23-3.9 1.02 1.04-3.8-.25-.4a10.6 10.6 0 0 1-1.63-5.63c0-5.87 4.78-10.65 10.66-10.65 2.85 0 5.52 1.11 7.53 3.12a10.58 10.58 0 0 1 3.12 7.53c0 5.88-4.78 10.66-10.65 10.66zm5.84-7.98c-.32-.16-1.89-.93-2.19-1.04-.29-.11-.51-.16-.72.16-.21.32-.83 1.04-1.01 1.25-.19.21-.37.24-.69.08-.32-.16-1.35-.5-2.57-1.59-.95-.85-1.59-1.89-1.78-2.21-.19-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.19.21-.32.32-.53.11-.21.05-.4-.03-.56-.08-.16-.72-1.73-.99-2.37-.26-.62-.52-.54-.72-.55h-.61c-.21 0-.56.08-.85.4-.29.32-1.12 1.09-1.12 2.66s1.15 3.09 1.31 3.3c.16.21 2.26 3.45 5.47 4.84.76.33 1.36.53 1.82.67.77.24 1.47.21 2.02.13.62-.09 1.89-.77 2.16-1.52.27-.75.27-1.39.19-1.52-.08-.13-.29-.21-.61-.37z"/>
-    </svg>
-  </a>
-
-  <div id="toast"></div>
-
-  <!-- MODAL PRIVACY -->
-  <div class="modal-overlay" id="modal-privacy">
-    <div class="modal-box">
-      <button class="modal-close" onclick="closeModal('privacy')">✕</button>
-      <h3 style="margin-bottom:14px;">Privacy Policy</h3>
-      <p style="color:var(--muted); font-size:0.9rem; line-height:1.7;">
-        <strong>Titolare:</strong> Cliento — Fossano (CN) • clientostudio26@gmail.com<br><br>
-        I dati inseriti nel modulo vengono utilizzati esclusivamente per rispondere alla tua richiesta. Puoi chiederne la cancellazione in qualsiasi momento scrivendo alla nostra email.
-      </p>
-    </div>
-  </div>
-
-  <script>
-    if (window.location.hash) {
-      history.replaceState(null, '', window.location.pathname);
-      window.scrollTo(0, 0);
-    }
-
-    /* TESTO DINAMICO NELLA HERO */
-    const words = ["attività locale.", "pizzeria o ristorante.", "bottega artigiana.", "impresa sul territorio."];
-    let wordIdx = 0;
-    const wordEl = document.getElementById('rotatingWord');
-    setInterval(() => {
-      wordEl.classList.add('fade-out');
-      setTimeout(() => {
-        wordIdx = (wordIdx + 1) % words.length;
-        wordEl.textContent = words[wordIdx];
-        wordEl.classList.remove('fade-out');
-      }, 350);
-    }, 3200);
-
-    /* TILT 3D SUL MOCKUP DELLA HERO */
-    const tiltStack = document.getElementById('tiltStack');
-    if (tiltStack) {
-      document.getElementById('hero').addEventListener('mousemove', e => {
-        const rect = tiltStack.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
-        tiltStack.style.transform = `rotateY(${x * 14}deg) rotateX(${-y * 14}deg)`;
-      });
-      document.getElementById('hero').addEventListener('mouseleave', () => {
-        tiltStack.style.transform = 'rotateY(0deg) rotateX(0deg)';
-      });
-    }
-
-    /* SPOTLIGHT SULLE CARD BENTO */
-    document.querySelectorAll('.b-card').forEach(card => {
-      card.addEventListener('mousemove', e => {
-        const rect = card.getBoundingClientRect();
-        card.style.setProperty('--mx', `${e.clientX - rect.left}px`);
-        card.style.setProperty('--my', `${e.clientY - rect.top}px`);
-      });
-    });
-
-    /* SCROLL REVEAL */
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    function selectPackage(val) {
-      const sel = document.getElementById('servizio');
-      for (let i = 0; i < sel.options.length; i++) {
-        if (sel.options[i].value === val) {
-          sel.selectedIndex = i;
-          break;
-        }
-      }
-    }
-
-    function showToast(msg, isError) {
-      const t = document.getElementById('toast');
-      t.textContent = msg;
-      t.className = isError ? 'err' : '';
-      t.style.opacity = '1';
-      t.style.transform = 'translateY(0)';
-      setTimeout(() => {
-        t.style.opacity = '0';
-        t.style.transform = 'translateY(10px)';
-      }, 4000);
-    }
-
-    /* INVIO FORM SU WHATSAPP + BACKUP EMAIL */
-    document.getElementById('contactForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      const nome = document.getElementById('nome');
-      const email = document.getElementById('email');
-      const privacy = document.getElementById('privacy');
-
-      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim());
-      nome.classList.toggle('field-error', !nome.value.trim());
-      email.classList.toggle('field-error', !emailOk);
-
-      if (!nome.value.trim() || !emailOk || !privacy.checked) {
-        showToast('Compila nome, email e accetta la privacy.', true);
-        return;
-      }
-
-      const attivitaVal = document.getElementById('attivita').value.trim() || 'Non specificata';
-      const telefonoVal = document.getElementById('telefono').value.trim() || 'Non inserito';
-      const pacchettoVal = document.getElementById('servizio').value || 'Analisi Gratuita';
-      const msgVal = document.getElementById('messaggio').value.trim();
-
-      fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          access_key: '5eebdc56-882d-4775-ba27-58ae3e8043f3',
-          subject: 'Nuova richiesta WhatsApp da ' + nome.value.trim() + ' — Cliento',
-          from_name: 'Cliento Sito Web',
-          replyto: email.value.trim(),
-          Nome: nome.value.trim(),
-          Email: email.value.trim(),
-          Telefono: telefonoVal,
-          Attivita: attivitaVal,
-          Pacchetto: pacchettoVal,
-          Messaggio: msgVal || '-'
-        })
-      }).catch(() => {});
-
-      let testoWa = `Ciao Cliento! Vorrei richiedere un'analisi gratuita.\n\n` +
-                    `👤 *Nome:* ${nome.value.trim()}\n` +
-                    `🏪 *Attività:* ${attivitaVal}\n` +
-                    `🎯 *Interesse:* ${pacchettoVal}\n` +
-                    `📧 *Email:* ${email.value.trim()}`;
-      if (msgVal) testoWa += `\n💬 *Note:* ${msgVal}`;
-
-      const waUrl = `https://wa.me/393459727648?text=${encodeURIComponent(testoWa)}`;
-      showToast('Apertura WhatsApp in corso...', false);
-      window.open(waUrl, '_blank', 'noopener,noreferrer');
-      this.reset();
-    });
-
-    function openModal(e, id) {
-      e.preventDefault();
-      document.getElementById('modal-' + id).classList.add('open');
-    }
-
-    function closeModal(id) {
-      document.getElementById('modal-' + id).classList.remove('open');
-    }
-
-    function copyEmailFallback() {
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText('clientostudio26@gmail.com').then(() => {
-          showToast('Email copiata: clientostudio26@gmail.com', false);
-        }).catch(() => {});
-      }
-    }
-/* CAROSELLO PORTFOLIO AUTOMATICO + PAUSA HOVER + SWIPE MOBILE */
-    (function initCarousel() {
-      const shell = document.getElementById('portfolioCarousel');
-      const track = document.getElementById('carouselTrack');
-      const dotsWrap = document.getElementById('carouselDots');
-      const progressBar = document.getElementById('carouselProgress');
-      const prevBtn = document.getElementById('prevSlide');
-      const nextBtn = document.getElementById('nextSlide');
-      if (!shell || !track) return;
-
-      const slides = track.querySelectorAll('.c-slide');
-      const total = slides.length;
-      let current = 0;
-      let paused = false;
-      let elapsed = 0;
-      const duration = 3500; // 3.5 secondi per slide
-
-      // Crea i pallini indicatori
-      slides.forEach((_, idx) => {
-        const dot = document.createElement('button');
-        dot.type = 'button';
-        dot.className = 'c-dot' + (idx === 0 ? ' active' : '');
-        dot.setAttribute('aria-label', 'Vai al lavoro ' + (idx + 1));
-        dot.addEventListener('click', () => goTo(idx));
-        dotsWrap.appendChild(dot);
-      });
-
-      const dots = dotsWrap.querySelectorAll('.c-dot');
-
-      function goTo(index) {
-        current = (index + total) % total;
-        track.style.transform = `translateX(-${current * 100}%)`;
-        dots.forEach((d, i) => d.classList.toggle('active', i === current));
-        elapsed = 0;
-        if (progressBar) progressBar.style.width = '0%';
-      }
-
-      prevBtn.addEventListener('click', () => goTo(current - 1));
-      nextBtn.addEventListener('click', () => goTo(current + 1));
-
-      // Pausa quando passi sopra con il mouse
-      shell.addEventListener('mouseenter', () => { paused = true; });
-      shell.addEventListener('mouseleave', () => { paused = false; });
-
-      // Supporto swipe con il dito su smartphone
-      let touchStartX = 0;
-      shell.addEventListener('touchstart', e => {
-        touchStartX = e.changedTouches[0].screenX;
-        paused = true;
-      }, { passive: true });
-
-      shell.addEventListener('touchend', e => {
-        const diff = touchStartX - e.changedTouches[0].screenX;
-        if (Math.abs(diff) > 45) {
-          goTo(diff > 0 ? current + 1 : current - 1);
-        }
-        paused = false;
-      }, { passive: true });
-
-      // Timer fluido per scorrimento automatico e barra
-      setInterval(() => {
-        if (paused) return;
-        elapsed += 100;
-        if (progressBar) {
-          progressBar.style.width = Math.min((elapsed / duration) * 100, 100) + '%';
-        }
-        if (elapsed >= duration) {
-          goTo(current + 1);
-        }
-      }, 100);
-    })();
-  </script>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)},fine=matchMedia('(hover:hover)').matches,rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+if(location.hash){history.replaceState(null,'',location.pathname);scrollTo(0,0)}
+/* marquee: duplica il gruppo per il loop continuo */
+var mg=document.querySelector('.mg');if(mg){var c=mg.cloneNode(true);c.setAttribute('aria-hidden','true');mg.parentNode.appendChild(c)}
+/* parola rotante */
+var W=["attività locale.","pizzeria o ristorante.","bottega artigiana.","impresa sul territorio."],wi=0,rw=$('rw');
+setInterval(function(){if(document.hidden)return;rw.classList.add('o');setTimeout(function(){wi=(wi+1)%W.length;rw.textContent=W[wi];rw.classList.remove('o')},350)},3200);
+/* digitazione ricerca Google (solo se visibile) */
+var ty=$('ty'),res=$('res'),Q='pizzeria Fossano',qi=0,dir=1,hv=true;
+if(ty){
+if(rm){ty.textContent=Q;res.classList.add('on')}else{
+new IntersectionObserver(function(e){hv=e[0].isIntersecting}).observe(res);
+(function tick(){var d=90;if(hv&&!document.hidden){
+if(dir>0){qi++;ty.textContent=Q.slice(0,qi);if(qi>=Q.length){dir=-1;res.classList.add('on');d=3200}}
+else{res.classList.remove('on');qi-=2;if(qi<=0){qi=0;dir=1;d=500}ty.textContent=Q.slice(0,Math.max(qi,0));d=30}}
+setTimeout(tick,d)})()}}
+/* barra di scorrimento + nav + glow cursore */
+var bar=$('bar'),nav=$('nav'),tk=false;
+addEventListener('scroll',function(){if(tk)return;tk=true;requestAnimationFrame(function(){var h=document.documentElement.scrollHeight-innerHeight;bar.style.transform='scaleX('+(h>0?scrollY/h:0)+')';nav.classList.toggle('sc',scrollY>20);tk=false})},{passive:true});
+if(fine&&!rm){
+var g=$('glow'),gx=0,gy=0,gt=false;
+addEventListener('pointermove',function(e){gx=e.clientX;gy=e.clientY;g.style.opacity=1;if(!gt){gt=true;requestAnimationFrame(function(){g.style.transform='translate3d('+gx+'px,'+gy+'px,0)';gt=false})}},{passive:true});
+/* tilt 3D hero */
+var ts=$('ts'),hero=$('hero');
+hero.addEventListener('pointermove',function(e){if(innerWidth<641){return}var r=ts.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;ts.style.transform='rotateY('+x*14+'deg) rotateX('+-y*14+'deg)'});
+hero.addEventListener('pointerleave',function(){ts.style.transform=''});
+/* bottoni magnetici */
+document.querySelectorAll('.mag').forEach(function(b){b.addEventListener('pointermove',function(e){var r=b.getBoundingClientRect();b.style.transform='translate('+(e.clientX-r.left-r.width/2)*.18+'px,'+(e.clientY-r.top-r.height/2)*.3+'px)'});b.addEventListener('pointerleave',function(){b.style.transform=''})});
+/* spotlight card */
+document.querySelectorAll('.bc').forEach(function(k){k.addEventListener('pointermove',function(e){var r=k.getBoundingClientRect();k.style.setProperty('--mx',e.clientX-r.left+'px');k.style.setProperty('--my',e.clientY-r.top+'px')})})}
+/* reveal */
+var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
+/* carosello: track a transform + drag + autoplay */
+var vp=$('vp'),tr=$('tr'),sl=tr.children,tb=$('tabs').children,N=sl.length,cur=0,pg=0,el=0,DUR=4800,hold=false,vis=false,drag=false,mv=false,x0=0,dx=0,W=1,cn=$('cn');
+function go(i){i=(i+N)%N;var old=cur;cur=i;el=0;tr.style.transform='translate3d(-'+i*100+'%,0,0)';
+for(var k=0;k<N;k++){tb[k].classList.toggle('a',k===i);tb[k].style.setProperty('--p',0)}
+sl[i].classList.add('on');cn.textContent='0'+(i+1);
+setTimeout(function(){for(var k=0;k<N;k++)if(k!==cur)sl[k].classList.remove('on')},900)}
+for(var i=0;i<N;i++)(function(i){tb[i].onclick=function(){go(i)}})(i);
+go(0);
+$('pv').onclick=function(){go(cur-1)};$('nx').onclick=function(){go(cur+1)};
+vp.addEventListener('pointerdown',function(e){if(e.pointerType==='mouse'&&e.button)return;drag=true;mv=false;x0=e.clientX;dx=0;W=vp.clientWidth});
+addEventListener('pointermove',function(e){if(!drag)return;dx=e.clientX-x0;if(!mv&&Math.abs(dx)>6){mv=true;vp.classList.add('dg')}if(mv)tr.style.transform='translate3d('+(-cur*W+dx)+'px,0,0)'});
+function end(){if(!drag)return;drag=false;vp.classList.remove('dg');go(mv&&Math.abs(dx)>W*.15?cur+(dx<0?1:-1):cur)}
+addEventListener('pointerup',end);addEventListener('pointercancel',end);
+var cs=$('cs');
+cs.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse')hold=true});cs.addEventListener('pointerleave',function(){hold=false});
+new IntersectionObserver(function(e){vis=e[0].isIntersecting}).observe(cs);
+if(fine&&!rm)document.querySelectorAll('.cm').forEach(function(m){var p=m.firstElementChild.nextElementSibling;m.addEventListener('pointermove',function(e){var r=m.getBoundingClientRect();p.style.setProperty('--px',((e.clientX-r.left)/r.width-.5)*26+'px');p.style.setProperty('--py',((e.clientY-r.top)/r.height-.5)*18+'px')});m.addEventListener('pointerleave',function(){p.style.setProperty('--px','0px');p.style.setProperty('--py','0px')})});
+if(!rm)setInterval(function(){if(hold||drag||!vis||document.hidden)return;el+=100;tb[cur].style.setProperty('--p',Math.min(el/DUR,1));if(el>=DUR)go(cur+1)},100);
+/* pacchetti -> select */
+document.querySelectorAll('[data-pk]').forEach(function(a){a.addEventListener('click',function(){$('servizio').value=a.dataset.pk})});
+/* toast */
+var tt;function toast(m,err){var t=$('toast');t.textContent=m;t.className=err?'err':'';t.style.opacity=1;t.style.transform='none';clearTimeout(tt);tt=setTimeout(function(){t.style.opacity=0;t.style.transform='translateY(10px)'},4000)}
+/* email: copia indirizzo */
+$('mail').addEventListener('click',function(){if(navigator.clipboard)navigator.clipboard.writeText('clientostudio26@gmail.com').then(function(){toast('Email copiata: clientostudio26@gmail.com')}).catch(function(){})});
+/* privacy */
+function om(e){e.preventDefault();$('mo').classList.add('open')}
+function cm(){$('mo').classList.remove('open')}
+$('pp').onclick=om;$('pp2').onclick=om;$('mc').onclick=cm;$('mo').addEventListener('click',function(e){if(e.target===this)cm()});
+addEventListener('keydown',function(e){if(e.key==='Escape')cm()});
+/* form -> WhatsApp + backup email */
+$('cf').addEventListener('submit',function(e){
+e.preventDefault();
+var n=$('nome'),m=$('email'),p=$('privacy'),ok=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(m.value.trim());
+n.classList.toggle('fe',!n.value.trim());m.classList.toggle('fe',!ok);
+if(!n.value.trim()||!ok||!p.checked){toast('Compila nome, email e accetta la privacy.',true);return}
+var a=$('attivita').value.trim()||'Non specificata',t=$('telefono').value.trim()||'Non inserito',k=$('servizio').value||'Analisi Gratuita',s=$('messaggio').value.trim();
+fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({access_key:'5eebdc56-882d-4775-ba27-58ae3e8043f3',subject:'Nuova richiesta WhatsApp da '+n.value.trim()+' — Cliento',from_name:'Cliento Sito Web',replyto:m.value.trim(),Nome:n.value.trim(),Email:m.value.trim(),Telefono:t,Attivita:a,Pacchetto:k,Messaggio:s||'-'})}).catch(function(){});
+var w="Ciao Cliento! Vorrei richiedere un'analisi gratuita.\n\n👤 *Nome:* "+n.value.trim()+"\n🏪 *Attività:* "+a+"\n🎯 *Interesse:* "+k+"\n📧 *Email:* "+m.value.trim();
+if(s)w+="\n💬 *Note:* "+s;
+toast('Apertura WhatsApp in corso...');
+window.open('https://wa.me/393459727648?text='+encodeURIComponent(w),'_blank','noopener,noreferrer');
+this.reset()});
+})();
+</script>
 </body>
-
 </html>
